@@ -23,7 +23,7 @@ I think it's useful for the following types of people:
 - **People who are familar with working with hardware, but are lazy** - (like me) Sometimes you just want to build a project without having to assemble any hardware
 - **People who aren't really looking to learn anything, but just want to build some cool things** - More about this later.
 
-# What is the purpose of this page
+## What is the purpose of this page?
 
 So this is pretty nice hardware and a cheap price, but the software instructions/support around it is pretty poor. Just a single link to a zip file on a random website.
 
@@ -31,6 +31,15 @@ A couple of years ago I released the [ESP32 Trinity](https://github.com/witnessm
 
 I'm no longer creating hardware products, but I think it would be interesting if we could create the same kind of community around this display, where people can share examples and projects made for this display. 
 
+## Where to buy?
+
+Buy from wherever works out cheapest for you:
+- [Aliexpress*](https://s.click.aliexpress.com/e/_DkSpIjB)
+- [Aliexpress*](https://s.click.aliexpress.com/e/_DkcmuCh)
+- [Aliexpress](https://www.aliexpress.com/item/1005004502250619.htm)
+- [Makerfabs](https://www.makerfabs.com/sunton-esp32-2-8-inch-tft-with-touch.html)
+    
+ \* = Affilate Link
 
 ## Help Support what I do!
 
