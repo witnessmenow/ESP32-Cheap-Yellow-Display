@@ -19,7 +19,7 @@ The CYD has the following features:
 
 I think it's useful for the following types of people:
 
-- **People just getting started with wokring hardware** - as everything is already connected, there is no soldering or additional components required
+- **People just getting started with working hardware** - as everything is already connected, there is no soldering or additional components required
 - **People who are familar with working with hardware, but are lazy** - (like me) Sometimes you just want to build a project without having to assemble any hardware
 - **People who aren't really looking to learn anything, but just want to build some cool things** - More about this later.
 
