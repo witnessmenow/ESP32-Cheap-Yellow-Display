@@ -36,7 +36,7 @@ I'm no longer creating hardware products, but I think it would be interesting if
 Buy from wherever works out cheapest for you:
 - [Aliexpress*](https://s.click.aliexpress.com/e/_DkSpIjB)
 - [Aliexpress*](https://s.click.aliexpress.com/e/_DkcmuCh)
-- [Aliexpress](https://www.aliexpress.com/item/1005004502250619.htm)
+- [Aliexpress](https://www.aliexpress.com/item/1005004502250619.html)
 - [Makerfabs](https://www.makerfabs.com/sunton-esp32-2-8-inch-tft-with-touch.html)
     
  \* = Affilate Link
