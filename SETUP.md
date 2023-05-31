@@ -8,9 +8,15 @@ There really is nothing to setup here, just connect the CYD to a computer using 
 
 ## Software Setup
 
+The driver needs to be setup for uploading to the CYD, including webflashing projects. 
+
 ### Driver
 
 The CYD uses the CH340 USB to UART chip. If you do not have a driver already installed for this chip you may need to install one. Check out [Sparkfun's guide for installation instruction](https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/all)
+
+## Coding Setup
+
+Follow these instructions if you want to write new code for the CYD
 
 ### Board definition
 
