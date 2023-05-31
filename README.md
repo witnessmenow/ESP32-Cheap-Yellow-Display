@@ -40,6 +40,14 @@ Buy from wherever works out cheapest for you:
 - [Makerfabs](https://www.makerfabs.com/sunton-esp32-2-8-inch-tft-with-touch.html) - Seems to come with a 16GB SD card. Makerfabs also stock my [ESP32 Trinity](https://github.com/witnessmenow/ESP32-Trinity)
     
  \* = Affilate Link
+ 
+ ## Getting Started With Your CYD
+
+For details on how to get started with your CYD, please check out the [Setup and Configuration](/SETUP.md) page
+
+## Examples
+
+I have provided examples for you to try out to get some ideas or inspiration. [Check them out here.](/examples/)
 
 ## Help Support what I do!
 
