@@ -47,7 +47,7 @@ For details on how to get started with your CYD, please check out the [Setup and
 
 ## Examples
 
-I have provided examples for you to try out to get some ideas or inspiration. [Check them out here.](/examples/)
+I have provided examples for you to try out to get some ideas or inspiration. [Check them out here.](/Examples/)
 
 ## Help Support what I do!
 
