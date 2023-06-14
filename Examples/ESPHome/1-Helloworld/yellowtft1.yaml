@@ -13,6 +13,7 @@
 # - ap_password
 #
 # Create a folder named images in your ESPHome folder, and copy the file fonts/Arimo-Regular.ttf there.
+# Create a folder named images in your ESPHome folder, and copy the file images/palette.png there.
 #
 # ============================================================ 
 # Example file setup
