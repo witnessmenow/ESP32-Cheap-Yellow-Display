@@ -5,13 +5,17 @@
 #
 # ============================================================ 
 # NOTE:
-# In order for this to work you need to add the following settings in your secrets.yaml file
+# In order for this to work you need to add the following settings in your secrets.yaml file:
 # - api_key
 # - ota_password
 # - wifi_ssid
 # - wifi_password
 # - ap_password
 #
+# Create a folder named images in your ESPHome folder, and copy the file fonts/Arimo-Regular.ttf there.
+#
+# ============================================================ 
+# Example file setup
 # Change the naming below, they will be the names used in Home Assistant
 #
 substitutions:
