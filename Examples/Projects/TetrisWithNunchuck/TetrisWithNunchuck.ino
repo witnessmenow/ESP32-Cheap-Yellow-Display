@@ -84,6 +84,8 @@ Nunchuk nchuk;
 
 #define PRINT_DELAY 1000
 
+bool fillBlocks = true;
+
 uint16_t myRED = TFT_RED;
 uint16_t myGREEN = TFT_GREEN;
 uint16_t myBLUE = TFT_BLUE;
@@ -425,21 +427,29 @@ uint16_t getFieldColour(int index, bool isDeathScreen) {
   }
 }
 
-void drawPiece(int x, int y, int rotation, int piece, uint16_t colour) {
+void drawBlock(int x, int y, uint16_t colour) {
   int realX;
   int realY;
+  realX = (x * WORLD_TO_PIXEL) + leftOffset;
+  realY = (y * WORLD_TO_PIXEL) + topOffset;
+  if (WORLD_TO_PIXEL > 1) {
+    if (fillBlocks) {
+      tft.fillRect(realX, realY, WORLD_TO_PIXEL, WORLD_TO_PIXEL, colour);
+      tft.drawRect(realX, realY, WORLD_TO_PIXEL, WORLD_TO_PIXEL, TFT_BLACK);
+    } else {
+      tft.drawRect(realX, realY, WORLD_TO_PIXEL, WORLD_TO_PIXEL, colour);
+    }
 
+  } else {
+    tft.drawPixel(realX, realY, colour);
+  }
+}
+
+void drawPiece(int x, int y, int rotation, int piece, uint16_t colour) {
   for (int px = 0; px < 4; px++) {
     for (int py = 0; py < 4; py++) {
-      if (tetromino[piece][Rotate(px, py, rotation)] != '.')
-      {
-        realX = ((x + px) * WORLD_TO_PIXEL) + leftOffset;
-        realY = ((y + py) * WORLD_TO_PIXEL) + topOffset;
-        if (WORLD_TO_PIXEL > 1) {
-          tft.drawRect(realX, realY, WORLD_TO_PIXEL, WORLD_TO_PIXEL, colour);
-        } else {
-          tft.drawPixel(realX, realY, colour);
-        }
+      if (tetromino[piece][Rotate(px, py, rotation)] != '.') {
+        drawBlock((x + px), (y + py), colour);
       }
     }
   }
@@ -458,15 +468,9 @@ void displayLogic(bool isDeathScreen = false) {
     // Draw Field
     for (int x = 0; x < nFieldWidth; x++) {
       for (int y = 0; y < nFieldHeight; y++) {
-        realX = (x * WORLD_TO_PIXEL) + leftOffset;
-        realY = (y * WORLD_TO_PIXEL) + topOffset;
         uint16_t fieldColour = getFieldColour((y * nFieldWidth + x), isDeathScreen);
         if (fieldColour != myBLACK) {
-          if (WORLD_TO_PIXEL > 1) {
-            tft.drawRect(realX, realY, WORLD_TO_PIXEL, WORLD_TO_PIXEL, fieldColour);
-          } else {
-            tft.drawPixel(realX, realY, fieldColour);
-          }
+          drawBlock(x, y, fieldColour);
         }
       }
     }
