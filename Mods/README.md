@@ -10,7 +10,7 @@ It involves soldering hand soldering on top of 0603 components, so probably not 
 
 [Link](https://github.com/hexeguitar/ESP32_TFT_PIO#1-ldr)
 
-## Aduio amp gain mod
+## Audio amp gain mod
 
 The configuration of the Audio amp on the CYD is not good, resulting in poor quality audio, this mod reduces the gain which leads to better sounding audio.
 
