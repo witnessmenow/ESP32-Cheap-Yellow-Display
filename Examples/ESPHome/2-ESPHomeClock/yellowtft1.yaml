@@ -1,7 +1,7 @@
 #
 # Basic yaml code to get the ESP32-2432S028R display to work in ESPHome.
 #
-# This yaml displays the text Hello World centered in the display.
+# This yaml displays the ESPHome logo and the current date and time.
 #
 # ============================================================ 
 # NOTE:
@@ -13,7 +13,7 @@
 # - ap_password
 #
 # Create a folder named fonts in your ESPHome folder, and copy the file fonts/Arimo-Regular.ttf there.
-# Create a folder named images in your ESPHome folder, and copy the file images/palette.png there.
+# Create a folder named images in your ESPHome folder, and copy the files images/palette.png and images/esphome.png there.
 #
 # ============================================================ 
 # Example file setup
@@ -67,14 +67,24 @@ captive_portal:
 # Create a font to use, add and remove glyphs as needed. 
 font:
   - file: 'fonts/Arimo-Regular.ttf'
-    id: arimo20
-    size: 20
+    id: arimo24
+    size: 24
     glyphs: "!\"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ abcdefghijklmnopqrstuvwxyzåäö"
+  - file: 'fonts/Arimo-Regular.ttf'
+    id: arimo96
+    size: 96
+    glyphs: ":0123456789"
 
 # Create a Home Assistant blue color
 color:
   - id: ha_blue
     hex: 51c0f2
+
+# Create an ESPHome logo image
+image:
+  - file: "images/esphome.png"
+    id: esphome_image
+    type: RGB24
 
 # ============================================================ 
 # Home Assistant related setup
@@ -85,6 +95,11 @@ light:
     name: Display Backlight
     id: backlight
     restore_mode: ALWAYS_ON
+
+# Create a time sensor, this will fetch time from Home Assistant
+time:
+  - platform: homeassistant
+    id: esptime
 
 # ============================================================ 
 # Hardware related setup
@@ -113,6 +128,10 @@ output:
 # pick colors from.
 #
 # Display is used as 280x320 by default so we rotate it to 90°
+#
+# We print date and time wth the strftime() function, see the ESPHome documentation to 
+# format date and atime to your locale.
+#
 display:
   - platform: ili9xxx
     model: ili9341
@@ -124,6 +143,8 @@ display:
       - "images/palette.png"
     rotation: 90
     lambda: |-
-      it.fill(id(ha_color));
-      it.print(160, 140, id(arimo20), id(ha_blue), TextAlign::BOTTOM_CENTER, "Hello World!");
+      it.fill(id(ha_blue));
+      it.image(120,10, id(esphome_image));
+      it.strftime(100, 100, id(arimo24), "%Y-%m-%d", id(esptime).now());
+      it.strftime(40, 120, id(arimo96), "%H:%M", id(esptime).now());
 
