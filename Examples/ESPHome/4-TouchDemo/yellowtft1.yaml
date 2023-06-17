@@ -1,7 +1,7 @@
 #
 # Basic yaml code to get the ESP32-2432S028R display to work in ESPHome.
 #
-# This yaml displays the text Hello World centered in the display.
+# This yaml displays two rectangles acting as binary touch sensors inside of Home Assistant.
 #
 # ============================================================ 
 # NOTE:
@@ -13,7 +13,6 @@
 # - ap_password
 #
 # Create a folder named fonts in your ESPHome folder, and copy the file fonts/Arimo-Regular.ttf there.
-# Create a folder named images in your ESPHome folder, and copy the file images/palette.png there.
 #
 # ============================================================ 
 # Example file setup
@@ -67,9 +66,9 @@ captive_portal:
 # Create a font to use, add and remove glyphs as needed. 
 font:
   - file: 'fonts/Arimo-Regular.ttf'
-    id: arimo20
-    size: 20
-    glyphs: "!\"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ abcdefghijklmnopqrstuvwxyzåäö"
+    id: arimo96
+    size: 96
+    glyphs: "AB"
 
 # Create a Home Assistant blue color
 color:
@@ -85,6 +84,22 @@ light:
     name: Display Backlight
     id: backlight
     restore_mode: ALWAYS_ON
+
+# Setup two binary sensors for the two areas for touch
+binary_sensor:
+  - platform: touchscreen
+    name: Button A
+    x_min: 20
+    x_max: 140
+    y_min: 60
+    y_max: 180
+
+  - platform: touchscreen
+    name: Button B
+    x_min: 180
+    x_max: 300
+    y_min: 60
+    y_max: 180
 
 # ============================================================ 
 # Hardware related setup
@@ -113,6 +128,10 @@ output:
 # pick colors from.
 #
 # Display is used as 280x320 by default so we rotate it to 90°
+#
+# We print date and time wth the strftime() function, see the ESPHome documentation to 
+# format date and atime to your locale.
+#
 display:
   - platform: ili9xxx
     model: ili9341
@@ -124,6 +143,23 @@ display:
       - "images/palette.png"
     rotation: 90
     lambda: |-
-      it.fill(id(ha_color));
-      it.print(160, 140, id(arimo20), id(ha_blue), TextAlign::BOTTOM_CENTER, "Hello World!");
+      it.fill(id(Color::BLACK));
+      it.filled_rectangle(20, 60, 120, 120, id(ha_blue));
+      it.filled_rectangle(180, 60, 120, 120, id(ha_blue));
+      it.print(80, 120, id(arimo96), TextAlign::CENTER, "A");
+      it.print(240, 120, id(arimo96), TextAlign::CENTER, "B");
 
+# Set up the xpt2046 touch platform
+touchscreen:
+  platform: xpt2046
+  spi_id: touch
+  cs_pin: GPIO33
+  interrupt_pin: GPIO36
+  update_interval: 50ms
+  report_interval: 1s
+  threshold: 400
+  calibration_x_min: 3860
+  calibration_x_max: 280
+  calibration_y_min: 340
+  calibration_y_max: 3860
+  swap_x_y: false      
