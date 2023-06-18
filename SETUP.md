@@ -30,7 +30,9 @@ If you see errors uploading a sketch, try setting board upload speed to `115200`
 
 The CYD can work with a selection of different libraries, but the main one this repo will focus on is [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) as it is a fairly popular library for working with these types of dsiplays and there are lots of examples. 
 
-This can be installed from the library manager by searching for "TFT_eSPI"
+This can be installed from the library manager by searching for "TFT_eSPI".
+
+ > Note: After install of the library, copy the file [User_Setup.h](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/DisplayConfig/User_Setup.h) to the `libraries\TFT_eSPI` Arduino folder. This sets up the library for use with this display.
 
 ### Examples
 
