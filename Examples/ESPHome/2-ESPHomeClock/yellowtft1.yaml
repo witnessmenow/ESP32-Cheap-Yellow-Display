@@ -3,6 +3,10 @@
 #
 # This yaml displays the ESPHome logo and the current date and time.
 #
+# Written by Jonny Bergdahl
+#    YouTube: https://www.youtube.com/jonnybergdahl
+#    Twitter: https://twitter.com/jonnybergdahl
+#
 # ============================================================ 
 # NOTE:
 # In order for this to work you need to add the following settings in your secrets.yaml file:
