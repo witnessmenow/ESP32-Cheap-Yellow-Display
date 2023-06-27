@@ -142,13 +142,9 @@ display:
     spi_id: tft
     cs_pin: GPIO15
     dc_pin: GPIO2
-    color_palette: IMAGE_ADAPTIVE
-    color_palette_images:
-      - "images/palette.png"
     rotation: 90
     lambda: |-
       it.fill(id(ha_blue));
       it.image(120,10, id(esphome_image));
       it.strftime(100, 100, id(arimo24), "%Y-%m-%d", id(esptime).now());
       it.strftime(40, 120, id(arimo96), "%H:%M", id(esptime).now());
-

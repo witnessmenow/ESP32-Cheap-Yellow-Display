@@ -142,9 +142,6 @@ display:
     spi_id: tft
     cs_pin: GPIO15
     dc_pin: GPIO2
-    color_palette: IMAGE_ADAPTIVE
-    color_palette_images:
-      - "images/palette.png"
     rotation: 90
     lambda: |-
       it.fill(id(Color::BLACK));
