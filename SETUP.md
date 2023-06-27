@@ -26,7 +26,7 @@ You can then select basically any ESP32 board in the boards menu. (I usually use
 
 If you see errors uploading a sketch, try setting board upload speed to `115200`
 
-### Library despondencies
+### Library Configuration
 
 The CYD can work with a selection of different libraries, but the main one this repo will focus on is [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) as it is a fairly popular library for working with these types of dsiplays and there are lots of examples. 
 
