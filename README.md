@@ -47,11 +47,14 @@ For details on how to get started with your CYD, please check out the [Setup and
 
 ## Examples
 
-I have provided examples for the TFT_eSPI library you to try out to get some ideas or inspiration. [Check them out here.](/Examples/Basics)
+### The Basics
+Here are a collection of examples demonstrating how to use the different features of the CYD, this is a good place to get started. [Check them out here.](/Examples/Basics)
 
-There are also example code if you prefer to use an alternative Arduino library. [Check them out here.](/Examples/AlternativeLibrary)
+### Alternative Display Libraries
+The basics examples are based on the TFT_eSPI display library, but the CYD also works with other libraries too. Here is some example code if you prefer to use an alternative Arduino library. [Check them out here.](/Examples/AlternativeLibrary)
 
-There are also examples for using the board in ESPHome. [Check them out here.](/Examples/ESPHome)
+### ESPHome
+Some examples for using the CYD in ESPHome. [Check them out here.](/Examples/ESPHome)
 
 ## Help Support what I do!
 
