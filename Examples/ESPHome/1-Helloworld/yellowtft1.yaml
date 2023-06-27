@@ -128,6 +128,5 @@ display:
       - "images/palette.png"
     rotation: 90
     lambda: |-
-      it.fill(id(ha_color));
       it.print(160, 140, id(arimo20), id(ha_blue), TextAlign::BOTTOM_CENTER, "Hello World!");
 
