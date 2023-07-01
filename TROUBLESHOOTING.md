@@ -24,5 +24,5 @@ If you are having issues getting the display working, the first thing I would tr
 ## Display is flickering
 
 - Try a different USB supply and or cable
-- Go through the **Display is not turning on** steps
+- Go through the [Display is not turning on](#display-is-not-turning-on steps)
 - If nothing else worked, your CYD could be faulty. Contact the seller.
