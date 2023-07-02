@@ -127,11 +127,7 @@ output:
 
 # Setup the ili9xxx platform
 #
-# There is not enough RAM in the ESP32-WROOM on the board, so we force it to use 8-bit
-# color by setting the palette to adaptive and give it a generic 8-8-4 palette image to
-# pick colors from.
-#
-# Display is used as 280x320 by default so we rotate it to 90°
+# Display is used as 240x320 by default so we rotate it to 90°
 #
 # We print date and time wth the strftime() function, see the ESPHome documentation to 
 # format date and atime to your locale.
