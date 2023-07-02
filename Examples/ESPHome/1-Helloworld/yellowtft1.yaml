@@ -112,10 +112,6 @@ output:
 
 # Setup the ili9xxx platform
 #
-# There is not enough RAM in the ESP32-WROOM on the board, so we force it to use 8-bit
-# color by setting the palette to adaptive and give it a generic 8-8-4 palette image to
-# pick colors from.
-#
 # Display is used as 280x320 by default so we rotate it to 90°
 display:
   - platform: ili9xxx
@@ -123,10 +119,8 @@ display:
     spi_id: tft
     cs_pin: GPIO15
     dc_pin: GPIO2
-    color_palette: IMAGE_ADAPTIVE
-    color_palette_images:
-      - "images/palette.png"
     rotation: 90
     lambda: |-
       it.print(160, 140, id(arimo20), id(ha_blue), TextAlign::BOTTOM_CENTER, "Hello World!");
+      it.rectangle(0, 0, 320, 240, id(ha_blue));
 
