@@ -57,7 +57,7 @@ The basics examples are based on the TFT_eSPI display library, but the CYD also 
 Some examples for using the CYD in ESPHome. [Check them out here.](/Examples/ESPHome)
 
 ### 3DPrinting
-Some examples of 3D printed stands. [Check them out here.](/3DModels)
+Some examples of 3D printed stands. [Check them out here.](/3dModels)
 
 ## Help Support what I do!
 
