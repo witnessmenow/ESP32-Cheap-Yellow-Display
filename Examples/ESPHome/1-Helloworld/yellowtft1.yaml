@@ -4,8 +4,9 @@
 # This yaml displays the text Hello World centered in the display.
 #
 # Written by Jonny Bergdahl
-#    YouTube: https://www.youtube.com/jonnybergdahl
-#    Twitter: https://twitter.com/jonnybergdahl
+# - [GitHub](https://github.com/jonnybergdahl)
+# - [Twitter](https://twitter.com/jonnybergdahl)
+# - [YouTube](https://www.youtube.com/jonnybergdahl)
 #
 # ============================================================ 
 # NOTE:
@@ -17,7 +18,6 @@
 # - ap_password
 #
 # Create a folder named fonts in your ESPHome folder, and copy the file fonts/Arimo-Regular.ttf there.
-# Create a folder named images in your ESPHome folder, and copy the file images/palette.png there.
 #
 # ============================================================ 
 # Example file setup
