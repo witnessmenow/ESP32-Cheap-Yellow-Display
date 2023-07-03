@@ -1,0 +1,33 @@
+# ESPHome examples
+
+These examples shows the yaml code to get the ESP32-2432S028R display to work in ESPHome.
+
+In order for the yaml to work you need to add the following settings in your secrets.yaml file:
+ - api_key
+ - ota_password
+ - wifi_ssid
+ - wifi_password
+ - ap_password
+
+For some of the examples you need to copy font or imnge files to your ESPHome folder. Those
+examples contains the instructions in the yaml file itself.
+
+## 1-HelloWorld 
+
+This yaml displays the text Hello World centered in the display.
+
+## 2-ESPHomeClock
+
+This yaml displays the ESPHome logo and the current date and time.
+
+## 3-RGBLED
+
+This yaml publishes the RGB LED on the back of the display to Home Assistant.
+
+## 4-TouchDemo
+
+This yaml displays two rectangles acting as binary touch sensors inside of Home Assistant.
+
+## 5-TemperatureGraph
+
+This yaml displays a graph of a Home Assistant temperature sensor.
