@@ -1,6 +1,6 @@
-# Hardware
+# Add-Ons
 
-Here is a list of aditional hardware that can add funcitonality to your CYD
+Here is a list of aditional hardware add-ons that can add funcitonality to your CYD
 
 ## Speakers
 
