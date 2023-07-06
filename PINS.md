@@ -4,18 +4,18 @@ This page talks about the pins on the CYD.
 
 ## Broken Out Pins
 
-There are 3no 4P 1.25mm JST connectors on the board,here are the broken out pins.
+There are three 4P 1.25mm JST connectors on the board, here are the broken out pins.
 
 ### P3
 |Pin|Use|Note|
 |---|---|----|
 |GND|||
-|IO35||Input only pin, does not have internal pullups available|
+|IO35||Input only pin, no internal pullups available|
 |IO22||Also on the **CN1** connector|
-|IO21||Is the TFT Backlight, so not really usuable|
+|IO21||Used for the TFT Backlight, so not really usuable|
 
 ### CN1
-This is a great canditate for I2C devices
+This is a great candidate for I2C devices
 
 |Pin|Use|Note|
 |---|---|----|
@@ -43,15 +43,15 @@ The CYD has two buttons, reset and boot.
 
 ## Speaker
 
-The speaker connector is a 2p 1.25mm JST connector that is connected through the amp, so not usuable as GPIO at the speaker connector
+The speaker connector is a 2P 1.25mm JST connector that is connected to the amplifier, so not usuable as GPIO at the speaker connector
 
 |Pin|Use|Note|
 |---|---|----|
-|IO26|Conneted to amp|`i2s_set_dac_mode(I2S_DAC_CHANNEL_LEFT_EN);`|
+|IO26|Connected to amp|`i2s_set_dac_mode(I2S_DAC_CHANNEL_LEFT_EN);`|
 
 ## RGB LED
 
-If your project requires addtional pins to what is available elsewhere, this might be a good canditate to sacrafice.
+If your project requires addtional pins to what is available elsewhere, this might be a good candidate to sacrifice.
 
 Note: LEDs are "active low", meaning HIGH == off, LOW == on
 
