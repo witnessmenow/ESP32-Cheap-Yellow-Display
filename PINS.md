@@ -15,6 +15,8 @@ There are 3no 4P 1.25mm JST connectors on the board,here are the broken out pins
 |IO21||Is the TFT Backlight, so not really usuable|
 
 ### CN1
+This is a great canditate for I2C devices
+
 |Pin|Use|Note|
 |---|---|----|
 |GND|||
