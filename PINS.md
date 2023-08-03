@@ -96,3 +96,16 @@ Note: LEDs are "active low", meaning HIGH == off, LOW == on
 |IO14|TFT_SCK||
 |IO15|TFT_CS||
 |IO21|TFT_BL|Also on P3 connector, for some reason|
+
+## Test points
+|Pad|Use|Note|
+|---|---|----|
+|S1|GND|near USB-SERIAL|
+|S2|3.3v|for ESP32|
+|S3|5v|near USB-SERIAL|
+|S4|GND|for ESP32|
+|S5|3.3v|for TFT|
+|JP0 (pad nearest USB socket)|5v|TFT LDO|
+|JP0|3.3v|TFT LDO|
+|JP3 (pad nearest USB socket)|5v|ESP32 LDO|
+|JP3|3.3v|ESP32 LDO|
