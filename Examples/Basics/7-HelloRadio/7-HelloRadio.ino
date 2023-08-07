@@ -42,7 +42,7 @@
 
 // Change ssid and password for your local WiFi.
 const char* ssid     = "YOUR-SSID"; // Change this to your WiFi SSID
-const char* password = "YOUD-PASSWORD"; // Change this to your WiFi password
+const char* password = "YOUR-PASSWORD"; // Change this to your WiFi password
 
 TFT_eSPI tft = TFT_eSPI();
 Audio audio(true, I2S_DAC_CHANNEL_LEFT_EN);
@@ -80,7 +80,13 @@ void setup()
   audio.forceMono(true);
   audio.setVolume(10);
   // Connect to swedish radio channel 'Star 80's'
-  audio.connecttohost("https://wr02-ice.stream.khz.se/wr02_mp3");  
+  do
+  {
+    succeeded = audio.connecttohost("https://wr02-ice.stream.khz.se/wr02_aac");     
+    delay(500);
+    Serial.println("Retrying");
+  } while (!succeeded);
+
 }
 
 void loop() 
