@@ -49,6 +49,7 @@ Audio audio(true, I2S_DAC_CHANNEL_LEFT_EN);
 
 void setup() 
 {
+  bool succeeded;
   Serial.begin(115200);
   
   // Start the TFT display and set it to black
