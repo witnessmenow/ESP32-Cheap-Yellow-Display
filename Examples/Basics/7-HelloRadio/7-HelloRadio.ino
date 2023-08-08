@@ -1,6 +1,16 @@
 /*******************************************************************
     A simple radio player for the ESP32 Cheap Yellow Display.
 
+    Note: This sketch can play most radio streams, but it might be hard to 
+    find the exact url to use. 
+    You can some url's on the following sites:
+    
+    - http://listenlive.nl/
+    - https://en.wikipedia.org/wiki/List_of_Internet_radio_stations/
+    - https://github.com/mikepierce/internet-radio-streams/
+
+    Also note that many streams are geographically restricted as well.
+
     https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display
 
     If you find what Brian Lough do useful and would like to support him,
@@ -80,10 +90,10 @@ void setup()
   // Setup audio and 
   audio.forceMono(true);
   audio.setVolume(10);
-  // Connect to swedish radio channel 'Star 80's'
   do
   {
-    succeeded = audio.connecttohost("https://wr02-ice.stream.khz.se/wr02_aac");     
+    // Connect to 'FM - Disco Ball 70's-80's Los Angeles'
+    succeeded = audio.connecttohost("http://sc8.1.fm:8100/;");     
     delay(500);
     Serial.println("Retrying");
   } while (!succeeded);
