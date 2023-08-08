@@ -5,6 +5,7 @@
     find the exact url to use. 
     You can some url's on the following sites:
     
+    - https://streamurl.link/ 
     - http://listenlive.nl/
     - https://en.wikipedia.org/wiki/List_of_Internet_radio_stations/
     - https://github.com/mikepierce/internet-radio-streams/
