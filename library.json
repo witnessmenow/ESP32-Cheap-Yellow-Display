@@ -1,0 +1,62 @@
+{
+  "name": "ESP32 Cheap Yellow Display",
+  "version": "1.0.0",
+  "keywords": "example, library, arduino",
+  "authors": [
+    {
+      "name": "Brian Lough",
+      "email": "brian.d.lough@gmail.com"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Brian Lough",
+      "email": "brian.d.lough@gmail.com"
+    }
+  ],
+  "sentence": "Instructions and software for the ESP32-2432S028R, also known as the Cheap Yellow Display",
+  "category": "Device Control",
+  "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display",
+  "architectures": ["esp32"],
+  "frameworks": "Arduino",
+  "dependencies": {
+    "bodmer/TFT_eSPI@^2.5.31"
+  },
+  "examples": [
+    {
+      "name": "1.Hello World",
+      "description": "TFT Test",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/1-HelloWorld"
+    },
+    {
+      "name": "2.Touch Test",
+      "description": "Touch Test",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/2-TouchTest"
+    },
+    {
+      "name": "3.SD Card Test",
+      "description": "SD Card Test",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/3-SDCardTest"
+    },
+    {
+      "name": "4.Backlight Control Test",
+      "description": "Backlight Control Test",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/4-BacklightControlTest"
+    },
+    {
+      "name": "5.LDR Test",
+      "description": "LDR Test",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/5-LDRTest"
+    },
+    {
+      "name": "6.LED Test",
+      "description": "LED Test",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/6-LEDTest"
+    },
+    {
+      "name": "7.Hello Radio",
+      "description": "Hello Radio",
+      "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/tree/main/Examples/Basics/7-HelloRadio"
+    }
+  ]
+}
