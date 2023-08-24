@@ -1,6 +1,17 @@
 /*******************************************************************
     A simple radio player for the ESP32 Cheap Yellow Display.
 
+    Note: This sketch can play most radio streams, but it might be hard to 
+    find the exact url to use. 
+    You can some url's on the following sites:
+    
+    - https://streamurl.link/ 
+    - http://listenlive.nl/
+    - https://en.wikipedia.org/wiki/List_of_Internet_radio_stations/
+    - https://github.com/mikepierce/internet-radio-streams/
+
+    Also note that many streams are geographically restricted as well.
+
     https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display
 
     If you find what Brian Lough do useful and would like to support him,
@@ -42,13 +53,14 @@
 
 // Change ssid and password for your local WiFi.
 const char* ssid     = "YOUR-SSID"; // Change this to your WiFi SSID
-const char* password = "YOUD-PASSWORD"; // Change this to your WiFi password
+const char* password = "YOUR-PASSWORD"; // Change this to your WiFi password
 
 TFT_eSPI tft = TFT_eSPI();
 Audio audio(true, I2S_DAC_CHANNEL_LEFT_EN);
 
 void setup() 
 {
+  bool succeeded;
   Serial.begin(115200);
   
   // Start the TFT display and set it to black
@@ -79,8 +91,14 @@ void setup()
   // Setup audio and 
   audio.forceMono(true);
   audio.setVolume(10);
-  // Connect to swedish radio channel 'Star 80's'
-  audio.connecttohost("https://wr02-ice.stream.khz.se/wr02_mp3");  
+  do
+  {
+    // Connect to 'FM - Disco Ball 70's-80's Los Angeles'
+    succeeded = audio.connecttohost("http://sc8.1.fm:8100/;");     
+    delay(500);
+    Serial.println("Retrying");
+  } while (!succeeded);
+
 }
 
 void loop() 
