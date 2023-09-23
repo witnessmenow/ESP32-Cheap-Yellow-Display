@@ -15,6 +15,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 |Tetris with Nunchuck|A version of Tetris using a Nintendo wii Nunchuck|[Brian Lough](https://github.com/witnessmenow)|A nunchuck and an adaptor for connecting it|[Code](/Examples/Projects/TetrisWithNunchuck)||
 |Galagino|An emulator for some classic arcade games (Galaga, Donkey Kong, Pacman, Digdug and Frogger) |[Till Harbaum](https://github.com/harbaum)|A nunchuck and an adaptor for connecting it. Speaker if you want sound|[Github](https://github.com/harbaum/galagino)||
 |ESP32-fluid-simulation|A small fluid simulation with touch input|[Kenny Peng](https://github.com/colonelwatch)||[Github](https://github.com/colonelwatch/ESP32-fluid-simulation)||
+|ESP32-TV|Play Video Files on the ESP32|[atomic14](https://github.com/atomic14)|Speaker if you want sound and possibly an IR receiver|[Github](https://github.com/atomic14/esp32-tv)||
 
 ## Adding a project
 
