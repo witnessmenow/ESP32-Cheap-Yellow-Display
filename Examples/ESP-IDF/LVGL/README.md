@@ -3,7 +3,10 @@
 #                                GENERAL INFO                                #
 #                                                                            #
 ##############################################################################
-Important information:
+
+--------------------------
+| Important information: | 
+--------------------------
 
 - Copiler: Visual Studio with Esp-IDF version 5.1.1
 
