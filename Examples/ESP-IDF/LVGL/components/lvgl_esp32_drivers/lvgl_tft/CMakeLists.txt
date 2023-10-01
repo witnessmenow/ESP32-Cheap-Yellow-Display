@@ -1,0 +1,43 @@
+set(SOURCES "disp_driver.c")
+
+# Include only the source file of the selected
+# display controller.
+if(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_ILI9341)
+    list(APPEND SOURCES "ili9341.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_ILI9481)
+    list(APPEND SOURCES "ili9481.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_ILI9486)
+    list(APPEND SOURCES "ili9486.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_ILI9488)
+    list(APPEND SOURCES "ili9488.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_ST7789)
+    list(APPEND SOURCES "st7789.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_ST7735S)
+    list(APPEND SOURCES "st7735s.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_HX8357)
+    list(APPEND SOURCES "hx8357.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_SH1107)
+    list(APPEND SOURCES "sh1107.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_SSD1306)
+    list(APPEND SOURCES "ssd1306.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_FT81X)
+    list(APPEND SOURCES "EVE_commands.c")
+    list(APPEND SOURCES "FT81x.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_IL3820)
+    list(APPEND SOURCES "il3820.c")
+elseif(CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_RA8875)
+    list(APPEND SOURCES "ra8875.c")
+else()
+    message("DISPLAY CONTROLLER NOT DEFINED")
+endif()
+
+if(CONFIG_LVGL_TFT_DISPLAY_PROTOCOL_SPI)
+    list(APPEND SOURCES "disp_spi.c")
+endif()
+
+# Print the included source files
+message("SOURCES contents: " "${SOURCES}")
+
+idf_component_register(SRCS ${SOURCES}
+                       INCLUDE_DIRS .
+                       REQUIRES lvgl driver)

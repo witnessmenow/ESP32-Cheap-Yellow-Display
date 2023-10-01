@@ -1,0 +1,455 @@
+menu "LVGL Touch controller"
+
+    config LVGL_TOUCH_CONTROLLER
+	int
+	default 0 if LVGL_TOUCH_CONTROLLER_NONE
+	default 1 if LVGL_TOUCH_CONTROLLER_XPT2046
+	default 2 if LVGL_TOUCH_CONTROLLER_FT6X06
+	default 3 if LVGL_TOUCH_CONTROLLER_STMPE610
+        default 4 if LVGL_TOUCH_CONTROLLER_ADCRAW
+        default 5 if LVGL_TOUCH_CONTROLLER_FT81X
+        default 6 if LVGL_TOUCH_CONTROLLER_RA8875
+
+    choice
+	prompt "Select a touch panel controller model."
+	default LVGL_TOUCH_CONTROLLER_NONE
+	help
+	    Select the controller for your touch panel.
+
+	config LVGL_TOUCH_CONTROLLER_NONE
+	    bool "None"
+	config LVGL_TOUCH_CONTROLLER_XPT2046
+            select LVGL_TOUCH_DRIVER_PROTOCOL_SPI
+            bool "XPT2046"
+	config LVGL_TOUCH_CONTROLLER_FT6X06
+            select LVGL_TOUCH_DRIVER_PROTOCOL_I2C
+            bool "FT6X06"
+        config LVGL_TOUCH_CONTROLLER_STMPE610
+            select LVGL_TOUCH_DRIVER_PROTOCOL_SPI
+            bool "STMPE610"
+        config LVGL_TOUCH_CONTROLLER_ADCRAW
+            select LVGL_TOUCH_DRIVER_ADC
+            bool "ADCRAW"
+        config LVGL_TOUCH_CONTROLLER_FT81X
+            select LVGL_TOUCH_DRIVER_PROTOCOL_SPI
+            bool "FT81X"
+        config LVGL_TOUCH_CONTROLLER_RA8875
+            select LVGL_TOUCH_DRIVER_DISPLAY
+            bool "RA8875"
+    endchoice
+    
+    config LVGL_TOUCH_DRIVER_PROTOCOL_SPI
+        bool
+        help
+            Touch controller protocol SPI
+
+    config LVGL_TOUCH_DRIVER_PROTOCOL_I2C
+        bool
+        help
+            Touch controller protocol I2C
+
+    config LVGL_TOUCH_DRIVER_ADC
+        bool
+        help
+            Touch controller via ADC
+
+    config LVGL_TOUCH_DRIVER_DISPLAY
+        bool
+        help
+            Touch controller uses same interface/device as display
+	    (Note: Display must be initialized before touch)
+    
+    choice
+        prompt "Touch I2C port"
+        depends on LVGL_TOUCH_DRIVER_PROTOCOL_I2C
+        
+        default LVGL_TOUCH_I2C_PORT_0
+        help
+            Select the I2C port used by the touch controller.
+
+        config LVGL_TOUCH_I2C_PORT_0
+            bool "I2C PORT 0"
+        config LVGL_TOUCH_I2C_PORT_1
+            bool "I2C PORT 1"
+    endchoice
+    
+    choice
+        prompt "Touch Controller SPI Bus."
+        depends on LVGL_TOUCH_DRIVER_PROTOCOL_SPI
+        
+        default LVGL_TOUCH_CONTROLLER_SPI_VSPI
+        help
+            Select the SPI Bus the TFT Display is attached to.
+    
+        config LVGL_TOUCH_CONTROLLER_SPI_HSPI
+            bool "HSPI"
+        config LVGL_TOUCH_CONTROLLER_SPI_VSPI
+            bool "VSPI"
+        endchoice
+    
+    menu "Touchpanel (XPT2046) Pin Assignments"
+        depends on LVGL_TOUCH_CONTROLLER_XPT2046
+
+        config LVGL_TOUCH_SPI_MISO
+            int
+            prompt "GPIO for MISO (Master In Slave Out)"
+	    range 0 39	
+            default 35 if LVGL_PREDEFINED_PINS_38V1
+            default 19
+
+            help
+            Configure the touchpanel MISO pin here.
+
+        config LVGL_TOUCH_SPI_MOSI
+            int
+            prompt "GPIO for MOSI (Master Out Slave In)"
+	    range 0 39	
+            default 32 if LVGL_PREDEFINED_PINS_38V1
+            default 23
+
+            help
+            Configure the touchpanel MOSI pin here.
+
+        config LVGL_TOUCH_SPI_CLK
+            int "GPIO for CLK (SCK / Serial Clock)"
+	    range 0 39	
+            default 26 if LVGL_PREDEFINED_PINS_38V1
+            default 18
+            help
+            Configure the touchpanel CLK pin here.
+
+        config LVGL_TOUCH_SPI_CS
+            int "GPIO for CS (Slave Select)"
+	    range 0 39	
+            default 33 if LVGL_PREDEFINED_PINS_38V1
+            default 5
+            help
+            Configure the touchpanel CS pin here.
+
+        config LVGL_TOUCH_PIN_IRQ
+            int "GPIO for IRQ (Interrupt Request)"
+	    range 0 39	
+            default 27 if LVGL_PREDEFINED_PINS_38V4
+            default 25
+            help
+            Configure the touchpanel CS pin here.
+    endmenu
+    
+    menu "Touchpanel Configuration (XPT2046)"
+        depends on LVGL_TOUCH_CONTROLLER_XPT2046
+
+        config LVGL_TOUCH_X_MIN
+            int
+            prompt "Minimum X coordinate value."
+            default 0 if LVGL_PREDEFINED_PINS_38V4
+            default 200
+
+        config LVGL_TOUCH_Y_MIN
+            int
+            prompt "Minimum Y coordinate value."
+            default 0 if LVGL_PREDEFINED_PINS_38V4
+            default 120
+
+        config LVGL_TOUCH_X_MAX
+            int
+            prompt "Maximum X coordinate value."
+            default 4095 if LVGL_PREDEFINED_PINS_38V4
+            default 1900
+
+        config LVGL_TOUCH_Y_MAX
+            int
+            prompt "Maximum Y coordinate value."
+            default 4095 if LVGL_PREDEFINED_PINS_38V4
+            default 1900
+        
+		config LVGL_TOUCH_XY_SWAP
+        	bool
+        	prompt "Swap XY."
+        	default y
+
+        config LVGL_TOUCH_INVERT_X
+            bool
+            prompt "Invert X coordinate value."
+            default y
+
+        config LVGL_TOUCH_INVERT_Y
+            bool
+            prompt "Invert Y coordinate value."
+            default y
+
+    endmenu
+
+    menu "Touchpanel (FT6X06) Pin Assignments"
+        depends on LVGL_TOUCH_CONTROLLER_FT6X06
+
+        config LVGL_TOUCH_I2C_SDA
+            int
+            prompt "GPIO for SDA (I2C)"
+        range 0 39
+            default 21
+            help
+            Configure the I2C touchpanel SDA pin here.
+
+        config LVGL_TOUCH_I2C_SCL
+            int "GPIO for clock signal SCL (I2C)"
+        range 0 39
+            default 22
+            help
+            Configure the I2C touchpanel SCL pin here.
+    endmenu
+    
+    menu "Touchpanel Configuration (FT6X06)"
+        depends on LVGL_TOUCH_CONTROLLER_FT6X06
+
+	config LVGL_FT6X36_SWAPXY
+	    bool
+	    prompt "Swap X with Y coordinate."
+	    default y
+
+        config LVGL_FT6X36_INVERT_X
+            bool
+            prompt "Invert X coordinate value."
+            default n
+
+        config LVGL_FT6X36_INVERT_Y
+            bool
+            prompt "Invert Y coordinate value."
+            default y
+
+    endmenu
+    
+    menu "Touchpanel (STMPE610) Pin Assignments"
+        depends on LVGL_TOUCH_CONTROLLER_STMPE610
+
+        config LVGL_TOUCH_SPI_MISO
+            int
+            prompt "GPIO for MISO (Master In Slave Out)"
+	    range 0 39	
+            default 35 if LVGL_PREDEFINED_PINS_38V1
+            default 19 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 19
+
+            help
+            Configure the touchpanel MISO pin here.
+
+        config LVGL_TOUCH_SPI_MOSI
+            int
+            prompt "GPIO for MOSI (Master Out Slave In)"
+	    range 0 39	
+            default 32 if LVGL_PREDEFINED_PINS_38V1
+            default 18 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 23
+
+            help
+            Configure the touchpanel MOSI pin here.
+
+        config LVGL_TOUCH_SPI_CLK
+            int "GPIO for CLK (SCK / Serial Clock)"
+	    range 0 39	
+            default 26 if LVGL_PREDEFINED_PINS_38V1
+            default 5 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 18
+            help
+            Configure the touchpanel CLK pin here.
+
+        config LVGL_TOUCH_SPI_CS
+            int "GPIO for CS (Slave Select)"
+	    range 0 39	
+            default 33 if LVGL_PREDEFINED_PINS_38V1
+            default 32 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 5
+            help
+            Configure the touchpanel CS pin here.
+    endmenu
+
+    menu "Touchpanel Configuration (STMPE610)"
+        depends on LVGL_TOUCH_CONTROLLER_STMPE610
+
+        config LVGL_TOUCH_X_MIN
+            int
+            prompt "Minimum X coordinate value."
+            default 160
+
+        config LVGL_TOUCH_Y_MIN
+            int
+            prompt "Minimum Y coordinate value."
+            default 230
+
+        config LVGL_TOUCH_X_MAX
+            int
+            prompt "Maximum X coordinate value."
+            default 3800
+
+        config LVGL_TOUCH_Y_MAX
+            int
+            prompt "Maximum Y coordinate value."
+            default 3800
+        
+        config LVGL_TOUCH_XY_SWAP
+        	bool
+        	prompt "Swap XY."
+        	default n
+
+        config LVGL_TOUCH_INVERT_X
+            bool
+            prompt "Invert X coordinate value."
+            default y
+
+        config LVGL_TOUCH_INVERT_Y
+            bool
+            prompt "Invert Y coordinate value."
+            default y
+    endmenu
+    
+    menu "Touchpanel (ADCRAW) Pin Assignments"
+        depends on LVGL_TOUCH_CONTROLLER_ADCRAW
+
+        config LVGL_TOUCHSCREEN_RESISTIVE_PIN_YU
+            int
+            prompt "GPIO Y+"
+            default 26 if CONFIG_LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 26
+
+            help
+            Configure the touchpanel Y+ pin. Can be a regular GPIO.
+
+        config LVGL_TOUCHSCREEN_RESISTIVE_PIN_YD
+            int
+            prompt "GPIO/ADC Y-"
+            default 32 if CONFIG_LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 32
+
+            help
+            Configure the touchpanel Y- pin. Must be ADC input.
+        
+        config LVGL_TOUCHSCREEN_RESISTIVE_PIN_XL
+            int
+            prompt "GPIO X-"
+            default 27 if CONFIG_LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 27
+
+            help
+            Configure the touchpanel X- pin. Can be a regular GPIO.
+
+        config LVGL_TOUCHSCREEN_RESISTIVE_PIN_XR
+            int
+            prompt "GPIO/ADC X+"
+            default 33 if CONFIG_LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 33
+
+            help
+            Configure the touchpanel X- pin. Must be ADC input.
+    endmenu
+
+    menu "Touchpanel Configuration (ADCRAW)"
+        depends on LVGL_TOUCH_CONTROLLER_ADCRAW
+
+        config LVGL_TOUCH_X_MIN
+            int
+            prompt "Minimum X coordinate value."
+            default 160
+
+        config LVGL_TOUCH_Y_MIN
+            int
+            prompt "Minimum Y coordinate value."
+            default 230
+
+        config LVGL_TOUCH_X_MAX
+            int
+            prompt "Maximum X coordinate value."
+            default 3800
+
+        config LVGL_TOUCH_Y_MAX
+            int
+            prompt "Maximum Y coordinate value."
+            default 3800
+
+        config LVGL_TOUCH_XY_SWAP
+            bool
+            prompt "Swap XY."
+            default n
+
+        config LVGL_TOUCH_INVERT_X
+            bool
+            prompt "Invert X coordinate value."
+            default y
+
+        config LVGL_TOUCH_INVERT_Y
+            bool
+            prompt "Invert Y coordinate value."
+            default y
+
+    endmenu
+
+    menu "Touchpanel Configuration (RA8875)"
+        depends on LVGL_TOUCH_CONTROLLER_RA8875
+
+        config LVGL_TOUCH_X_MIN
+            int
+            prompt "Minimum X coordinate ADC value"
+	    range 0 1023
+            default 0
+
+        config LVGL_TOUCH_Y_MIN
+            int
+            prompt "Minimum Y coordinate ADC value"
+	    range 0 1023
+            default 0
+
+        config LVGL_TOUCH_X_MAX
+            int
+            prompt "Maximum X coordinate ADC value"
+	    range 0 1023
+            default 1023
+
+        config LVGL_TOUCH_Y_MAX
+            int
+            prompt "Maximum Y coordinate ADC value"
+	    range 0 1023
+            default 1023
+
+        config LVGL_TOUCH_XY_SWAP
+            bool
+            prompt "Swap XY"
+            default n
+
+        config LVGL_TOUCH_INVERT_X
+            bool
+            prompt "Invert X coordinate value"
+            default n
+
+        config LVGL_TOUCH_INVERT_Y
+            bool
+            prompt "Invert Y coordinate value"
+            default n
+
+        config LVGL_TOUCH_RA8875_SAMPLE_TIME
+            int
+            prompt "TP Sample Time Adjusting"
+	    range 0 7
+            default 0
+
+        config LVGL_TOUCH_RA8875_ADC_CLOCK
+            int
+            prompt "ADC Clock Setting"
+	    range 0 7
+            default 0
+
+        config LVGL_TOUCH_RA8875_WAKEUP_ENABLE
+            bool
+            prompt "Touch Panel Wakeup Enable"
+            default n
+
+        config LVGL_TOUCH_RA8875_EXTERNAL_VREF
+            bool
+            prompt "TP ADC Use External Reference Voltage Source"
+            default n
+
+        config LVGL_TOUCH_RA8875_DEBOUNCE_ENABLE
+            bool
+            prompt "De-bounce Circuit Enable for Touch Panel Interrupt"
+            default y
+
+    endmenu
+
+endmenu

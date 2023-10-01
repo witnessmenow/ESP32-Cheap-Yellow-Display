@@ -1,0 +1,791 @@
+# NOTES:
+# - default <> if <> work only when no prompt is available for the user
+
+menu "LVGL TFT Display controller"
+
+    # Predefined display configurations for multiple
+    # evaluation/development boards.
+    choice LVGL_PREDEFINED_DISPLAY
+        prompt "Select predefined display configuration"
+        default LVGL_PREDEFINED_DISPLAY_NONE
+        help
+            Select predefined display configuration
+
+        config LVGL_PREDEFINED_DISPLAY_NONE
+            bool "None"
+        config LVGL_PREDEFINED_DISPLAY_WROVER4
+            bool "ESP-Wrover-KIT v4.1"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9341
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_M5STACK
+            bool "M5Stack"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9341
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_M5STICK
+            bool "M5Stick"
+            select LVGL_TFT_DISPLAY_CONTROLLER_SH1107
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            select LVGL_TFT_DISPLAY_MONOCHROME
+            select LVGL_THEME_MONO
+        config LVGL_PREDEFINED_DISPLAY_M5STICKC
+            bool "M5StickC"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ST7735S
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_ERTFT0356
+            bool "ER-TFT035-6"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9488
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            bool "Adafruit 3.5 Featherwing"
+            select LVGL_TFT_DISPLAY_CONTROLLER_HX8357
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+       config LVGL_PREDEFINED_DISPLAY_RPI_MPI3501
+            bool "RPi MPI3501"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9486
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN
+            bool "Wemos Lolin OLED"
+            select LVGL_TFT_DISPLAY_CONTROLLER_SSD1306
+            select LVGL_TFT_DISPLAY_PROTOCOL_I2C
+            select LVGL_TFT_DISPLAY_MONOCHROME
+            select LVGL_THEME_MONO
+        config LVGL_PREDEFINED_DISPLAY_ATAG
+            bool "AIRcable ATAGv3"
+            select LVGL_TFT_DISPLAY_CONTROLLER_IL3820
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            select LVGL_TFT_DISPLAY_MONOCHROME
+            select LVGL_THEME_MONO
+        config LVGL_PREDEFINED_DISPLAY_RPI_RA8875
+            bool "RAiO RA8875"
+            select LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_PREDEFINED_DISPLAY_TTGO
+            bool "TTGO T-Display"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ST7789
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            select LVGL_TFT_DISPLAY_OFFSETS
+    endchoice
+
+    # START of helper symbols.
+    #
+    # Display controller symbols,
+    #
+    # This boolean configuration symbols can be used to know what
+    # display controller has been choosen by the user. When selected
+    # the symbol <symbol_name> is set to y, then in the file sdkconfig.h
+    # the symbol CONFIG_<symbol_name> is set to 1.
+    #
+    # If you add support for a new display controller to the repository
+    # you must add a config option for it on this helper symbols section.
+    config LVGL_TFT_DISPLAY_CONTROLLER_ILI9341
+        bool
+        help
+            ILI9341 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_ILI9481
+        bool
+        help
+            ILI9481 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_ILI9488
+        bool
+        help
+            ILI9488 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_ILI9486
+        bool
+        help
+            ILI9486 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_ST7789
+        bool
+        help
+            ST7789 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_ST7735S
+        bool
+        help
+            ST7735S display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_HX8357
+        bool
+        help
+            HX8357 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_SH1107
+        bool
+        help
+            SH1107 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_SSD1306
+        bool
+        help
+            SSD1306 display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+        bool
+        help
+            FT81x display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_IL3820
+        bool
+        help
+            IL3820 epaper display controller.
+
+    config LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+        bool
+        help
+            RA8875 display controller.
+
+    # Display controller communication protocol
+    #
+    # This symbols define the communication protocol used by the
+    # ESP32 to communicate with the display controller.
+    # This symbols can be used, but not limited, to:
+    # - Know what peripherals to initialize.
+    # - Know if the touch and display controllers share the same peripheral.
+    # - Etc.
+    config LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        bool
+        help
+            Display controller protocol SPI
+
+    config LVGL_TFT_DISPLAY_PROTOCOL_I2C
+        bool
+        help
+            Display controller protocol I2C
+
+    config LVGL_TFT_DISPLAY_OFFSETS
+    	bool
+	help
+		Display area doesn't start at address 0
+
+    config LVGL_TFT_DISPLAY_X_OFFSET
+        depends on LVGL_TFT_DISPLAY_OFFSETS
+        int 
+        default 40 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE || LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 52 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_PORTRAIT  || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 0
+
+    config LVGL_TFT_DISPLAY_Y_OFFSET
+        depends on LVGL_TFT_DISPLAY_OFFSETS
+        int 
+        default 52  if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE || LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 40 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_PORTRAIT  || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 0
+
+
+    # Display colors(?)
+    # Useful to know when the display being used is a monochrome
+    # display, so we can use the monochrome theme, etc.
+    config LVGL_TFT_DISPLAY_MONOCHROME
+        bool
+        help
+            A monochrome display is used.
+    # END of helper symbols
+
+    choice
+        prompt "Select predefined board pinouts" if LVGL_PREDEFINED_DISPLAY_NONE || LVGL_PREDEFINED_DISPLAY_ERTFT0356
+        default LVGL_PREDEFINED_PINS_NONE
+        help
+            Select predefined board pin out configuration.
+
+        config LVGL_PREDEFINED_PINS_NONE
+            bool "None"
+        config LVGL_PREDEFINED_PINS_38V4
+            bool "ESP32 DevKit v4 with 38 pins"
+        config LVGL_PREDEFINED_PINS_30
+            bool "ESP32 Devkit v1 with 30 pins"
+        config LVGL_PREDEFINED_PINS_38V1
+            bool "Dev Board with 38 pins"
+        config LVGL_PREDEFINED_PINS_TKOALA
+            bool "TTGO Koala"
+    endchoice
+
+    # Select one of the available display controllers.
+    choice
+	prompt "Select a display controller model." if LVGL_PREDEFINED_DISPLAY_NONE
+        help
+	    Select the controller for your display.
+
+        config LVGL_TFT_DISPLAY_USER_CONTROLLER_ILI9341
+	    bool "ILI9341"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9341
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+    config LVGL_TFT_DISPLAY_USER_CONTROLLER_ILI9481
+        bool "ILI9481"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9481
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+	config LVGL_TFT_DISPLAY_USER_CONTROLLER_ILI9486
+	    bool "ILI9486"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9486
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+	config LVGL_TFT_DISPLAY_USER_CONTROLLER_ILI9488
+	    bool "ILI9488"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ILI9488
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+	config LVGL_TFT_DISPLAY_USER_CONTROLLER_ST7789
+	    bool "ST7789"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ST7789
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_TFT_DISPLAY_USER_CONTROLLER_ST7735S
+            bool "ST7735S"
+            select LVGL_TFT_DISPLAY_CONTROLLER_ST7735S
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+	config LVGL_TFT_DISPLAY_USER_CONTROLLER_HX8357
+	    bool "HX8357"
+            select LVGL_TFT_DISPLAY_CONTROLLER_HX8357
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+	config LVGL_TFT_DISPLAY_USER_CONTROLLER_SH1107
+	    bool "SH1107"
+            select LVGL_TFT_DISPLAY_CONTROLLER_SH1107
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            select LVGL_TFT_DISPLAY_MONOCHROME
+        config LVGL_TFT_DISPLAY_USER_CONTROLLER_SSD1306
+            bool "SSD1306"
+            select LVGL_TFT_DISPLAY_CONTROLLER_SSD1306
+            select LVGL_TFT_DISPLAY_PROTOCOL_I2C
+            select LVGL_TFT_DISPLAY_MONOCHROME
+        config LVGL_TFT_DISPLAY_USER_CONTROLLER_FT81X
+            bool "FT81X"
+            select LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        config LVGL_TFT_DISPLAY_USER_CONTROLLER_IL3820
+            bool "IL3820"
+            select LVGL_TFT_DISPLAY_CONTROLLER_IL3820
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            select LVGL_TFT_DISPLAY_MONOCHROME
+        config LVGL_TFT_DISPLAY_USER_CONTROLLER_RA8875
+            bool "RA8875"
+            select LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            select LVGL_TFT_DISPLAY_PROTOCOL_SPI
+	endchoice
+
+    choice
+        prompt "TFT SPI Bus." if LVGL_TFT_DISPLAY_PROTOCOL_SPI && \
+            !LVGL_PREDEFINED_DISPLAY_TTGO
+        default LVGL_TFT_DISPLAY_SPI_VSPI if LVGL_PREDEFINED_DISPLAY_TTGO
+        default LVGL_TFT_DISPLAY_SPI_HSPI
+        help
+    	      Select the SPI Bus the TFT Display is attached to.
+
+    	config LVGL_TFT_DISPLAY_SPI_HSPI
+	        bool "HSPI"
+    	config LVGL_TFT_DISPLAY_SPI_VSPI
+	        bool "VSPI"
+	endchoice
+
+    choice
+        prompt "Display I2C port" if LVGL_TFT_DISPLAY_PROTOCOL_I2C
+        default LVGL_DISPLAY_I2C_PORT_0
+        help
+            Select the I2C port used by the display controller.
+
+        config LVGL_DISPLAY_I2C_PORT_0
+            bool "I2C PORT 0"
+        config LVGL_DISPLAY_I2C_PORT_1
+            bool "I2C PORT 1"
+    endchoice
+
+    choice
+	prompt "Display orientation"
+        depends on  LVGL_TFT_DISPLAY_CONTROLLER_ILI9341 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_ILI9481 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_ILI9486 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_ILI9488 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_SH1107 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_SSD1306 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_FT81X || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_ST7789  || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_ST7735S || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_IL3820 || \
+                    LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+        default LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+	help
+	    Display orientation.
+
+        config LVGL_DISPLAY_ORIENTATION_PORTRAIT
+            bool "Portrait"
+        config LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED
+            bool "Inverted Portrait"
+        config LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+            bool "Landscape"
+        config LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED
+            bool "Inverted Landscape"
+    endchoice
+
+
+    # Display orientation
+    # This symbol is meant to be used as parameter on the display_set_orientation
+    # function at init.
+    config LVGL_DISPLAY_ORIENTATION
+        int
+        default 0 if LVGL_DISPLAY_ORIENTATION_PORTRAIT
+        default 1 if LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED
+        default 2 if LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+        default 3 if LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED
+
+    config LVGL_DISPLAY_WIDTH
+        int "TFT display width in pixels." if LVGL_PREDEFINED_DISPLAY_NONE || \
+            LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+        default 240 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_PORTRAIT)
+        default 240 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 320 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE)
+        default 320 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 480 if LVGL_PREDEFINED_DISPLAY_ERTFT0356 || LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+        default 64 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_PORTRAIT
+        default 128 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+        default 800 if LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+        default 128 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_PORTRAIT
+        default 296 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+        default 80 if LVGL_PREDEFINED_DISPLAY_M5STICKC && (LVGL_DISPLAY_ORIENTATION_PORTRAIT || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 160 if LVGL_PREDEFINED_DISPLAY_M5STICKC && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE || LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 135 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_PORTRAIT || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 240 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE || LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 320
+
+    config LVGL_DISPLAY_HEIGHT
+        int "TFT display height in pixels." if LVGL_PREDEFINED_DISPLAY_NONE || \
+            LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+        default 320 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_PORTRAIT)
+        default 320 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 240 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE)
+        default 240 if ( LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_WROVER4 ) && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 320 if LVGL_PREDEFINED_DISPLAY_ERTFT0356 || LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+        default 128 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_PORTRAIT
+        default 64 if ( LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN || LVGL_PREDEFINED_DISPLAY_M5STICK ) && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+        default 480 if LVGL_TFT_DISPLAY_CONTROLLER_FT81X
+        default 296 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_PORTRAIT
+        default 128 if LVGL_PREDEFINED_DISPLAY_ATAG && LVGL_DISPLAY_ORIENTATION_LANDSCAPE
+        default 160 if LVGL_PREDEFINED_DISPLAY_M5STICKC && (LVGL_DISPLAY_ORIENTATION_PORTRAIT || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 80 if LVGL_PREDEFINED_DISPLAY_M5STICKC && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE || LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 240 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_PORTRAIT || LVGL_DISPLAY_ORIENTATION_PORTRAIT_INVERTED)
+        default 135 if LVGL_PREDEFINED_DISPLAY_TTGO && (LVGL_DISPLAY_ORIENTATION_LANDSCAPE || LVGL_DISPLAY_ORIENTATION_LANDSCAPE_INVERTED)
+        default 240
+
+    config LVGL_TFT_USE_CUSTOM_SPI_CLK_DIVIDER
+        bool "Use custom SPI clock frequency." if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+        default n
+        help
+            Allows to use a custom divider for the SPI clock frequency.
+
+    choice
+        prompt "Select a custom frequency."
+        depends on LVGL_TFT_USE_CUSTOM_SPI_CLK_DIVIDER
+        default LVGL_TFT_SPI_CLK_DIVIDER_4 if LVGL_TFT_DISPLAY_CONTROLLER_ST7789 || LVGL_TFT_DISPLAY_CONTROLLER_ILI9486
+        default LVGL_TFT_SPI_CLK_DIVIDER_5 if LVGL_TFT_DISPLAY_CONTROLLER_ILI9481
+        default LVGL_TFT_SPI_CLK_DIVIDER_3 if LVGL_TFT_DISPLAY_CONTROLLER_HX8357
+        default LVGL_TFT_SPI_CLK_DIVIDER_10 if CONFIG_LVGL_TFT_DISPLAY_CONTROLLER_SH1107
+        default LVGL_TFT_SPI_CLK_DIVIDER_2
+
+        config LVGL_TFT_SPI_CLK_DIVIDER_1
+            bool "80 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_2
+            bool "40 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_3
+            bool "26.67 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_4
+            bool "20 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_5
+            bool "16 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_6
+            bool "13.33 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_7
+            bool "11.43 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_8
+            bool "10 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_9
+            bool "8.89 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_10
+            bool "8 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_12
+            bool "6.67 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_16
+            bool "5 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_20
+            bool "4 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_24
+            bool "3.33 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_32
+            bool "2.5 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_40
+            bool "2 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_48
+            bool "1.67 MHz"
+        config LVGL_TFT_SPI_CLK_DIVIDER_80
+            bool "1 MHz"
+    endchoice
+
+    config LVGL_TFT_CUSTOM_SPI_CLK_DIVIDER
+        int
+        default 1 if LVGL_TFT_SPI_CLK_DIVIDER_1
+        default 2 if LVGL_TFT_SPI_CLK_DIVIDER_2
+        default 3 if LVGL_TFT_SPI_CLK_DIVIDER_3
+        default 4 if LVGL_TFT_SPI_CLK_DIVIDER_4
+        default 5 if LVGL_TFT_SPI_CLK_DIVIDER_5
+        default 6 if LVGL_TFT_SPI_CLK_DIVIDER_6
+        default 7 if LVGL_TFT_SPI_CLK_DIVIDER_7
+        default 8 if LVGL_TFT_SPI_CLK_DIVIDER_8
+        default 9 if LVGL_TFT_SPI_CLK_DIVIDER_9
+        default 10 if LVGL_TFT_SPI_CLK_DIVIDER_10
+        default 12 if LVGL_TFT_SPI_CLK_DIVIDER_12
+        default 16 if LVGL_TFT_SPI_CLK_DIVIDER_16
+        default 20 if LVGL_TFT_SPI_CLK_DIVIDER_20
+        default 24 if LVGL_TFT_SPI_CLK_DIVIDER_24
+        default 32 if LVGL_TFT_SPI_CLK_DIVIDER_32
+        default 40 if LVGL_TFT_SPI_CLK_DIVIDER_40
+        default 48 if LVGL_TFT_SPI_CLK_DIVIDER_48
+        default 80 if LVGL_TFT_SPI_CLK_DIVIDER_80
+        default 2
+
+    config LVGL_INVERT_DISPLAY
+        bool "IN DEPRECATION - Invert display."
+        default y if LVGL_PREDEFINED_DISPLAY_M5STACK
+        help
+            If text is backwards on your display, try enabling this.
+
+    config LVGL_INVERT_COLORS
+        bool "Invert colors in display" if LVGL_TFT_DISPLAY_CONTROLLER_ILI9341 || LVGL_TFT_DISPLAY_CONTROLLER_ST7735S || LVGL_TFT_DISPLAY_CONTROLLER_ILI9481
+        default y if LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_M5STICKC
+        help
+            If the colors look inverted on your display, try enabling this.
+
+    config LVGL_M5STICKC_HANDLE_AXP192
+        bool "Handle Backlight and TFT power for M5StickC using AXP192." if LVGL_PREDEFINED_DISPLAY_M5STICKC || LVGL_TFT_DISPLAY_CONTROLLER_ST7735S
+        default y if LVGL_PREDEFINED_DISPLAY_M5STICKC
+        help
+            Display and TFT power supply on M5StickC is controlled using an AXP192 Power Mangerment IC.
+            Select yes if you want to enable TFT IC (LDO3) and backlight power using AXP192 by LVGL, or select no if you want to take care of
+            power management in your own code.
+
+    config LVGL_AXP192_PIN_SDA
+        int "GPIO for AXP192 I2C SDA" if LVGL_M5STICKC_HANDLE_AXP192
+        range 0 39
+        default 21 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+        default 21
+        help
+            Configure the AXP192 I2C SDA pin here.
+
+    config LVGL_AXP192_PIN_SCL
+        int "GPIO for AXP192 I2C SCL" if LVGL_M5STICKC_HANDLE_AXP192
+        range 0 39
+        default 22 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+        default 22
+        help
+            Configure the AXP192 I2C SDA pin here.
+
+    # menu will be visible only when LVGL_PREDEFINED_DISPLAY_NONE is y
+    menu "Display RA8875 Configuration"
+    visible if LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+
+        config LVGL_DISP_RA8875_PLLDIVM
+            int "PLLDIVM value for RA8875 System Clock"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 0 1
+            default 0
+            help
+                Configure the value to use for PLLDIVM in PLLC0 register here.
+
+        config LVGL_DISP_RA8875_PLLDIVN
+            int "PLLDIVN value for RA8875 System Clock"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 1 31
+            default 7
+            help
+                Configure the value to use for PLLDIVN in PLLC0 register here.
+
+        config LVGL_DISP_RA8875_PLLDIVK
+            int "PLLDIVK value for RA8875 System Clock"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 0 7
+            default 3
+            help
+                Configure the value to use for PLLDIVK in PLLC1 register here.
+
+        config LVGL_DISP_RA8875_PCLK_MULTIPLIER
+            int "PCLK Period Setting"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 0 3
+            default 0
+            help
+                Configure the PCLK multiplier in PCSR register here.
+
+        config LVGL_DISP_RA8875_PCLK_INVERT
+            bool "PCLK Inversion"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            default n
+            help
+                Configure the PCLK to be inverted in PCSR register here.
+
+        config LVGL_DISP_RA8875_DE_POLARITY
+            bool "Data Enable (DE) Polarity/Invert"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            default n
+            help
+                Set to make data enable (DE) signal active low.
+
+        config LVGL_DISP_RA8875_HORI_NON_DISP_PERIOD
+            int "Horizontal Non-Display Period"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 12 274
+            default 12
+            help
+                Configure the Horizontal Non-Display Period (aka Horizontal Back Porch).
+                Horizontal Non-Display Period(pixels) = 8*(HNDR+1) + 2*(HNDFTR/2+1) + 2
+
+        config LVGL_DISP_RA8875_HSYNC_START
+            int "HSYNC Start Position"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 8 256
+            default 8
+            help
+                Configure start position of HSYNC (aka Horizontal Front Porch).
+                HSYNC Start Position(pixels) = 8*(HSTR+1)
+
+        config LVGL_DISP_RA8875_HSYNC_PW
+            int "HSYNC Pulse Width"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 8 256
+            default 8
+            help
+                Configure pulse width of HSYNC.
+                HSYNC Pulse Width(pixels) = 8*(HPW+1)
+
+        config LVGL_DISP_RA8875_HSYNC_POLARITY
+            bool "HSYNC Polarity/Invert"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            default n
+            help
+                Set to make HSYNC signal active high.
+
+        config LVGL_DISP_RA8875_VERT_NON_DISP_PERIOD
+            int "Vertical Non-Display Period"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 1 512
+            default 1
+            help
+                Configure the Vertical Non-Display Period (aka Vertical Back Porch).
+                Vertical Non-Display Period(lines) = (VNDR+1)
+
+        config LVGL_DISP_RA8875_VSYNC_START
+            int "VSYNC Start Position"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 1 512
+            default 1
+            help
+                Configure start position of VSYNC (aka Vertical Front Porch).
+                VSYNC Start Position(lines) = (VSTR+1)
+
+        config LVGL_DISP_RA8875_VSYNC_PW
+            int "VSYNC Pulse Width"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            range 1 128
+            default 1
+            help
+                Configure pulse width of VSYNC.
+                VSYNC Pulse Width(lines) = (VPWR+1)
+
+        config LVGL_DISP_RA8875_VSYNC_POLARITY
+            bool "VSYNC Polarity/Invert"
+            depends on LVGL_TFT_DISPLAY_CONTROLLER_RA8875
+            default n
+            help
+                Set to make VSYNC signal active high.
+
+    endmenu
+
+    # menu will be visible only when LVGL_PREDEFINED_DISPLAY_NONE is y
+    menu "Display Pin Assignments"
+    visible if LVGL_PREDEFINED_DISPLAY_NONE || LVGL_PREDEFINED_DISPLAY_RPI_MPI3501 || LVGL_PREDEFINED_PINS_TKOALA
+
+        config LVGL_DISP_SPI_MOSI
+            int "GPIO for MOSI (Master Out Slave In)" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            range 0 39
+            default 23 if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 23 if LVGL_PREDEFINED_DISPLAY_ATAG
+            default 23 if LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_M5STICK
+            default 15 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+            default 18 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 23 if LVGL_PREDEFINED_PINS_TKOALA
+            default 19 if LVGL_PREDEFINED_DISPLAY_TTGO
+            default 13
+
+            help
+                Configure the display MOSI pin here.
+
+        config LVGL_DISPLAY_USE_SPI_MISO
+            bool "Use MISO signal to control the display" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            default y if LVGL_PREDEFINED_PINS_TKOALA
+            help
+                Enable the MISO signal to control the display. You can disable
+                it when the display does not need MISO signal to be controlled.
+
+        config LVGL_DISP_SPI_MISO
+            int "GPIO for MISO (Master In Slave Out)" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            depends on LVGL_DISPLAY_USE_SPI_MISO
+            range 0 39
+            default 18 if LVGL_PREDEFINED_PINS_TKOALA
+            default 0
+
+            help
+                Configure the display MISO pin here.
+
+        config LVGL_DISP_SPI_INPUT_DELAY_NS
+            int "MISO Input Delay (ns)" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            depends on LVGL_DISPLAY_USE_SPI_MISO
+            range 0 2147483647
+            default 0
+            help
+                The time required between SCLK and MISO being valid, including the possible clock
+                delay from processor to display. Leave at 0 unless you know you need a delay.
+
+        config LVGL_DISP_SPI_CLK
+            int "GPIO for CLK (SCK / Serial Clock)" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            range 0 39
+            default 18 if LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_M5STICK
+            default 13 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+            default 18 if LVGL_PREDEFINED_DISPLAY_ATAG
+            default 19 if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 5 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 18 if LVGL_PREDEFINED_PINS_TKOALA
+            default 18 if LVGL_PREDEFINED_DISPLAY_TTGO
+            default 14
+
+            help
+                Configure the display CLK pin here.
+
+        config LVGL_DISPLAY_USE_SPI_CS
+            bool "Use CS signal to control the display" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            default y
+            help
+                Enable the CS signal to control the display. You can disable
+                it when the display does not need CS signal to be controlled.
+
+        config LVGL_DISP_SPI_CS
+            int "GPIO for CS (Slave Select)" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            depends on LVGL_DISPLAY_USE_SPI_CS
+            range 0 39
+            default 5 if LVGL_PREDEFINED_PINS_38V1
+            default 14 if LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_M5STICK
+            default 5 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+            default 22 if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 15 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 5 if LVGL_PREDEFINED_PINS_TKOALA
+            default 26 if LVGL_PREDEFINED_DISPLAY_ATAG
+            default 5 if LVGL_PREDEFINED_DISPLAY_TTGO
+            default 15
+
+            help
+                Configure the display CS pin here.
+
+        config LVGL_DISPLAY_USE_DC
+            bool "Use DC signal to control the display" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            default y if !LVGL_PREDEFINED_PINS_TKOALA
+            help
+                Enable the DC signal to control the display. You can disable
+                it when the display does not need DC signal to be controlled.
+
+        config LVGL_DISP_PIN_DC
+            int "GPIO for DC (Data / Command)" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            range 0 39
+            depends on LVGL_DISPLAY_USE_DC
+            default 19 if LVGL_PREDEFINED_PINS_38V1
+            default 17 if LVGL_PREDEFINED_PINS_38V4
+            default 27 if LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_M5STICK
+            default 23 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+            default 21 if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 33 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 0 if LVGL_PREDEFINED_PINS_TKOALA
+            default 17 if LVGL_PREDEFINED_DISPLAY_ATAG
+            default 16 if LVGL_PREDEFINED_DISPLAY_TTGO
+            default 2
+
+            help
+                Configure the display DC pin here.
+
+        config LVGL_DISP_PIN_RST
+            int "GPIO for Reset" if LVGL_TFT_DISPLAY_PROTOCOL_SPI
+            range 0 39
+            default 18 if LVGL_PREDEFINED_PINS_38V1
+            default 25 if LVGL_PREDEFINED_PINS_38V4
+            default 33 if LVGL_PREDEFINED_DISPLAY_M5STACK || LVGL_PREDEFINED_DISPLAY_M5STICK
+            default 18 if LVGL_PREDEFINED_DISPLAY_M5STICKC
+            default 18 if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 4 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 15 if LVGL_PREDEFINED_PINS_TKOALA
+            default 16 if LVGL_PREDEFINED_DISPLAY_ATAG
+            default 23 if LVGL_PREDEFINED_DISPLAY_TTGO
+            default 4
+
+            help
+                Configure the display Reset pin here.
+
+        config LVGL_DISP_PIN_BUSY
+            int "GPIO for Busy" if LVGL_TFT_DISPLAY_CONTROLLER_IL3820
+            range 0 39
+            default 35 if LVGL_TFT_DISPLAY_CONTROLLER_IL3820
+            default 35
+
+            help
+                Configure the display Busy pin here.
+
+        config LVGL_ENABLE_BACKLIGHT_CONTROL
+            bool "Enable control of the display backlight by using an GPIO." if \
+                ( LVGL_PREDEFINED_DISPLAY_NONE && ! ( LVGL_TFT_DISPLAY_CONTROLLER_SH1107 || LVGL_TFT_DISPLAY_CONTROLLER_SSD1306 ) ) \
+                || LVGL_PREDEFINED_DISPLAY_RPI_MPI3501
+            default y if LVGL_PREDEFINED_DISPLAY_M5STACK
+            default y if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default y if LVGL_PREDEFINED_DISPLAY_ERTFT0356
+            default y if LVGL_PREDEFINED_DISPLAY_TTGO
+            help
+                Enable controlling the display backlight using an GPIO
+
+        config LVGL_BACKLIGHT_ACTIVE_LVL
+            bool "Is backlight turn on with a HIGH (1) logic level?"
+            depends on LVGL_ENABLE_BACKLIGHT_CONTROL
+            default y if LVGL_PREDEFINED_DISPLAY_M5STACK
+            default y if LVGL_PREDEFINED_DISPLAY_ERTFT0356
+	    default y if LVGL_PREDEFINED_DISPLAY_TTGO
+            help
+                Some backlights are turned on with a high signal, others held low.
+                If enabled, a value of 1 will be sent to the display to enable the backlight,
+                otherwise a 0 will be expected to enable it.
+
+        config LVGL_DISP_PIN_BCKL
+            int "GPIO for Backlight Control"
+            depends on LVGL_ENABLE_BACKLIGHT_CONTROL
+            range 0 39
+            default 23 if LVGL_PREDEFINED_PINS_38V1
+            default 26 if LVGL_PREDEFINED_PINS_38V4
+            default 32 if LVGL_PREDEFINED_DISPLAY_M5STACK
+            default 5 if LVGL_PREDEFINED_DISPLAY_WROVER4
+            default 2 if LVGL_PREDEFINED_DISPLAY_ADA_FEATHERWING
+            default 27 if LVGL_PREDEFINED_DISPLAY_ERTFT0356
+            default 0  if LVGL_PREDEFINED_PINS_TKOALA
+            default 4 if LVGL_PREDEFINED_DISPLAY_TTGO
+            default 27
+
+            help
+                Configure the display BCLK (LED) pin here.
+
+        config LVGL_DISP_PIN_SDA
+            int "GPIO for I2C SDA" if LVGL_TFT_DISPLAY_PROTOCOL_I2C
+            range 0 39
+            default 5 if LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN
+            default 5
+
+            help
+            Configure the I2C SDA pin here.
+
+        config LVGL_DISP_PIN_SCL
+            int "GPIO for I2C SCL" if LVGL_TFT_DISPLAY_PROTOCOL_I2C
+            range 0 39
+            default 4 if LVGL_PREDEFINED_DISPLAY_WEMOS_LOLIN
+            default 4
+
+            help
+            Configure the I2C SCL pin here.
+
+    endmenu
+
+endmenu
