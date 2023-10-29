@@ -36,4 +36,4 @@ This can be installed from the library manager by searching for "TFT_eSPI".
 
 ### Examples
 
-I have provided examples for you to try out to get some ideas or inspiration. [Check them out here.](/examples/)
+I have provided examples for you to try out to get some ideas or inspiration. [Check them out here.](/Examples/)
