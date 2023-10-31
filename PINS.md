@@ -2,17 +2,31 @@
 
 This page talks about the pins on the CYD.
 
+## What pins are available on the CYD?
+
+There are 3 easily accessible GPIO pins
+
+|Pin|Location|Note|
+|---|---|----|
+|IO35|**P3** JST connector|Input only pin, no internal pull-ups available|
+|IO22|**P3** and **CN1** JST connector||
+|IO27|**CN1** JST connector||
+
+If you need more than that, you need to start taking them from something else. An SD Card sniffer like mentioned in the [Add-ons](/ADDONS.md) is probably the next easiest.
+
+After that you're probably de-soldering something!
+
 ## Broken Out Pins
 
-There are three 4P 1.25mm JST connectors on the board, here are the broken out pins.
+There are three 4P 1.25mm JST connectors on the board
 
 ### P3
 |Pin|Use|Note|
 |---|---|----|
 |GND|||
-|IO35||Input only pin, no internal pullups available|
+|IO35||Input only pin, no internal pull-ups available|
 |IO22||Also on the **CN1** connector|
-|IO21||Used for the TFT Backlight, so not really usuable|
+|IO21||Used for the TFT Backlight, so not really usable|
 
 ### CN1
 This is a great candidate for I2C devices
@@ -43,7 +57,7 @@ The CYD has two buttons, reset and boot.
 
 ## Speaker
 
-The speaker connector is a 2P 1.25mm JST connector that is connected to the amplifier, so not usuable as GPIO at the speaker connector
+The speaker connector is a 2P 1.25mm JST connector that is connected to the amplifier, so not usable as GPIO at the speaker connector
 
 |Pin|Use|Note|
 |---|---|----|
@@ -51,7 +65,7 @@ The speaker connector is a 2P 1.25mm JST connector that is connected to the ampl
 
 ## RGB LED
 
-If your project requires addtional pins to what is available elsewhere, this might be a good candidate to sacrifice.
+If your project requires additional pins to what is available elsewhere, this might be a good candidate to sacrifice.
 
 Note: LEDs are "active low", meaning HIGH == off, LOW == on
 
@@ -68,7 +82,7 @@ Note: LEDs are "active low", meaning HIGH == off, LOW == on
 |IO5|SD_CS||
 |IO18|SD_SCK||
 |IO19|SD_MISO||
-|IO23|SD_MOSI
+|IO23|SD_MOSI||
 
 ## Touch Screen
 

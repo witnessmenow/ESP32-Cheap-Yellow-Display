@@ -6,6 +6,10 @@ Please use these files at your own risk
 
 I downloaded this from the [Sunton Store listing](https://www.aliexpress.com/item/1005004502250619.html) on May 21st, 2023
 
+## License Note:
+
+This folder is **NOT** covered by the MIT license as I do not have authority to do that. You will need to contact Sunton to get license information for it.
+
 ## Removed folders
 
 I have removed two folders from the original download as some contain executables and are also quite large. These were labeled:
