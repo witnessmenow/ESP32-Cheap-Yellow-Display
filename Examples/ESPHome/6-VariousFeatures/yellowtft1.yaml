@@ -79,16 +79,14 @@ color:
   - id: aquamarina
     hex: d1d59f
   - id: blue_color
-    red: 100%
-  - id: red_color
+    # Make use of `red: 100%` if using ILI9342
     blue: 100%
+  - id: red_color
+    # Make use of `blue: 100%` if using ILI9342
+    red: 100%
   - id: green_color
     green: 100%
-  - id: my_white
-    red: 100%
-    blue: 100%
-    green: 100%
-  - id: my_yellow
+  - id: yellow_color
     hex: ffff00
 
 # Create an ESPHome logo image
@@ -229,11 +227,13 @@ media_player:
 display:
   - platform: ili9xxx
     id: esp_display
-    # In some boards the model might be ILI9341 so change this if your board has only one USB port
-    model: ILI9342
+    # In some boards the model might be ILI9342 so change this if your board has two USB ports
+    model: ILI9341
     spi_id: spi_tft
     cs_pin: GPIO15
     dc_pin: GPIO2
+    # Remove rotation if your board used the ILI9341 LCD
+    rotation: 90
     pages:
       - id: page1
         lambda: |-
@@ -276,7 +276,7 @@ display:
             it.horizontal_line(shift_x+210,i+shift_y,50, blue_color.fade_to_white(i));
             it.horizontal_line(shift_x+260,i+shift_y,50, blue_color.fade_to_black(i));
           }
-          it.rectangle(shift_x+ 0, 0+shift_y, shift_x+ 310, 256+shift_y, my_yellow);
+          it.rectangle(shift_x+ 0, 0+shift_y, shift_x+ 310, 256+shift_y, yellow_color);
           it.print(0, 10, id(arimo24), "This is page 4!");
           it.filled_rectangle($button_a_x1, $button_a_y1, $button_a_max_width, $button_a_max_height, id(aquamarina));
           it.filled_rectangle($button_b_x1, $button_b_y1, $button_b_max_width, $button_b_max_height, id(aquamarina));
