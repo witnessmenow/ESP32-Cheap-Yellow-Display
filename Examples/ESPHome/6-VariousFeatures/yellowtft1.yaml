@@ -1,0 +1,327 @@
+substitutions:
+  device_name: yellowtft1
+  friendly_name: Yellow TFT 1
+
+  
+  button_a_max_width: "120"
+  button_a_max_height: "120"
+  button_a_x1: "20"
+  # button_a_x1 + button_a_max_width
+  button_a_x2: "140"
+  button_a_y1: "60"
+  # button_a_y1 + button_a_max_height
+  button_a_y2: "140"
+
+  button_b_max_width: "120"
+  button_b_max_height: "120"
+  button_b_x1: "180"
+  # button_b_x1 + button_b_max_width
+  button_b_x2: "300"
+  button_b_y1: "60"
+  # button_b_y1 + button_b_max_height
+  button_b_y2: "180"
+  
+
+esphome:
+  name: $device_name
+  friendly_name: $friendly_name
+  compile_process_limit: 1
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: $device_name Fallback Hotspot
+    password: !secret ap_password
+
+captive_portal:
+
+web_server:
+  port: 80
+  include_internal: true
+
+# ============================================================ 
+# ESPHome Display related setup
+#
+# Create a font to use, add and remove glyphs as needed. 
+font:
+  - file: 'fonts/Arimo-Regular.ttf'
+    id: arimo12
+    size: 12
+    glyphs: "<>!\"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz"
+  - file: 'fonts/Arimo-Regular.ttf'
+    id: arimo24
+    size: 24
+    glyphs: "<>!\"%()+=,-_.:°0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz"
+
+# Create a colors to use in the display
+color:
+  - id: ha_blue
+    hex: f2c051
+  - id: aquamarina
+    hex: d1d59f
+  - id: blue_color
+    red: 100%
+  - id: red_color
+    blue: 100%
+  - id: green_color
+    green: 100%
+  - id: my_white
+    red: 100%
+    blue: 100%
+    green: 100%
+  - id: my_yellow
+    hex: ffff00
+
+# Create an ESPHome logo image
+image:
+  - file: "images/esphome.png"
+    id: esphome_image
+    type: RGB24
+
+# ============================================================ 
+# Home Assistant related setup
+#
+light:
+# Setup backlight from LCD
+  - platform: monochromatic
+    output: backlight_pwm
+    name: Display Backlight
+    id: backlight
+    restore_mode: ALWAYS_ON
+
+# Setup a RGB light in Home Assistant
+  - platform: rgb
+    name: RGB
+    id: led
+    red: led_red
+    green: led_green
+    blue: led_blue
+    restore_mode: ALWAYS_OFF
+
+# Create a time sensor, this will fetch time from Home Assistant
+time:
+  - platform: homeassistant
+    id: ha_time
+  - platform: sntp
+    id: sntp_time
+
+# Setup two binary sensors for the two areas for touch
+binary_sensor:
+  - platform: status
+    id: board_status
+    name: "$friendly_name Status"
+
+  - platform: touchscreen
+    name: Button A
+    x_min: $button_a_x1
+    x_max: $button_a_x2
+    y_min: $button_a_y1
+    y_max: $button_a_y2
+    on_press:
+      - display.page.show_previous: esp_display
+      - component.update: esp_display
+
+  - platform: touchscreen
+    name: Button B
+    x_min: $button_b_x1
+    x_max: $button_b_x2
+    y_min: $button_b_y1
+    y_max: $button_b_y2
+    on_press:
+      - display.page.show_next: esp_display
+      - component.update: esp_display
+
+# ============================================================ 
+# Hardware related setup
+
+sensor:
+  # Board LDR
+  - platform: adc
+    pin: GPIO34
+    name: "board_ldr"
+    update_interval: 1500ms
+# Reports the WiFi signal strength/RSSI in dB
+  - platform: wifi_signal 
+    name: "WiFi Signal dB"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: "diagnostic"
+# Reports the WiFi signal strength in %
+  - platform: copy 
+    source_id: wifi_signal_db
+    name: "WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "Signal %"
+    entity_category: "diagnostic"
+
+# Setup SPI for the display. The ESP32-2432S028R uses separate SPI buses for display and touch
+spi:
+  - id: spi_tft
+    clk_pin: GPIO14
+    mosi_pin: GPIO13
+    miso_pin: GPIO12
+  - id: spi_touch
+    clk_pin: GPIO25
+    mosi_pin: GPIO32
+    miso_pin: GPIO39
+
+switch:
+  # Board power switches
+  - platform: restart
+    name: "$friendly_name restart"
+  - platform: shutdown
+    name: "$friendly_name shutdown"
+  - platform: safe_mode
+    name: "$friendly_name restart (Safe Mode)"
+
+output:
+# Setup a pin to control the backlight
+  - platform: ledc
+    pin: GPIO21
+    id: backlight_pwm
+# Setup the pins that control the RGB LED
+  - platform: ledc
+    pin: GPIO4
+    id: led_red
+    inverted: true
+  - platform: ledc
+    pin: GPIO16
+    id: led_green
+    inverted: true
+  - platform: ledc
+    pin: GPIO17
+    id: led_blue
+    inverted: true
+
+i2s_audio:
+  i2s_lrclk_pin: GPIO25
+  i2s_bclk_pin: GPIO26
+
+media_player:
+  - platform: i2s_audio
+    name: ESPHome I2S Media Player
+    dac_type: internal
+    mode: stereo
+
+
+# Setup the ili9xxx platform
+# Display is used as 240x320 by default so we rotate it to 90°
+display:
+  - platform: ili9xxx
+    id: esp_display
+    # In some boards the model might be ILI9341 so change this if your board has only one USB port
+    model: ILI9342
+    spi_id: spi_tft
+    cs_pin: GPIO15
+    dc_pin: GPIO2
+    pages:
+      - id: page1
+        lambda: |-
+          it.fill(id(ha_blue));
+          it.print(0, 10, id(arimo24), "This is page 1!");
+          it.filled_rectangle($button_a_x1, $button_a_y1, $button_a_max_width, $button_a_max_height, id(aquamarina));
+          it.filled_rectangle($button_b_x1, $button_b_y1, $button_b_max_width, $button_b_max_height, id(aquamarina));
+          it.print(80, 120, id(arimo24), TextAlign::CENTER, "<");
+          it.print(240, 120, id(arimo24), TextAlign::CENTER, ">");
+      - id: page2
+        lambda: |-
+          it.fill(id(ha_blue));
+          it.print(0, 10, id(arimo24), "This is page 2!");
+          it.filled_rectangle($button_a_x1, $button_a_y1, $button_a_max_width, $button_a_max_height, id(aquamarina));
+          it.filled_rectangle($button_b_x1, $button_b_y1, $button_b_max_width, $button_b_max_height, id(aquamarina));
+          it.print(80, 120, id(arimo24), TextAlign::CENTER, "<");
+          it.print(240, 120, id(arimo24), TextAlign::CENTER, ">");
+      - id: page3
+        lambda: |-
+          it.fill(id(ha_blue));
+          it.print(0, 10, id(arimo24), "This is page 3!");
+          it.image(200, 5, id(esphome_image));
+          it.strftime(100, 200, id(arimo12), "%Y-%m-%d", id(sntp_time).now());
+          it.strftime(40, 220, id(arimo12), "%H:%M", id(sntp_time).now());
+          it.filled_rectangle($button_a_x1, $button_a_y1, $button_a_max_width, $button_a_max_height, id(aquamarina));
+          it.filled_rectangle($button_b_x1, $button_b_y1, $button_b_max_width, $button_b_max_height, id(aquamarina));
+          it.print(80, 120, id(arimo24), TextAlign::CENTER, "<");
+          it.print(240, 120, id(arimo24), TextAlign::CENTER, ">");
+      - id: page4
+        lambda: |-
+          int shift_x = (it.get_width()-310)/2;
+          int shift_y = (it.get_height()-256)/2;
+          for(auto i = 0; i<256; i++) {
+            it.horizontal_line(shift_x+  0,i+shift_y,50, red_color.fade_to_white(i));
+            it.horizontal_line(shift_x+ 50,i+shift_y,50, red_color.fade_to_black(i));
+
+            it.horizontal_line(shift_x+105,i+shift_y,50, green_color.fade_to_white(i));
+            it.horizontal_line(shift_x+155,i+shift_y,50, green_color.fade_to_black(i));
+
+            it.horizontal_line(shift_x+210,i+shift_y,50, blue_color.fade_to_white(i));
+            it.horizontal_line(shift_x+260,i+shift_y,50, blue_color.fade_to_black(i));
+          }
+          it.rectangle(shift_x+ 0, 0+shift_y, shift_x+ 310, 256+shift_y, my_yellow);
+          it.print(0, 10, id(arimo24), "This is page 4!");
+          it.filled_rectangle($button_a_x1, $button_a_y1, $button_a_max_width, $button_a_max_height, id(aquamarina));
+          it.filled_rectangle($button_b_x1, $button_b_y1, $button_b_max_width, $button_b_max_height, id(aquamarina));
+          it.print(80, 120, id(arimo24), TextAlign::CENTER, "<");
+          it.print(240, 120, id(arimo24), TextAlign::CENTER, ">");
+      - id: page5
+        lambda: |-
+          it.fill(id(red_color));
+          it.print(0, 10, id(arimo24), "This is page 5!");
+          it.print(0, 30, id(arimo24), "Background in Red");
+          it.filled_rectangle($button_a_x1, $button_a_y1, $button_a_max_width, $button_a_max_height, id(blue_color));
+          it.filled_rectangle($button_b_x1, $button_b_y1, $button_b_max_width, $button_b_max_height, id(green_color));
+          it.print(80, 120, id(arimo24), TextAlign::CENTER, "Blue");
+          it.print(240, 120, id(arimo24), TextAlign::CENTER, "Green");
+
+
+
+# Set up the xpt2046 touch platform
+touchscreen:
+  platform: xpt2046
+  id: esp_touchscreen
+  spi_id: spi_touch
+  cs_pin: GPIO33
+  interrupt_pin: GPIO36
+  update_interval: 50ms
+  report_interval: 1s
+  threshold: 400
+  calibration_x_min: 3860
+  calibration_x_max: 280
+  calibration_y_min: 340
+  calibration_y_max: 3860
+  swap_x_y: true
+  # Calibration for the display
+  # on_touch:
+  #   - lambda: |-
+  #         ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+  #             id(esp_touchscreen).x,
+  #             id(esp_touchscreen).y,
+  #             id(esp_touchscreen).x_raw,
+  #             id(esp_touchscreen).y_raw
+  #             ); 
+  
+# Loop trough all pages on the display
+interval:
+  - interval: 15s
+    then:
+      - display.page.show_next: esp_display
+      - component.update: esp_display
