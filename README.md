@@ -95,6 +95,16 @@ This project is licensed as MIT as per the [license file](/LICENSE)
 
 The one exception to this is the [OriginalDocumentation](/OriginalDocumentation/) folder, that I do not have the right to license
 
+## Other Languages
+
+Some members of the community have ported some of this information to other languages! 
+
+Please note: I can't gaurantee the accuracy of the translation, how up to date they are or the content on them in general.
+
+- [French / Française](https://github.com/usini/ESP32-Cheap-Yellow-Display-Documentation-FR)
+
+If you would like to contribure a translation, please name the repo with the language name or code in the repo name and you can link it here.
+
 ## Help Support what I do!
 
 [If you enjoy my work, please consider becoming a Github sponsor!](https://github.com/sponsors/witnessmenow/)
