@@ -33,9 +33,9 @@ For these two pins you get:
 - 2 Buttons
 - An accelerometer
 
-## Hardware Required
+### Hardware Required
 
-### Nunchuck controllers
+#### Nunchuck controllers
 
 Official Nintendo ones are generally better (maybe try second-hand options), but third-party ones also work fine.
 
@@ -43,7 +43,7 @@ Official Nintendo ones are generally better (maybe try second-hand options), but
 - [Amazon.com Search\*](https://amzn.to/3nRJTUd)
 - [Aliexpress (Third Party)\*](https://s.click.aliexpress.com/e/_AaQbXh)
 
-### Nunchuck controllers
+#### Nunchuck Adaptors
 
 There are many different options available for these, even the cheap ones from Aliexpress work perfectly.
 
@@ -51,7 +51,7 @@ There are many different options available for these, even the cheap ones from A
 - [My Open source one from Oshpark](https://oshpark.com/shared_projects/RcIxSx2D)
 - [Adafaruit](https://www.adafruit.com/product/4836)
 
-## Wiring
+### Wiring
 
 The easiest way to wire this up is to use the wire that came with the CYD and the **CN1** JST connector (the one closest to the Micro SD card slot)
 
@@ -66,7 +66,7 @@ Connect the wire to your breakout board as follows:
 
 Note: I have found pull-ups resistors are not required on SDA and SCL
 
-## Example
+### Example
 
 Check out the [NunchuckTest](/Examples/InputTests/NunchuckTest) example for code how to use it.
 
