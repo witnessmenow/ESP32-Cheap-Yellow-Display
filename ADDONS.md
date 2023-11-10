@@ -21,7 +21,7 @@ If you want to use the pins of the SD card for a different purpose, the easiest 
 
 ### Links
 
-- [Micro SD Card Snigger - Aliexpress\*](https://s.click.aliexpress.com/e/_Ddwcy9h)
+- [Micro SD Card Sniffer - Aliexpress\*](https://s.click.aliexpress.com/e/_Ddwcy9h)
 
 ## Nintendo Wii Nunchuck
 
