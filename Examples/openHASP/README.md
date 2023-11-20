@@ -5,8 +5,10 @@
 Support for the CYD is in beta, as such you'll need to use the 'nightly' builds.  Currently only the display and touchscreen are supported out of the box, adding support for the RGB LED is mostly trivial.  There is no support for the speaker and the LDR output does not appear to work
 
 ## OpenHASP vs ESPHome
-ESPHome is much more configurable, supports a load more peripherals and is fairly easy to install and get working.  Generating pages for the CYD is done exclusively through YAML and is all honesty a bit of a drag.  Any buttons/widgets you create are generally automagically added to Home Assistant.
+ESPHome is much more configurable, supports a load more peripherals and is fairly easy to install and get working.  Generating pages for the CYD is done exclusively through YAML and is a bit of a drag.  Any buttons/widgets you create are generally automagically added to Home Assistant.
+
 OpenHASP is much easier to work with, but is slightly harder to install.  Generating and testing pages is a lot easier, but peripheral support is basically non-existant in comparison.  Also any widgets you create have to be manually added via YAML to Home Assistant.
+
 
 I went with OpenHASP as making pages was a lot easier and I didn't plan to use any other peripherals other than the touchscreen and display.
 
