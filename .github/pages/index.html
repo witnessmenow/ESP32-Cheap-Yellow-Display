@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CYD Examples</title>
+	<script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+</head>
+<body>
+    <h1>Cheap Yellow Display (CYD) Examples</h1>
+
+    <p>Just hit the button to install the example on your CYD.</p>
+	
+	<p>NOTE: Make sure to close anything using your devices com port (e.g. Serial monitor)</p>
+	<div id="examples" style="display: none;">
+	</div>
+
+	<template id="webflash">
+		<div style="margin-bottom: 10px;">
+			<esp-web-install-button class="installButton">
+				<button slot="activate"></button>
+			</esp-web-install-button>
+		</div>
+	</template>
+    <div id="notSupported" style="display: none;">
+        Your browser does not support the Web Serial API.
+    </div>
+    
+
+    <script>
+        if(navigator.serial){
+			fetch('./examples.json')
+				.then(response => response.json())
+				.then(json => {
+					let examples = document.getElementById('examples');
+					json.examples.forEach((element) => {
+						let w = document.importNode(document.getElementById('webflash').content, true);
+						w.querySelector('button').textContent = 'Install ' + element;
+						console.log(w.querySelector('esp-web-install-button'));
+						w.querySelector('esp-web-install-button').setAttribute('manifest', element + '/cyd/manifest.json');
+						console.log(w.querySelector('esp-web-install-button'));
+						examples.appendChild(w);
+					});
+				});
+            document.getElementById('examples').style.display = 'block';
+        } else {
+			console.log('Serial not supported');
+            document.getElementById('notSupported').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

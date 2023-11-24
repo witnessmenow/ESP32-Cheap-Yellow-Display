@@ -44,3 +44,28 @@ jobs:
     - name: Merge flash files
       run: |
         find . -path '*/.pio*' -type f -name 'firmware.bin' -printf '%h\n' | xargs -i bash -c "(echo {}; cd {}; ~/.platformio/packages/tool-esptoolpy/esptool.py --chip esp32 merge_bin -o merged-flash.bin --flash_mode dio --flash_size 4MB 0x1000 bootloader.bin 0x8000 partitions.bin 0x10000 firmware.bin)"
+    - name: Create JSON
+      run: |
+        cp ./.github/pages/index.html tmp/
+        echo '{"examples":[' > tmp/examples.json
+        first=1
+        find . -path './Examples/*/.pio*' -type f -name 'firmware.bin' | awk -F '.pio' '{print $1}' - | uniq | while read -r example ; do
+            if [ $first -eq 1 ]
+            then
+                first=0
+            else
+                echo ','  >> tmp/examples.json
+            fi
+            echo -n '"'  >> tmp/examples.json
+            realpath --relative-to=./tmp tmp/$example/ | xargs echo -n >> tmp/examples.json
+            echo -n '"'  >> tmp/examples.json
+
+            mkdir -p tmp/$example/cyd
+            mkdir -p tmp/$example/cyd2usb
+            cp ./.github/pages/manifest.json tmp/$example/cyd
+            cp ./.github/pages/manifest.json tmp/$example/cyd2usb
+            cp $example.pio/build/cyd/merged-flash.bin tmp/$example/cyd
+            cp $example.pio/build/cyd2usb/merged-flash.bin tmp/$example/cyd2usb
+        done
+
+        echo ']}' >> tmp/examples.json
