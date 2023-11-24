@@ -69,3 +69,23 @@ jobs:
         done
 
         echo ']}' >> tmp/examples.json
+    - name: Setup Github Page
+      uses: actions/configure-pages@v3
+    - name: Upload webflash files
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: ./tmp
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
