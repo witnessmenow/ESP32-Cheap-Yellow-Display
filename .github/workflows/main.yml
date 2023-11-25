@@ -50,6 +50,7 @@ jobs:
         echo '{"examples":[' > tmp/examples.json
         first=1
         find . -path './Examples/*/.pio*' -type f -name 'firmware.bin' | awk -F '.pio' '{print $1}' - | uniq | while read -r example ; do
+            echo $example
             if [ $first -eq 1 ]
             then
                 first=0
@@ -57,7 +58,7 @@ jobs:
                 echo ','  >> tmp/examples.json
             fi
             echo -n '"'  >> tmp/examples.json
-            realpath --relative-to=./tmp tmp/$example/ | xargs echo -n >> tmp/examples.json
+            realpath --relative-to=./tmp tmp/$example | xargs echo -n >> tmp/examples.json
             echo -n '"'  >> tmp/examples.json
 
             mkdir -p tmp/$example/cyd
