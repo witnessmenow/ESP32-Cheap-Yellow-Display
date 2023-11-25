@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>CYD Examples</title>
+	<title>CYD Example Web Installer</title>
+	<meta charset="utf-8">
 	<script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+    <script>
+		function loadExamples(type) {
+			if(!type) {
+				return;
+			}
+			let examples = document.getElementById('examples');
+			examples.innerHTML = '';
+			fetch('examples.json')
+				.then(response => response.json())
+				.then(json => {
+					json.examples.forEach((element) => {
+						let w = document.importNode(document.getElementById('webflash').content, true);
+						w.querySelector('button').textContent = 'Install ' + element;
+						w.querySelector('esp-web-install-button').setAttribute('manifest', element + '/' + type + '/manifest.json');
+						examples.appendChild(w);
+					});
+				});
+		}
+    </script>
 </head>
 <body>
-    <h1>Cheap Yellow Display (CYD) Examples</h1>
-
-    <p>Just hit the button to install the example on your CYD.</p>
+    <h1>Cheap Yellow Display (CYD) Example Web Installer</h1>
 	
-	<p>NOTE: Make sure to close anything using your devices com port (e.g. Serial monitor)</p>
-	<div id="examples" style="display: none;">
+	<form onsubmit="return false;" class="flashable">
+		<label>Choose your CYD: 
+			<select name="cyd" onchange="loadExamples(this.value)">
+			  <option value=""></option>
+			  <option value="cyd">CYD</option>
+			  <option value="cyd2usb">CYD with 2 USBs</option>
+			</select>
+		</label>
+	</form>
+
+    <p class="flashable">Make sure to close anything using your devices com port (e.g. Serial monitor). Just hit the button to install the example on your CYD.</p>
+	
+	<div id="examples" style="display: none;" class="flashable">
 	</div>
 
 	<template id="webflash">
@@ -20,29 +49,17 @@
 			</esp-web-install-button>
 		</div>
 	</template>
-    <div id="notSupported" style="display: none;">
-        Your browser does not support the Web Serial API.
-    </div>
+    <p id="notSupported" style="display: none; color: red;">
+        Your browser does not support the Web Serial API. Please open this page using Edge or Chrome.
+    </p>
     
 
     <script>
         if(navigator.serial){
-			fetch('./examples.json')
-				.then(response => response.json())
-				.then(json => {
-					let examples = document.getElementById('examples');
-					json.examples.forEach((element) => {
-						let w = document.importNode(document.getElementById('webflash').content, true);
-						w.querySelector('button').textContent = 'Install ' + element;
-						console.log(w.querySelector('esp-web-install-button'));
-						w.querySelector('esp-web-install-button').setAttribute('manifest', element + '/cyd/manifest.json');
-						console.log(w.querySelector('esp-web-install-button'));
-						examples.appendChild(w);
-					});
-				});
             document.getElementById('examples').style.display = 'block';
         } else {
 			console.log('Serial not supported');
+			[...document.getElementsByClassName('flashable')].forEach((e) => {e.style.display = 'none';});
             document.getElementById('notSupported').style.display = 'block';
         }
     </script>
