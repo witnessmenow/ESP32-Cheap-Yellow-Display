@@ -14,7 +14,7 @@
 			fetch('examples.json')
 				.then(response => response.json())
 				.then(json => {
-					json.examples.forEach((element) => {
+					json.examples.sort().forEach((element) => {
 						let w = document.importNode(document.getElementById('webflash').content, true);
 						w.querySelector('button').textContent = 'Install ' + element;
 						w.querySelector('esp-web-install-button').setAttribute('manifest', element + '/' + type + '/manifest.json');
