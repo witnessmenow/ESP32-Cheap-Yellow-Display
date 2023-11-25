@@ -57,12 +57,13 @@ jobs:
             else
                 echo ','  >> tmp/examples.json
             fi
+            mkdir -p tmp/$example/cyd
+            mkdir -p tmp/$example/cyd2usb
+            
             echo -n '"'  >> tmp/examples.json
             realpath --relative-to=./tmp tmp/$example | xargs echo -n >> tmp/examples.json
             echo -n '"'  >> tmp/examples.json
 
-            mkdir -p tmp/$example/cyd
-            mkdir -p tmp/$example/cyd2usb
             cp ./.github/pages/manifest.json tmp/$example/cyd
             cp ./.github/pages/manifest.json tmp/$example/cyd2usb
             cp $example.pio/build/cyd/merged-flash.bin tmp/$example/cyd
