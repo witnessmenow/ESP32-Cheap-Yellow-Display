@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - '**.md'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Cache pip
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Cache PlatformIO
+      uses: actions/cache@v3
+      with:
+        path: ~/.platformio
+        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+    - name: Install PlatformIO
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade platformio
+    - name: Build
+      run: |
+        find . -not -path '*/.*' -type f -name 'platformio.ini' -printf '%h\n' | xargs -i bash -c "(echo {}; pio run -e cyd -e cyd2usb -d {})"
+    - name: Merge flash files
+      run: |
+        find . -path '*/.pio*' -type f -name 'firmware.bin' -printf '%h\n' | xargs -i bash -c "(echo {}; cd {}; ~/.platformio/packages/tool-esptoolpy/esptool.py --chip esp32 merge_bin -o merged-flash.bin --flash_mode dio --flash_size 4MB 0x1000 bootloader.bin 0x8000 partitions.bin 0x10000 firmware.bin)"
+    - name: Create JSON
+      run: |
+        mkdir tmp
+        cp ./.github/pages/index.html tmp/
+        echo '{"examples":[' > tmp/examples.json
+        first=1
+        find . -path './Examples/*/.pio*' -type f -name 'firmware.bin' | awk -F '.pio' '{print $1}' - | uniq | while read -r example ; do
+            echo $example
+            if [ $first -eq 1 ]
+            then
+                first=0
+            else
+                echo ','  >> tmp/examples.json
+            fi
+            mkdir -p tmp/$example/cyd
+            mkdir -p tmp/$example/cyd2usb
+            
+            echo -n '"'  >> tmp/examples.json
+            realpath --relative-to=./tmp tmp/$example | xargs echo -n >> tmp/examples.json
+            echo -n '"'  >> tmp/examples.json
+
+            cp ./.github/pages/manifest.json tmp/$example/cyd
+            cp ./.github/pages/manifest.json tmp/$example/cyd2usb
+            cp $example.pio/build/cyd/merged-flash.bin tmp/$example/cyd
+            cp $example.pio/build/cyd2usb/merged-flash.bin tmp/$example/cyd2usb
+        done
+
+        echo ']}' >> tmp/examples.json
+    - name: Setup Github Page
+      uses: actions/configure-pages@v3
+    - name: Upload webflash files
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: ./tmp
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
