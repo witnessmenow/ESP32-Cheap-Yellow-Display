@@ -4,4 +4,4 @@ Most of the code are borrowed from other examples. Thanks Internet!
 
 You will have to modify the PREFERENCES section in RollingClock.ino to your WiFi and TimeZone.
 
-[CYD Rolling Clock](https://www.youtube.com/watch?v=y8mGTQBH4xI)
+[CYD Rolling Clock](https://youtu.be/-od1sp2yYmw)

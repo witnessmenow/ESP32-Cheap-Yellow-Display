@@ -11,7 +11,7 @@ You will have to modify the PREFERENCES section in RollingClock.ino to your WiFi
 #include <WiFiUdp.h>  // To communicate with NTP server
 #include <Timezone.h>
 
-#define TOUCH_CS       // This sketch does not use touch, but this is defined to quiet the warning about not defining touch_cs.
+#define TOUCH_CS  // This sketch does not use touch, but this is defined to quiet the warning about not defining touch_cs.
 
 /*-------- DEBUGGING ----------*/
 void Debug(String label, int val) {
@@ -19,7 +19,6 @@ void Debug(String label, int val) {
   Serial.print("=");
   Serial.println(val);
 }
-
 
 /*-------- TIME SERVER ----------*/
 // NTP Servers:
@@ -33,19 +32,19 @@ WiFiUDP Udp;
 unsigned int localPort = 8888;  // local port to listen for UDP packets
 TimeChangeRule *tcr;            // pointer to the time change rule, use to get TZ abbrev
 
-
 /*-------- PREFERENCES ----------*/
 String credentials[][2] = {
   { "SSID", "SSIDPassword" },
   { "OptionalOtherSSID", "OptionalOtherSSDPassword" },
 };
+const bool SHOW_24HOUR = false;
+const bool SHOW_AMPM = true;
 
 // Info about these settings at https://github.com/JChristensen/Timezone#coding-timechangerules
 TimeChangeRule myStandardTime = { "CST", First, Sun, Nov, 2, -6 * 60 };
 TimeChangeRule myDaylightSavingsTime = { "CDT", Second, Sun, Mar, 2, -5 * 60 };
 Timezone myTZ(myStandardTime, myDaylightSavingsTime);
 static const int ntpSyncIntervalInSeconds = 300;  // How often to sync with time server (300 = every five minutes)
-
 
 /*-------- CYD (Cheap Yellow Display) ----------*/
 #include <TFT_eSPI.h>  // Hardware-specific library
@@ -82,13 +81,15 @@ void SetupCYD() {
 Digit *digs[6];
 int colons[2];
 int timeY = 50;
+int ampm[2];  // X, Y of the AM or PM indicator
+bool ispm;
 
 void CalculateDigitOffsets() {
   int y = timeY;
   int width = tft.width();
   int DigitWidth = tft.textWidth("8");
   int colonWidth = tft.textWidth(":");
-  int left = (width - DigitWidth * 6 - colonWidth * 2) / 2;
+  int left = SHOW_AMPM ? 10 : (width - DigitWidth * 6 - colonWidth * 2) / 2;
   digs[0]->SetXY(left, y);                       // HH
   digs[1]->SetXY(digs[0]->X() + DigitWidth, y);  // HH
 
@@ -101,6 +102,9 @@ void CalculateDigitOffsets() {
 
   digs[4]->SetXY(colons[1] + colonWidth, y);  // SS
   digs[5]->SetXY(digs[4]->X() + DigitWidth, y);
+
+  ampm[0] = digs[5]->X() + DigitWidth + 4;
+  ampm[1] = y - 2;
 }
 
 void SetupDigits() {
@@ -115,18 +119,28 @@ void SetupDigits() {
   }
 
   //-- Measure font widths --
-  //Debug("1", tft.textWidth("1"));
-  //Debug(":", tft.textWidth(":"));
-  //Debug("8", tft.textWidth("8"));
+  // Debug("1", tft.textWidth("1"));
+  // Debug(":", tft.textWidth(":"));
+  // Debug("8", tft.textWidth("8"));
 
   CalculateDigitOffsets();
 }
 
-
 /*-------- DRAWING ----------*/
 void DrawColons() {
+  tft.setTextFont(clockFont);
+  tft.setTextSize(clockSize);
+  tft.setTextDatum(clockDatum);
   tft.drawChar(':', colons[0], timeY);
   tft.drawChar(':', colons[1], timeY);
+}
+
+void DrawAmPm() {
+  if (SHOW_AMPM) {
+    tft.setTextSize(3);
+    tft.drawChar(ispm ? 'P' : 'A', ampm[0], ampm[1]);
+    tft.drawChar('M', ampm[0], ampm[1] + tft.fontHeight());
+  }
 }
 
 void DrawADigit(Digit *digg);  // Without this line, compiler says: error: variable or field 'DrawADigit' declared void.
@@ -198,12 +212,13 @@ void DrawDigitsOneByOne() {
 
 void ParseDigits(time_t utc) {
   time_t local = myTZ.toLocal(utc, &tcr);
-  digs[0]->NewValue(hourFormat12(local) / 10);
-  digs[1]->NewValue(hourFormat12(local) % 10);
+  digs[0]->NewValue((SHOW_24HOUR ? hour(local) : hourFormat12(local)) / 10);
+  digs[1]->NewValue((SHOW_24HOUR ? hour(local) : hourFormat12(local)) % 10);
   digs[2]->NewValue(minute(local) / 10);
   digs[3]->NewValue(minute(local) % 10);
   digs[4]->NewValue(second(local) / 10);
   digs[5]->NewValue(second(local) % 10);
+  ispm = isPM(local);
 }
 
 /*-------- NTP code ----------*/
@@ -251,7 +266,7 @@ time_t getNtpTime() {
   while (millis() - beginWait < 1500) {
     int size = Udp.parsePacket();
     if (size >= NTP_PACKET_SIZE) {
-      //Serial.println("Receive NTP Response");
+      // Serial.println("Receive NTP Response");
       Udp.read(packetBuffer, NTP_PACKET_SIZE);  // read packet into the buffer
       unsigned long secsSince1900;
       // convert four bytes starting at location 40 to a long integer
@@ -261,8 +276,8 @@ time_t getNtpTime() {
       secsSince1900 |= (unsigned long)packetBuffer[43];
 
       // NTP server responds within 50ms, so it does not account for the one second lag.
-      //unsigned long secsSinceNTPRequest = (millis() - beginWait);
-      //Debug("secsSinceNTPRequest=",secsSinceNTPRequest);
+      // unsigned long secsSinceNTPRequest = (millis() - beginWait);
+      // Debug("secsSinceNTPRequest=",secsSinceNTPRequest);
       unsigned long hackFactor = 1;  // Without this the clock is 1 second behind (even when drawing without animation)
 
       return secsSince1900 - 2208988800UL + hackFactor;
@@ -359,6 +374,7 @@ void loop() {
     DrawDigitsAtOnce();     // Choose one: DrawDigitsWithoutAnimation(), DrawDigitsAtOnce(), DrawDigitsOneByOne()
     DrawDate(prevDisplay);  // Draw Date and day of the week.
     DrawColons();
+    DrawAmPm();
   }
   delay(100);
 }
