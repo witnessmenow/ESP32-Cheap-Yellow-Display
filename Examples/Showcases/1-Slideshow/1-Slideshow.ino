@@ -16,6 +16,12 @@
 // Can be installed from the library manager (Search for "TFT_eSPI")
 // https://github.com/Bodmer/TFT_eSPI
 
+#include <XPT2046_Bitbang.h>
+// A library for interfacing with the touch screen
+//
+// Can be installed from the library manager (Search for "XPT2046_Bitbang_Slim")
+// https://github.com/TheNitek/XPT2046_Bitbang_Arduino_Library
+
 #include <SPI.h>
 
 #include <SdFat.h>
@@ -31,8 +37,24 @@ typedef SdBaseFile File; // Avoid compile issues
 // Can be installed from the library manager (Search for "JPEGDEC")
 // https://github.com/bitbank2/JPEGDEC
 
+
+// ----------------------------
+// Touch Screen pins
+// ----------------------------
+
+// The CYD touch uses some non default
+// SPI pins
+
+#define XPT2046_IRQ 36
+#define XPT2046_MOSI 32
+#define XPT2046_MISO 39
+#define XPT2046_CLK 25
+#define XPT2046_CS 33
+
 TFT_eSPI tft = TFT_eSPI();
 JPEGDEC jpeg;
+
+XPT2046_Bitbang ts = XPT2046_Bitbang(XPT2046_MOSI, XPT2046_MISO, XPT2046_CLK, XPT2046_CS);
 
 // Functions to access a file on the SD card
 SPIClass sdSpi = SPIClass(VSPI);
@@ -172,6 +194,8 @@ void setup() {
   tft.writedata(1);
 #endif
 
+  ts.begin();
+
   // Initialize SD card
   if(!sd.begin(sdSpiConfig)) {
     // SD error, stop here
@@ -213,8 +237,11 @@ void setup() {
 }
 
 void loop() {
+  TouchPoint t = ts.getTouch();
+
   // Display next image after 10 seconds or button press
-  if((millis() - timer > 10*1000) || buttonPressed) {
+  if((millis() - timer > 10*1000) || buttonPressed || t.zRaw > 0) {
+    Serial.printf("x: %d y: %d xRaw: %d yRaw: %d zRaw: %d\n", t.x, t.y, t.xRaw, t.yRaw, t.zRaw);
     currentIndex++;
     loadImage(currentIndex);
     timer = millis();
