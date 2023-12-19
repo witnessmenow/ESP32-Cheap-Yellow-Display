@@ -20,6 +20,6 @@ There are a number of designs for cases that can be found across the various 3D 
 - [ESP32-2432S028R-Panel-Mount-Case](https://github.com/clowrey/ESP32-2432S028R-Panel-Mount-Case)
 - [Alien3D Deck (Printables)](https://www.printables.com/model/310352/)
 - [ESP32-2432S028 enclosure for Battery and BMS
-(Thangs)](https://thangs.com/designer/dimosram/3d-model/ESP32-2432S028%20enclosure%20for%20Battery%20and%20BMS-788656)
+(Thangs)](https://thangs.com/designer/dimosram/3d-model/ESP32-2432S028%20enclosure%20for%20Battery%20and%20BMS-788656) - Possibly wrong size? [#44](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/issues/44)
 - [2.8inch ESP32 2432S028R (Thingiverse)](https://www.thingiverse.com/thing:5990927)
 - [Case for Sunton ESP32-2432S028 2.8" TFT-Touch Board (Printables)](https://www.printables.com/model/519913-case-for-sunton-esp32-2432s028-28-tft-touch-board)

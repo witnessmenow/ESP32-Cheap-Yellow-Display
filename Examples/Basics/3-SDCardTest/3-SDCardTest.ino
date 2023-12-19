@@ -27,13 +27,12 @@
 
 
 // ----------------------------
-// SD Reader pins
+// SD Reader pins (default VSPI pins)
 // ----------------------------
-
-#define SD_SCK 18
-#define SD_MISO 19
-#define SD_MOSI 23
-#define SD_CS 5
+//#define SD_SCK 18
+//#define SD_MISO 19
+//#define SD_MOSI 23
+//#define SD_CS 5
 
 // ----------------------------
 
@@ -56,7 +55,7 @@ void listDir(fs::FS &fs, const char * dirname, uint8_t levels) {
       Serial.print("  DIR : ");
       Serial.println(file.name());
       if (levels) {
-        listDir(fs, file.name(), levels - 1);
+        listDir(fs, file.path(), levels - 1);
       }
     } else {
       Serial.print("  FILE: ");
@@ -197,10 +196,9 @@ void testFileIO(fs::FS &fs, const char * path) {
 void setup() {
   Serial.begin(115200);
 
-  SPIClass spi = SPIClass(HSPI);
-  spi.begin(SD_SCK, SD_MISO, SD_MOSI, SD_CS);
+  SPIClass spi = SPIClass(VSPI);
 
-  if (!SD.begin(SD_CS, spi, 80000000)) {
+  if (!SD.begin(SS, spi, 80000000)) {
     Serial.println("Card Mount Failed");
     return;
   }

@@ -76,13 +76,15 @@ Note: LEDs are "active low", meaning HIGH == off, LOW == on
 |IO17|Blue LED||
 
 ## SD Card
+Uses the VSPI
+Pin names are predefined in SPI.h
 
 |Pin|Use|Note|
 |---|---|----|
-|IO5|SD_CS||
-|IO18|SD_SCK||
-|IO19|SD_MISO||
-|IO23|SD_MOSI||
+|IO5|SS||
+|IO18|SCK||
+|IO19|MISO||
+|IO23|MOSI||
 
 ## Touch Screen
 
@@ -101,6 +103,7 @@ Note: LEDs are "active low", meaning HIGH == off, LOW == on
 |IO34|||
 
 ## Display
+Uses the HSPI
 
 |Pin|Use|Note|
 |---|---|----|

@@ -45,6 +45,9 @@ void setup() {
 
   Serial.begin(115200);
 
+  // Increase read sensitivity
+  analogSetAttenuation(ADC_0db);
+
   pinMode(LDR_PIN, INPUT);
 
   // Start the tft display and set it to black

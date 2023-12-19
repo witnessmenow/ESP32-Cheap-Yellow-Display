@@ -15,6 +15,14 @@
 // Make sure to copy the UserSetup.h file into the library as
 // per the Github Instructions. The pins are defined in there.
 
+// Font 1. Original Adafruit 8 pixel font needs ~1820 bytes in FLASH
+// Font 2. Small 16 pixel high font, needs ~3534 bytes in FLASH, 96 characters
+// Font 4. Medium 26 pixel high font, needs ~5848 bytes in FLASH, 96 characters
+// Note the following larger fonts are primarily numeric only!
+// Font 6. Large 48 pixel font, needs ~2666 bytes in FLASH, only characters 1234567890:-.apm
+// Font 7. 7 segment 48 pixel font, needs ~2438 bytes in FLASH, only characters 1234567890:-.
+// Font 8. Large 75 pixel font needs ~3256 bytes in FLASH, only characters 1234567890:-.
+
 #include <TFT_eSPI.h>
 // A library for interfacing with LCD displays
 //
@@ -34,12 +42,12 @@ void setup() {
   tft.setTextColor(TFT_WHITE, TFT_BLACK);
   int x = 5;
   int y = 10;
-  int fontSize = 2; 
-  tft.drawString("Hello", x, y, fontSize); // Left Aligned
+  int fontNum = 2; 
+  tft.drawString("Hello", x, y, fontNum); // Left Aligned
   x = 320 /2;
   y += 16;
   tft.setTextColor(TFT_BLUE, TFT_BLACK);
-  tft.drawCentreString("World", x, y, fontSize);
+  tft.drawCentreString("World", x, y, fontNum);
 
 }
 

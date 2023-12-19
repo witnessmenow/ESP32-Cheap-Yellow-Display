@@ -1,6 +1,6 @@
 # ESP32-Cheap-Yellow-Display
 
-There is an ESP32 with a built in 320 x 240 LCD display with a touch screen called the "ESP32-2432S028R", since this doesn't roll of the tongue, I propose it should be renamed the "Cheap Yellow Display" or CYD for short. This display is only about $15 delivered so I think it's really good value.
+There is an ESP32 with a built in 320 x 240 2.8" LCD display with a touch screen called the "ESP32-2432S028R", since this doesn't roll of the tongue, I propose it should be renamed the "Cheap Yellow Display" or CYD for short. This display is only about $15 delivered so I think it's really good value.
 
 ![image](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/assets/1562562/76c3d481-2523-4b6f-881c-2e29f9368cd0)
 
@@ -9,7 +9,7 @@ There is an ESP32 with a built in 320 x 240 LCD display with a touch screen call
 The CYD has the following features:
 
 - ESP32 (With Wifi and Bluetooth)
-- 320 x 240 LCD Display
+- 320 x 240 LCD Display (2.8")
 - Touch Screen (Resistive)
 - USB for powering and programming
 - SD Card Slot, LED and some additional pins broken out
@@ -94,6 +94,17 @@ Some examples of 3D printed stands and cases. [Check them out here.](/3dModels)
 This project is licensed as MIT as per the [license file](/LICENSE)
 
 The one exception to this is the [OriginalDocumentation](/OriginalDocumentation/) folder, that I do not have the right to license
+
+## Other Languages
+
+Some members of the community have ported some of this information to other languages! 
+
+Please note: I can't gaurantee the accuracy of the translation, how up to date they are or the content on them in general.
+
+- [French / Française](https://github.com/usini/ESP32-Cheap-Yellow-Display-Documentation-FR)
+- [German / Deutsch](https://github.com/paelzer/ESP32-Cheap-Yellow-Display-Documentation-DE)
+
+If you would like to contribure a translation, please name the repo with the language name or code in the repo name and you can link it here.
 
 ## Help Support what I do!
 

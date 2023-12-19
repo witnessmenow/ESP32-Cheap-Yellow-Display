@@ -112,7 +112,7 @@ output:
 
 # Setup the ili9xxx platform
 #
-# Display is used as 280x320 by default so we rotate it to 90°
+# Display is used as 240x320 by default so we rotate it to 90°
 display:
   - platform: ili9xxx
     model: ili9341
