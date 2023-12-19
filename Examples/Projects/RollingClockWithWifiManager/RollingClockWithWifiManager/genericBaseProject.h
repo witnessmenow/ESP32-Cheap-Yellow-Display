@@ -49,7 +49,7 @@
 
 #include "projectDisplay.h"
 
-#include "WifiManagerHandler.h"
+#include "wifiManagerHandler.h"
 
 #include "cheapYellowLCD.h"
 
