@@ -1,6 +1,9 @@
 # SD to NFC Adaptor
 This is a PCB for breaking out the pins of the MicroSD Card. It is specifically designed for the red PN532 NFC module, but it can be used for anything.
 
+![IMG_20231130_123558](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/assets/1562562/3c1b8149-c26c-49c4-be1b-03e8a84d07db)
+
+
 ## What PCB Thickness to order
 
 SD cards are typically 0.75mm thick, but that is not a typical PCB thickness that is offered by the fab houses
