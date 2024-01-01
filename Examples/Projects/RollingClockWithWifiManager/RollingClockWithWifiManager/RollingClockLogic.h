@@ -9,6 +9,7 @@ int clockSize = 6;
 int clockDatum = TL_DATUM;
 uint16_t clockBackgroundColor = TFT_BLACK;
 uint16_t clockFontColor = TFT_YELLOW;
+int prevDay = 0;
 
 bool SHOW_24HOUR = false;
 bool SHOW_AMPM = true;
@@ -207,25 +208,32 @@ void DrawDate()
     int mth = month(local);
     int yr = year(local);
 
-    tft.setTextDatum(BC_DATUM);
-    char buffer[50];
-    if (NOT_US_DATE)
+    if (dd != prevDay)
     {
-        sprintf(buffer, "%02d/%02d/%d", dd, mth, yr);
-    }
-    else
-    {
-        // MURICA!!
-        sprintf(buffer, "%02d/%02d/%d", mth, dd, yr);
-    }
+        tft.setTextDatum(BC_DATUM);
+        char buffer[50];
+        if (NOT_US_DATE)
+        {
+            sprintf(buffer, "%02d/%02d/%d", dd, mth, yr);
+        }
+        else
+        {
+            // MURICA!!
+            sprintf(buffer, "%02d/%02d/%d", mth, dd, yr);
+        }
 
-    tft.setTextSize(4);
-    tft.drawString(buffer, 320 / 2, 210);
+        tft.setTextSize(4);
+        int h = tft.fontHeight();
+        tft.fillRect(0, 210 - h, 320, h, TFT_BLACK);
 
-    int dow = weekday(local);
-    String dayNames[] = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    tft.setTextSize(4);
-    tft.drawString(dayNames[dow], 320 / 2, 170);
+        tft.drawString(buffer, 320 / 2, 210);
+
+        int dow = weekday(local);
+        String dayNames[] = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        tft.setTextSize(4);
+        tft.fillRect(0, 170 - h, 320, h, TFT_BLACK);
+        tft.drawString(dayNames[dow], 320 / 2, 170);
+    }
 }
 
 void rollingClockSetup(bool is24Hour, bool notUsDate)
