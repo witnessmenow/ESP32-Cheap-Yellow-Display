@@ -9,8 +9,23 @@ In order for the yaml to work you need to add the following settings in your sec
  - wifi_password
  - ap_password
 
-For some of the examples you need to copy font or imnge files to your ESPHome folder. Those
+For some of the examples you need to copy font or image files to your ESPHome folder. Those
 examples contains the instructions in the yaml file itself.
+
+> [!NOTE]
+> #### NEW HARDWARE VERSION WITH USB-C CONNECTOR:
+> for this, the display component needs to be set up like the following (model ili9342, no rotation, inverted)
+>```
+>display:
+>  - platform: ili9xxx
+>    id: esp_display
+>    model: ili9342
+>    spi_id: tft
+>    cs_pin: GPIO15
+>    dc_pin: GPIO2
+>    #invert_display: true (changed to below with ESPhome 2023.12.0)
+>    invert_colors: true
+>```
 
 ## 1-HelloWorld 
 
