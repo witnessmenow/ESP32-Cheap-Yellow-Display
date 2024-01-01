@@ -23,7 +23,8 @@ examples contains the instructions in the yaml file itself.
 >    spi_id: tft
 >    cs_pin: GPIO15
 >    dc_pin: GPIO2
->    invert_display: true
+>    #invert_display: true (changed to below with ESPhome 2023.12.0)
+>    invert_colors: true
 >```
 
 ## 1-HelloWorld 
