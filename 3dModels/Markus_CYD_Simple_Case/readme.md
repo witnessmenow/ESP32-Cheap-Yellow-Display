@@ -21,4 +21,8 @@ And last not lease: stable housing that actually fits - I did some test prints t
 - USB-C Cable
 
 ### Pictures 
-[Front](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%201.jpg)
+![Front](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%201.jpg)
+![Bottom1](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%202.jpg)
+![Bottom2](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%203.jpg)
+![Foto1](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%20Front.jpg)
+![Foto2](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%20Back.jpg)
