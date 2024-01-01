@@ -9,6 +9,9 @@ I needed a simple case for the CYD in landscape mode. Main goals:
 - Front does not interfere witht he touch display
 And last not lease: stable housing that actually fits - I did some test prints to ensure that no rework is needed to fit the CYD into the housing
 
+The design is based on Leo Ruiz' housing : https://www.thingiverse.com/thing:5990927, but completely redone in Fusion 360
+Fusion 360 File is included
+
 ### Printing Details
 
 - Housing has been tested on Ender3 S1 
