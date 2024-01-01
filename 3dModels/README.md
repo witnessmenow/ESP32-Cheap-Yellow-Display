@@ -14,8 +14,8 @@ Designed by Jonny Bergdahl.
 
 ## Simple CYD Case 
 
-Designed ba Markus Preidel. 
-[Files can be found here](/Markus_CYD_Simple_Case).
+Designed by Markus Preidel. 
+[Files can be found here](/3dModels/Markus_CYD_Simple_Case).
 
 ## Other cases from elsewhere
 
