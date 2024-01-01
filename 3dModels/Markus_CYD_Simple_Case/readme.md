@@ -19,3 +19,6 @@ And last not lease: stable housing that actually fits - I did some test prints t
 
 - You will need 4 pieces 3 mm Brass inserts and 4 screws 3 x 8 mm  
 - USB-C Cable
+
+### Pictures 
+[Front](https://github.com/88markus88/ESP32-Cheap-Yellow-Display/blob/main/3dModels/Markus_CYD_Simple_Case/Markus%20CYD%20Box%201.jpg)
