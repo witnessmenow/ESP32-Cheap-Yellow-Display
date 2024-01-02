@@ -1,5 +1,11 @@
 /*******************************************************************
-    An example ESP32 Project with the following features
+    /* === CYD ROLLING CLOCK ===
+    This example shows a digital clock with a rolling effect as the digits change.
+    Most of the code are borrowed from other examples. Thanks Internet!
+
+
+    Brian:
+    Took the rolling clock example and added the following to make it webflashable
 
     - Wifi manager for configuring
     - Double reset detector for entering config mode
