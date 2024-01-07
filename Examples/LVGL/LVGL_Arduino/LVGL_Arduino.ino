@@ -1,5 +1,5 @@
 /*Using LVGL with Arduino requires some extra steps:
- *Be sure to read the docs here: https://docs.lvgl.io/master/get-started/platforms/arduino.html  */
+ *Be sure to read the docs here: https://docs.lvgl.io/8.3/get-started/platforms/arduino.html  */
 
 #include <lvgl.h>
 #include <TFT_eSPI.h>
