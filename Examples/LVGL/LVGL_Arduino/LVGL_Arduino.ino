@@ -1,5 +1,9 @@
-/*Using LVGL with Arduino requires some extra steps:
- *Be sure to read the docs here: https://docs.lvgl.io/8.3/get-started/platforms/arduino.html  */
+/* Using LVGL with Arduino requires some extra steps:
+ * Be sure to read the docs here: https://docs.lvgl.io/8.3/get-started/platforms/arduino.html
+ * 
+ * Note you MUST move the 'examples' and 'demos' folders into the 'src' folder inside the lvgl library folder otherwise this will not compile
+ * 
+ */
 
 #include <lvgl.h>
 #include <TFT_eSPI.h>
@@ -23,8 +27,9 @@
 #define XPT2046_MISO 39
 #define XPT2046_CLK 25
 #define XPT2046_CS 33
-SPIClass mySpi = SPIClass(HSPI);
+SPIClass mySpi = SPIClass(VSPI);
 XPT2046_Touchscreen ts(XPT2046_CS, XPT2046_IRQ);
+uint16_t touchScreenMinimumX = 200, touchScreenMaximumX = 3700, touchScreenMinimumY = 240,touchScreenMaximumY = 3800;
 
 
 /*Change to your screen resolution*/
@@ -62,32 +67,27 @@ void my_disp_flush( lv_disp_drv_t *disp_drv, const lv_area_t *area, lv_color_t *
 /*Read the touchpad*/
 void my_touchpad_read( lv_indev_drv_t * indev_drv, lv_indev_data_t * data )
 {
-    uint16_t touchX, touchY;
-
-    //bool touched = tft.getTouch( &touchX, &touchY, 600 );
-    //bool touched = false;
-    bool touched = (ts.tirqTouched() && ts.touched());
-
-    if( !touched )
+    if(ts.touched())
     {
-        data->state = LV_INDEV_STATE_REL;
+        TS_Point p = ts.getPoint();
+        //Some very basic auto calibration so it doesn't go out of range
+        if(p.x < touchScreenMinimumX) touchScreenMinimumX = p.x;
+        if(p.x > touchScreenMaximumX) touchScreenMaximumX = p.x;
+        if(p.y < touchScreenMinimumY) touchScreenMinimumY = p.y;
+        if(p.y > touchScreenMaximumY) touchScreenMaximumY = p.y;
+        //Map this to the pixel position
+        data->point.x = map(p.x,touchScreenMinimumX,touchScreenMaximumX,1,screenWidth); /* Touchscreen X calibration */
+        data->point.y = map(p.y,touchScreenMinimumY,touchScreenMaximumY,1,screenHeight); /* Touchscreen Y calibration */
+        data->state = LV_INDEV_STATE_PR;
+
+        //Serial.print( "Touch x " );
+        //Serial.print( data->point.x );
+        //Serial.print( " y " );
+        //Serial.println( data->point.y );
     }
     else
     {
-        TS_Point p = ts.getPoint();
-        touchX = map(p.x,200,3700,1,screenWidth); /* Touchscreen X calibration */
-        touchY = map(p.y,240,3800,1,screenHeight); /* Touchscreen X calibration */
-        data->state = LV_INDEV_STATE_PR;
-
-        /*Set the coordinates*/
-        data->point.x = touchX;
-        data->point.y = touchY;
-
-        Serial.print( "Data x " );
-        Serial.println( touchX );
-
-        Serial.print( "Data y " );
-        Serial.println( touchY );
+        data->state = LV_INDEV_STATE_REL;
     }
 }
 
@@ -95,11 +95,10 @@ void setup()
 {
     Serial.begin( 115200 ); /* prepare for possible serial debug */
 
-    String LVGL_Arduino = "Hello Arduino! ";
+    String LVGL_Arduino = "LVGL version ";
     LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
 
     Serial.println( LVGL_Arduino );
-    Serial.println( "I am LVGL_Arduino" );
 
     lv_init();
 
@@ -131,7 +130,7 @@ void setup()
     lv_indev_drv_init( &indev_drv );
     indev_drv.type = LV_INDEV_TYPE_POINTER;
     indev_drv.read_cb = my_touchpad_read;
-    lv_indev_drv_register( &indev_drv );
+    lv_indev_t * my_indev = lv_indev_drv_register( &indev_drv );
   
     /* Uncomment to create simple label */
     // lv_obj_t *label = lv_label_create( lv_scr_act() );
