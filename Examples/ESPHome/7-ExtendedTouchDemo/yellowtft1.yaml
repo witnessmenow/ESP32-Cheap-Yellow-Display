@@ -239,13 +239,13 @@ touchscreen:
   cs_pin: GPIO33
   interrupt_pin: GPIO36
   update_interval: 50ms
-  report_interval: 1s
   threshold: 400
   calibration_x_min: 3860
   calibration_x_max: 280
   calibration_y_min: 340
   calibration_y_max: 3860
-  swap_x_y: false
+  transform:
+    swap_xy: false
 # When the display is touched, turn on the backlight,
 # store that we had a recent touch, and update the UI
   on_touch:
