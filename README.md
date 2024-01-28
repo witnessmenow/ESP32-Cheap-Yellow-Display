@@ -30,6 +30,9 @@ A couple of years ago I released the [ESP32 Trinity](https://github.com/witnessm
 
 I'm no longer creating hardware products, but I think it would be interesting if we could create the same kind of community around this display, where people can share examples and projects made for this display.
 
+## How do I know if a display is a CYD?
+![CYD decision tree](https://www.plantuml.com/plantuml/png/TP4nJyCm48Nt_efJku146TmbOe0Aoi22AbK8CLwJWrWuTcGxgVBlIIxdq8YodT_xddtMsuQ8FZQLMPIw8A2gZXqK57AlwwYTNVH-95Y-1D0HEZB6dHwMW47cvEySCL5YIu1Gw50Rx9XCXt_GvyD-eqQGGhrHynVLRJPwAhkOZwx9IoR6SPxs57I8kgMHc8uNhwfqxXsy7Hx1MIEhizPBAM1T18IdZzqD79iu3D2YrsWZupB3QeyrTlXUwZeb-PjmTEWBHgqRmgjQs--4d5-hXZq-3RRECvvtXMh2iG-WeIzF9CqCx5zn-Sfxdhq9rdbchsJ7QxxsLFPuIruMuG9WlRwNTk6k7yAPdFZUi6unGcn8nnBuDUIVZ0l3iie4dSGvgp9Mk5CXHPBzHunzbgTkXPwSUM32s4hrIcPcpdE9P8UtvCHCJXrnO4ksQ2hp0m00)
+
 ## Where to buy?
 
 Buy from wherever works out cheapest for you:
