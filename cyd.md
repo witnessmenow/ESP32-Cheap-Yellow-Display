@@ -10,10 +10,14 @@ You can verify you have the correct board by checking the number on the back of 
 
 ## My CYD has two USB ports
 
-The original CYD only has a micro USB port, but there is a device that is also labelled a *ESP32-2432S028* that has two USB ports, one micro USB and one USB-C.
+The original CYD only has a micro USB port, but there is a device that is also labelled a _ESP32-2432S028_ that has two USB ports, one micro USB and one USB-C.
 
-If an extra USB port was the only difference, there would be no problems, but unfortunately that is not the case.
+Having an additional USB port would be a minor problem if that was the only difference, but unfortunately the display also works differently, the colours are inverted on the display.
 
-The display is also different on these boards, so it requires a different config file
+It can be fixed in a couple of ways:
+
+- Use platformio - The examples on the Github have all been updated so they can be used with platformio, and you can simply select CYD or CYD2USB and it will just work
+- Use the CYD2USB specific User_setup.h that is on the repo, you can now use all the examples like normal
+- Invert the display at the code level using the `tft.invertDisplay(1);` method
 
 Ideally we would just not call it a CYD, but it seems to be a very popular board, so I think it would be too confusing to not handle it.
