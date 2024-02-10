@@ -19,6 +19,8 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | xtouch                 | "The xtouch screen is a revolutionary addition to your BambuLab Printer"                    | [xperiments-in](https://github.com/xperiments-in) (\#) |                                                                        | [Github](https://github.com/xperiments-in/xtouch)                  | [Webflash](https://github.com/xperiments-in/xtouch#online-web-installer) |
 | CYD-Klipper            | An implementation of a wireless Klipper status display on an ESP32 + screen                 | [Sims](https://github.com/suchmememanyskill)           |                                                                        | [Github](https://github.com/suchmememanyskill/CYD-Klipper)         | [Webflash](https://suchmememanyskill.github.io/CYD-Klipper/)             |
 | DRO (for lathe / mill) | A DRO (digital readout) for your lathe or mill                                              | [Alanesq](https://github.com/alanesq)                  | It uses cheap digital caliper, requires a very basic interface         | [Github](https://github.com/alanesq/DRO)                           |                                                                          |
+| CYD_Basics | First steps with the ESP32-2432S028R | [Carlo47](https://github.com/Carlo47) |  | [Github](https://github.com/Carlo47/CYD_basics) | 
+| CYD_Gui | Some graphical user interface components for the ESP32-2432S028R | [Carlo47](https://github.com/Carlo47) |  | [Github](https://github.com/Carlo47/CYD_Gui) |
 
 (\#) = Project not added by original author
 
