@@ -1,4 +1,4 @@
-set(COMPONENT_SRCS "GUI.c")
+set(COMPONENT_SRCS "gui.c")
 
 set(COMPONENT_ADD_INCLUDEDIRS ". include")
 
