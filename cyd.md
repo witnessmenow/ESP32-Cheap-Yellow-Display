@@ -17,7 +17,27 @@ Having an additional USB port would be a minor problem if that was the only diff
 It can be fixed in a couple of ways:
 
 - Use platformio - The examples on the Github have all been updated so they can be used with platformio, and you can simply select CYD or CYD2USB and it will just work
-- Use the CYD2USB specific User_setup.h that is on the repo, you can now use all the examples like normal
+- Use the [CYD2USB specific User_setup.h](/DisplayConfig/CYD2USB/) that is on the repo, you can now use all the examples like normal
 - Invert the display at the code level using the `tft.invertDisplay(1);` method
 
-Ideally we would just not call it a CYD, but it seems to be a very popular board, so I think it would be too confusing to not handle it.
+### The USB-C port doesn't work
+
+The USB-C port has a flaw in it, it doesn’t have the resistors on the CC lines. This means it will not work with USB-C to USB-C cables. If your computer only has USB-C ports, you can use it through a USB-C to USB-A adaptor.
+
+### The Display doesn't look as good 
+
+There seems to be a gamma issue with the CYD2USB (I don't even know what gamma is)
+
+Adding this to the code seems to help
+
+```
+tft.writecommand(ILI9341_GAMMASET); //Gamma curve selected
+tft.writedata(2);
+delay(120);
+tft.writecommand(ILI9341_GAMMASET); //Gamma curve selected
+tft.writedata(1);
+```
+
+
+
+
