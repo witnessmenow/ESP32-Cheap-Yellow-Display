@@ -1,7 +1,7 @@
 [package]
 name = "cyd"
 version = "0.1.0"
-authors = ["Martin <me@mart-e.be>"]
+authors = ["Martin <me@mart-e.be>", "Claus Näveke <claus+cyd@naeveke.de>"]
 edition = "2021"
 resolver = "2"
 rust-version = "1.75"
@@ -38,4 +38,4 @@ display-interface = "0.4.1"
 display-interface-spi = "0.4.1"
 
 [build-dependencies]
-embuild = "0.31.3"
+embuild = "0.31.4"
