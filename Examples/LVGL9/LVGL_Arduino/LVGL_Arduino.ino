@@ -1,6 +1,14 @@
-/*Using LVGL with Arduino requires some extra steps:
- *Be sure to read the docs here: https://docs.lvgl.io/master/integration/framework/arduino.html#arduino */
-
+/* Using LVGL with Arduino requires some extra steps...
+ *  
+ * Be sure to read the docs here: https://docs.lvgl.io/master/integration/framework/arduino.html
+ * but note you should use the lv_conf.h from the repo as it is pre-edited to work.
+ * 
+ * You can always edit your own lv_conf.h later and exclude the example options once the build environment is working.
+ * 
+ * Note you MUST move the 'examples' and 'demos' folders into the 'src' folder inside the lvgl library folder 
+ * otherwise this will not compile, please see README.md in the repo.
+ * 
+ */
 #include <lvgl.h>
 
 #include <TFT_eSPI.h>
@@ -48,42 +56,14 @@ void my_print( lv_log_level_t level, const char * buf )
 /* LVGL calls it when a rendered image needs to copied to the display*/
 void my_disp_flush( lv_display_t *disp, const lv_area_t *area, uint8_t * px_map)
 {
-    /*Copy `px map` to the `area`*/
-
-    /*For example ("my_..." functions needs to be implemented by you)
-    uint32_t w = lv_area_get_width(area);
-    uint32_t h = lv_area_get_height(area);
-
-    my_set_window(area->x1, area->y1, w, h);
-    my_draw_bitmaps(px_map, w * h);
-     */
-
     /*Call it to tell LVGL you are ready*/
     lv_disp_flush_ready(disp);
 }
 /*Read the touchpad*/
-//{
-    /*For example  ("my_..." functions needs to be implemented by you)
-    int32_t x, y;
-    bool touched = my_get_touch( &x, &y );
-
-    if(!touched) {
-        data->state = LV_INDEV_STATE_RELEASED;
-    } else {
-        data->state = LV_INDEV_STATE_PRESSED;
-
-        data->point.x = x;
-        data->point.y = y;
-    }
-     */
-//}
-/*Read the touchpad*/
 void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
-//void my_touchpad_read( lv_indev_drv_t * indev_drv, lv_indev_data_t * data )
 {
   if(touchscreen.touched())
   {
-    Serial.print("Touch ");
     TS_Point p = touchscreen.getPoint();
     //Some very basic auto calibration so it doesn't go out of range
     if(p.x < touchScreenMinimumX) touchScreenMinimumX = p.x;
@@ -94,12 +74,12 @@ void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
     data->point.x = map(p.x,touchScreenMinimumX,touchScreenMaximumX,1,TFT_HOR_RES); /* Touchscreen X calibration */
     data->point.y = map(p.y,touchScreenMinimumY,touchScreenMaximumY,1,TFT_VER_RES); /* Touchscreen Y calibration */
     data->state = LV_INDEV_STATE_PRESSED;
-
-    Serial.print("x ");
+    /*
+    Serial.print("Touch x ");
     Serial.print(data->point.x);
     Serial.print(" y ");
-    Serial.print(data->point.y);
-    Serial.println();
+    Serial.println(data->point.y);
+    */
   }
   else
   {
@@ -109,19 +89,20 @@ void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
 
 lv_indev_t * indev; //Touchscreen input device
 uint8_t* draw_buf;  //draw_buf is allocated on heap otherwise the static area is too big on ESP32 at compile
+uint32_t lastTick = 0;  //Used to track the tick timer
 
 void setup()
 {
   //Some basic info on the Serial console
-  String LVGL_Arduino = "Hello Arduino! ";
+  String LVGL_Arduino = "LVGL demo ";
   LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
-  Serial.begin( 115200 );
-  Serial.println( LVGL_Arduino );
+  Serial.begin(115200);
+  Serial.println(LVGL_Arduino);
     
   //Initialise the touchscreen
   touchscreenSpi.begin(XPT2046_CLK, XPT2046_MISO, XPT2046_MOSI, XPT2046_CS); /* Start second SPI bus for touchscreen */
   touchscreen.begin(touchscreenSpi); /* Touchscreen init */
-  touchscreen.setRotation(1); /* Landscape orientation */
+  touchscreen.setRotation(3); /* Inverted landscape orientation to match screen */
 
   //Initialise LVGL
   lv_init();
@@ -133,9 +114,6 @@ void setup()
   indev = lv_indev_create();
   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);  
   lv_indev_set_read_cb(indev, my_touchpad_read);
-  lv_indev_enable(indev, true);
-  lv_indev_set_mode(indev, LV_INDEV_MODE_TIMER);
-
 
   //Add the large standard widgets demo
   lv_demo_widgets();
@@ -145,8 +123,9 @@ void setup()
 }
 
 void loop()
-{
-    //lv_indev_read(indev); //Read the touchscreen
-    lv_timer_handler(); //Update the UI
+{   
+    lv_tick_inc(millis() - lastTick); //Update the tick timer. Tick is new for LVGL 9
+    lastTick = millis();
+    lv_timer_handler();               //Update the UI
     delay(5);
 }
