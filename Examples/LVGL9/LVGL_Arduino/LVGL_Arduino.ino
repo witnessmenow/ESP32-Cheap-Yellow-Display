@@ -115,8 +115,73 @@ void setup()
   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);  
   lv_indev_set_read_cb(indev, my_touchpad_read);
 
-  //Add the large standard widgets demo
+  /* Try an example. See all the examples 
+   * online: https://docs.lvgl.io/master/examples.html
+   */
+  // lv_example_animimg_1();
+  // lv_example_arc_1();
+  // lv_example_arc_2();
+  // lv_example_bar_1();
+  // lv_example_bar_2();
+  // lv_example_bar_3();
+  // lv_example_bar_4();
+  // lv_example_bar_5();
+  // lv_example_bar_6();
+  // lv_example_btn_1();
+  // lv_example_btn_2();
+  // lv_example_btn_3();
+  // lv_example_btnmatrix_1();
+  // lv_example_btnmatrix_2();
+  // lv_example_btnmatrix_3();
+  // lv_example_calendar_1();
+  // lv_example_chart_1();
+  // lv_example_chart_2();
+  // lv_example_chart_3();
+  // lv_example_chart_4();
+  // lv_example_chart_5();
+  // lv_example_chart_6();
+  // lv_example_chart_7();
+  // lv_example_chart_8();
+  // lv_example_chart_9();
+  // lv_example_checkbox_1();
+  // lv_example_checkbox_2();
+  // lv_example_dropdown_1();
+  // lv_example_dropdown_2();
+  // lv_example_dropdown_3();
+  // lv_example_keyboard_1();
+  // lv_example_label_1();
+  // lv_example_label_2();
+  // lv_example_label_3();
+  // lv_example_label_4();
+  // lv_example_label_5();
+  // lv_example_line_1();
+  // lv_example_list_1();
+  // lv_example_list_2();
+  // lv_example_msgbox_1();
+  // lv_example_roller_1();
+  // lv_example_roller_2();
+  // lv_example_roller_3();
+  // lv_example_slider_1();
+  // lv_example_slider_2();
+  // lv_example_slider_3();
+  // lv_example_span_1();
+  // lv_example_spinbox_1();
+  // lv_example_spinner_1();
+  // lv_example_switch_1();
+  // lv_example_table_1();
+  // lv_example_table_2();
+  // lv_example_tabview_1();
+  // lv_example_tabview_2();
+  // lv_example_textarea_1();
+  // lv_example_textarea_2();
+  // lv_example_textarea_3();
+  // lv_example_tileview_1();
+  // lv_example_win_1();
+  
+  //Or try out the large standard widgets demo
   lv_demo_widgets();
+  // lv_demo_benchmark();          
+  // lv_demo_keypad_encoder();     
 
   //Done
   Serial.println( "Setup done" );
