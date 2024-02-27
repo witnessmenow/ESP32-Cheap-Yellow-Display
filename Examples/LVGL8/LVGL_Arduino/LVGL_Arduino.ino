@@ -1,7 +1,12 @@
-/* Using LVGL with Arduino requires some extra steps:
+/* Using LVGL with Arduino requires some extra steps...
+ *  
  * Be sure to read the docs here: https://docs.lvgl.io/8.3/get-started/platforms/arduino.html
+ * but note you should use the lv_conf.h from the repo as it is pre-edited to work.
  * 
- * Note you MUST move the 'examples' and 'demos' folders into the 'src' folder inside the lvgl library folder otherwise this will not compile
+ * You can always edit your own lv_conf.h later and exclude the example options once the build environment is working.
+ * 
+ * Note you MUST move the 'examples' and 'demos' folders into the 'src' folder inside the lvgl library folder 
+ * otherwise this will not compile, please see README.md in the repo.
  * 
  */
 
