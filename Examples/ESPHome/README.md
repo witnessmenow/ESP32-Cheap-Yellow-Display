@@ -46,3 +46,15 @@ This yaml displays two rectangles acting as binary touch sensors inside of Home 
 ## 5-TemperatureGraph
 
 This yaml displays a graph of a Home Assistant temperature sensor.
+
+## 6-VariousFeatures
+
+Example for ESPHome for board with 2 USB ports using most of the features of the board (also works on single USB port boards)
+
+## 7-ExtendedTouchDemo
+
+Extend the ESPHome touch demo to add:
+- Icons from the Material Design Icons font
+- A Wifi signal icon in the top right
+- Sleep mode that turns off the backlight
+- The LED on the back of the board
