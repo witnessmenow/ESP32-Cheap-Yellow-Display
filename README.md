@@ -54,6 +54,11 @@ For details on how to get started with your CYD, please check out the [Setup and
 
 A collection of examples demonstrating how to use the different features of the CYD, this is a good place to get started. [Check them out here.](/Examples/Basics)
 
+There is also a very simple example [for the CYD2U here](https://github.com/SzymonPriv/CydExample) showing how to use:
+- TFT_eSPI for display 
+- XPT2046_Touchscreen for touch
+- TFT_eWidget for buttons
+
 ### Alternative Display Libraries
 
 The basics examples are based on the TFT_eSPI display library, but the CYD also works with other display libraries too. Here is some example code if you prefer to use an alternative Arduino library. [Check them out here.](/Examples/AlternativeLibraries)
