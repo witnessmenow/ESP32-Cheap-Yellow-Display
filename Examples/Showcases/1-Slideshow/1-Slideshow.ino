@@ -185,15 +185,6 @@ void setup() {
   tft.setTextSize(2);
   tft.setSwapBytes(true);
 
-  // Fix image quality for CYD2USB
-#ifdef TFT_INVERSION_ON
-  tft.writecommand(ILI9341_GAMMASET); //Gamma curve selected
-  tft.writedata(2);
-  delay(120);
-  tft.writecommand(ILI9341_GAMMASET); //Gamma curve selected
-  tft.writedata(1);
-#endif
-
   ts.begin();
 
   // Initialize SD card
