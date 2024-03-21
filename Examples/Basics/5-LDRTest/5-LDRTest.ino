@@ -52,7 +52,9 @@ void setup() {
 
   // Start the tft display and set it to black
   tft.init();
+#ifdef ILI9341_2_DRIVER
   tft.setRotation(1); //This is the display in landscape
+#endif
 
   drawValueToScreen(0); // Just start with a 0 value on screen
 

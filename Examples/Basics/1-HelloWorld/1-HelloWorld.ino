@@ -34,8 +34,10 @@ TFT_eSPI tft = TFT_eSPI();
 void setup() {
   // Start the tft display and set it to black
   tft.init();
-  //tft.invertDisplay(1); //If you have a CYD2USB - https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/cyd.md#my-cyd-has-two-usb-ports
-  tft.setRotation(1); //This is the display in landscape
+
+#ifdef ILI9341_2_DRIVER
+  tft.setRotation(1); //This is the display in landscape (not for CYD2USB - https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/cyd.md#my-cyd-has-two-usb-ports)
+#endif
   
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

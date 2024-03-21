@@ -177,7 +177,9 @@ void setup() {
 
   // Start the tft display and set it to black
   tft.init();
+#ifdef ILI9341_2_DRIVER
   tft.setRotation(1); //This is the display in landscape
+#endif
   
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);
@@ -186,7 +188,7 @@ void setup() {
   tft.setSwapBytes(true);
 
   // Fix image quality for CYD2USB
-#ifdef TFT_INVERSION_ON
+#ifndef ILI9342_DRIVER
   tft.writecommand(ILI9341_GAMMASET); //Gamma curve selected
   tft.writedata(2);
   delay(120);

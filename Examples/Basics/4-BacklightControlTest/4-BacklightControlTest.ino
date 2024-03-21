@@ -59,7 +59,9 @@ void setup() {
   ledcSetup(LEDC_CHANNEL_0, LEDC_BASE_FREQ, LEDC_TIMER_12_BIT);
   ledcAttachPin(LCD_BACK_LIGHT_PIN, LEDC_CHANNEL_0);
   
+#ifdef ILI9341_2_DRIVER
   tft.setRotation(1); //This is the display in landscape
+#endif
 
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

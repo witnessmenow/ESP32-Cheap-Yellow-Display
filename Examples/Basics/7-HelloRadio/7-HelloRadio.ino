@@ -65,7 +65,9 @@ void setup()
   
   // Start the TFT display and set it to black
   tft.init();
+#ifdef ILI9341_2_DRIVER
   tft.setRotation(1); //This is the display in landscape
+#endif
   tft.setTextWrap(true, true);
 
   // Clear the screen before writing to it and set default text colors
