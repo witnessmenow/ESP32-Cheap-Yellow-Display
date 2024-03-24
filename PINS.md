@@ -4,12 +4,12 @@ This page talks about the pins on the CYD.
 
 ## Connector types
 
-|Connector|Type    |Note                     |
-|---      |---     |----                     |
-|[**P1**](#-p1)  |4P 1.25mm JST|Serial     |
+|Connector|Type    |Note                   |
+|---      |---     |----                   |
+|[**P1**](#p1)  |4P 1.25mm JST|Serial     |
 |[**P3**](#-p3)  |4P 1.25mm JST|GPIO       |
 |[**P4**](#-p4)  |2P 1.25mm JST|Speaker    |
-|[**CN1**](#-cn1)|4P 1.25mm JST|I2C devices|
+|[**CN1**](#-cn1)|4P 1.25mm JST|GPIO (I2C) |
 
 ## What pins are available on the CYD?
 
