@@ -2,6 +2,13 @@
 
 This page talks about the pins on the CYD.
 
+## Connector types
+|Connector|Type         |Note       |
+|[**P1**](###P1)|4P 1.25mm JST|Serial     |
+|**P3**   |4P 1.25mm JST|GPIO       |
+|**P4**   |2P 1.25mm JST|Speaker    |
+|**CN1**  |4P 1.25mm JST|I2C devices|
+
 ## What pins are available on the CYD?
 
 There are 3 easily accessible GPIO pins
