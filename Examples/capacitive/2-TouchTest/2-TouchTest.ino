@@ -1,15 +1,6 @@
 /*******************************************************************
-    A touch screen test for capacitive version of the ESP32 Cheap Yellow Display.
-
-    https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display
-
-    If you find what I do useful and would like to support me,
-    please consider becoming a sponsor on Github
-    https://github.com/sponsors/witnessmenow/
-
-    Written by Brian Lough
-    YouTube: https://www.youtube.com/brianlough
-    Twitter: https://twitter.com/witnessmenow
+    A touch screen test for capacitive version of the ESP32 Cheap
+    Yellow Display.
  *******************************************************************/
 
 // Make sure to copy the UserSetup.h file into the library as

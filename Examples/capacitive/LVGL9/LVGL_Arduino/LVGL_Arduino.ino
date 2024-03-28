@@ -20,17 +20,24 @@
 // A library for interfacing with the touch screen
 //
 // Can be installed from the library manager (Search for "bb_captouch")
-
-uint16_t touchScreenMinimumX = 200, touchScreenMaximumX = 3700, touchScreenMinimumY = 240,touchScreenMaximumY = 3800;
+uint16_t touchScreenMinimumX = 10, touchScreenMaximumX = 470, touchScreenMinimumY = 10,touchScreenMaximumY = 310;
 
 /*Set to your screen resolution*/
-#define TFT_HOR_RES   320
-#define TFT_VER_RES   240
+#define TFT_HOR_RES   480
+#define TFT_VER_RES   320
+
+// Pins to use for touch on ESP32 LCD CYD with capacitive GT911 touch controller
+#define TOUCH_SDA 33
+#define TOUCH_SCL 32
+#define TOUCH_INT 21
+#define TOUCH_RST 25
 
 /*LVGL draw into this buffer, 1/10 screen size usually works well. The size is in bytes*/
 #define DRAW_BUF_SIZE (TFT_HOR_RES * TFT_VER_RES / 10 * (LV_COLOR_DEPTH / 8))
 
 BBCapTouch bbct;
+
+TFT_eSPI tft = TFT_eSPI(TFT_HOR_RES, TFT_VER_RES);
 
 #if LV_USE_LOG != 0
 void my_print( lv_log_level_t level, const char * buf )
@@ -54,21 +61,22 @@ void my_touchpad_read( lv_indev_t * indev, lv_indev_data_t * data )
 
   if(bbct.getSamples(&ti))
   {
-    //Some very basic auto calibration so it doesn't go out of range
-    if(ti.x[0] < touchScreenMinimumX) touchScreenMinimumX = ti.x[0];
-    if(ti.x[0] > touchScreenMaximumX) touchScreenMaximumX = ti.x[0];
-    if(ti.y[0] < touchScreenMinimumY) touchScreenMinimumY = ti.y[0];
-    if(ti.y[0] > touchScreenMaximumY) touchScreenMaximumY = ti.y[0];
-    //Map this to the pixel position
-    data->point.x = map(ti.x[0],touchScreenMinimumX,touchScreenMaximumX,1,TFT_HOR_RES); /* Touchscreen X calibration */
-    data->point.y = map(ti.y[0],touchScreenMinimumY,touchScreenMaximumY,1,TFT_VER_RES); /* Touchscreen Y calibration */
+    // Some very basic auto calibration so it doesn't go out of range
+    if(ti.y[0] < touchScreenMinimumX) touchScreenMinimumX = ti.y[0];
+    if(ti.y[0] > touchScreenMaximumX) touchScreenMaximumX = ti.y[0];
+    if(ti.x[0] < touchScreenMinimumY) touchScreenMinimumY = ti.x[0];
+    if(ti.x[0] > touchScreenMaximumY) touchScreenMaximumY = ti.x[0];
+
+    // Map the touched position to the pixel position, ti.y[i], ti.area[i]
+    data->point.x = map(TFT_HOR_RES-ti.y[0],touchScreenMinimumX,touchScreenMaximumX,1,TFT_HOR_RES); /* Touchscreen X calibration */
+    data->point.y = map(ti.x[0],touchScreenMinimumY,touchScreenMaximumY,1,TFT_VER_RES); /* Touchscreen Y calibration */
     data->state = LV_INDEV_STATE_PRESSED;
-    /*
+    
     Serial.print("Touch x ");
     Serial.print(data->point.x);
     Serial.print(" y ");
     Serial.println(data->point.y);
-    */
+    
   }
   else
   {
@@ -82,6 +90,10 @@ uint32_t lastTick = 0;  //Used to track the tick timer
 
 void setup()
 {
+  // Start the tft display and set it to black
+  tft.init();
+  tft.setRotation(3); //This is the display in landscape
+
   //Some basic info on the Serial console
   String LVGL_Arduino = "LVGL demo ";
   LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
@@ -97,7 +109,6 @@ void setup()
   lv_display_t * disp;
   disp = lv_tft_espi_create(TFT_HOR_RES, TFT_VER_RES, draw_buf, DRAW_BUF_SIZE);
 
-  //Initialize the XPT2046 input device driver
   indev = lv_indev_create();
   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);  
   lv_indev_set_read_cb(indev, my_touchpad_read);
