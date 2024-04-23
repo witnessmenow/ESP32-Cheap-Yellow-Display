@@ -2,7 +2,7 @@
 
 Because the CYD is a common platform, it makes it really useful for sharing projects. This page will be a list of projects that are available on the CYD.
 
-## Disclamer!
+## Disclaimer!
 
 Projects appearing on here is not necessarily a seal of approval from me, I will not be test each project that gets added, so please install these projects at your own risk!
 
