@@ -5,12 +5,12 @@ This section will contain a collection of 3D design files for the CYD
 ## Simple CYD Stand Leg
 
 Designed by Brian Lough,
-[Files can be found here](/3dModels/Simple_CYD_Stand_Leg).
+[Files can be found here](/3dModels/Simple_CYD_%20Stand_Leg).
 
 ## CYD Stand Leg
 
 Designed by Jonny Bergdahl.
-[Files can be found here](/3DModels/Jonnys_CYD_Stand_Leg).
+[Files can be found here](/3dModels/Jonnys_CYD_Stand_Leg).
 
 ## Simple CYD Case 
 
