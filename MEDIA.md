@@ -5,6 +5,8 @@ This page can document any times the CYD project was mentioned somewhere!
 ## Videos
 
 - [Brian Lough (hey, thats me!) - Cheap and Easy to Use ESP32 Screen!](https://www.youtube.com/watch?v=0AVyvwv0agk)
+- [Talking Sasquach - Don't be Fooled!! This Cheap Yellow Display Can Do a LOT!!](https://youtu.be/PsqMCoCTgTg?feature=shared)
+- [Teaching Tech - Cheap and easy Klipper touch interface with CYD Klipper](https://youtu.be/R3o0MGYW1ZU?feature=shared)
 
 ## Articles
 
