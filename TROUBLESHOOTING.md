@@ -26,3 +26,6 @@ If you are having issues getting the display working, the first thing I would tr
 - Try a different USB supply and or cable
 - Go through the [Display is not turning on](#display-is-not-turning-on) steps
 - If nothing else worked, your CYD could be faulty. Contact the seller.
+
+## Cannot upload
+- On Ubuntu and flavors disable or uninstall service `brltty`
