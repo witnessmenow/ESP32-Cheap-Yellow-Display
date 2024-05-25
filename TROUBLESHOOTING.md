@@ -28,4 +28,4 @@ If you are having issues getting the display working, the first thing I would tr
 - If nothing else worked, your CYD could be faulty. Contact the seller.
 
 ## Cannot upload
-- On Ubuntu and flavors disable or uninstall service `brltty`
+- On Ubuntu and flavors disable or uninstall service `brltty` and make sure user is in group `dialout`
