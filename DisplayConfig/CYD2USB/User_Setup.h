@@ -43,7 +43,7 @@
 
 // Only define one driver, the other ones must be commented out
 // #define ILI9341_DRIVER       // Generic driver for common displays
-#define ILI9341_2_DRIVER // Alternative ILI9341 driver, see https://github.com/Bodmer/TFT_eSPI/issues/1172
+// #define ILI9341_2_DRIVER // Alternative ILI9341 driver, see https://github.com/Bodmer/TFT_eSPI/issues/1172
 // #define ST7735_DRIVER      // Define additional parameters below for this display
 // #define ILI9163_DRIVER     // Define additional parameters below for this display
 // #define S6D02A1_DRIVER
@@ -52,7 +52,7 @@
 // #define ILI9481_DRIVER
 // #define ILI9486_DRIVER
 // #define ILI9488_DRIVER     // WARNING: Do not connect ILI9488 display SDO to MISO if other devices share the SPI bus (TFT SDO does NOT tristate when CS is high)
-// #define ST7789_DRIVER      // Full configuration option, define additional parameters below for this display
+#define ST7789_DRIVER      // Full configuration option, define additional parameters below for this display
 // #define ST7789_2_DRIVER    // Minimal configuration option, define additional parameters below for this display
 // #define R61581_DRIVER
 // #define RM68140_DRIVER
@@ -74,7 +74,7 @@
 // Try ONE option at a time to find the correct colour order for your display
 
 //  #define TFT_RGB_ORDER TFT_RGB  // Colour order Red-Green-Blue
-//  #define TFT_RGB_ORDER TFT_BGR  // Colour order Blue-Green-Red
+#define TFT_RGB_ORDER TFT_BGR  // Colour order Blue-Green-Red
 
 // For M5Stack ESP32 module with integrated ILI9341 display ONLY, remove // in line below
 
@@ -84,11 +84,11 @@
 // #define TFT_WIDTH  80
 // #define TFT_WIDTH  128
 // #define TFT_WIDTH  172 // ST7789 172 x 320
-#define TFT_WIDTH 240 // ST7789 240 x 240 and 240 x 320
+// #define TFT_WIDTH 240 // ST7789 240 x 240 and 240 x 320
 // #define TFT_HEIGHT 160
 // #define TFT_HEIGHT 128
 // #define TFT_HEIGHT 240 // ST7789 240 x 240
-#define TFT_HEIGHT 320 // ST7789 240 x 320
+// #define TFT_HEIGHT 320 // ST7789 240 x 320
 // #define TFT_HEIGHT 240 // GC9A01 240 x 240
 
 // For ST7735 ONLY, define the type of display, originally this was based on the
@@ -112,8 +112,8 @@
 // If colours are inverted (white shows as black) then uncomment one of the next
 // 2 lines try both options, one of the options should correct the inversion.
 
-#define TFT_INVERSION_ON
-// #define TFT_INVERSION_OFF
+//#define TFT_INVERSION_ON
+#define TFT_INVERSION_OFF
 
 // ##################################################################################
 //
