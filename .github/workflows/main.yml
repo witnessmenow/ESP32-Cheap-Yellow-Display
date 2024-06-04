@@ -72,7 +72,7 @@ jobs:
 
         echo ']}' >> tmp/examples.json
     - name: Setup Github Page
-      uses: actions/configure-pages@v4
+      uses: actions/configure-pages@v5
     - name: Upload webflash files
       uses: actions/upload-pages-artifact@v3
       with:
