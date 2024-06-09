@@ -41,8 +41,11 @@ https://github.com/mobizt/Firebase-ESP32
 #define DELAY_FOR_SLOTS 24
 const unsigned int iterations = 20451;
 
-#define DATAPIN 16
-#define IRQPIN 5
+// PS/2 Keyboard
+#define DATAPIN 35
+#define IRQPIN 27
+// Swap if won't work
+
 #define TYPE_DELAY 72
 
 TFT_eSPI tft = TFT_eSPI();       // Invoke custom library
