@@ -1,0 +1,1 @@
+https://database-name-default-rtdb.firebaseio.com/
