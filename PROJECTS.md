@@ -28,6 +28,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | Midbar-Firebase-Edition | An advanced password vault that stores the encrypted data in the cloud while keeping the cryptographic keys on the edge! | [Northstrix](https://github.com/Northstrix) | PS/2 keyboard and an optional STM32F103C8T6 (if you want it to emulate the USB keyboard)  | [Github](https://github.com/Northstrix/Midbar-Firebase-Edition)
 | Electronic-Shelf-Label-Management-System | A simple device for displaying relevant product information. It gets the encrypted images via UDP. | [Northstrix](https://github.com/Northstrix)|                                                           | [Github](https://github.com/Northstrix/Electronic-Shelf-Label-Management-System)
 | ESP32-Tetris-With-Nintendo-64-Controller | Tetris for ESP32 with Nintendo 64 controller support                      | [Northstrix](https://github.com/Northstrix) | Nintendo 64 Controller and Arduino Nano                                           | [Github](https://github.com/Northstrix/ESP32-Tetris-With-Nintendo-64-Controller)
+| Midbar ESP32 CYD       | A version of Midbar data vault tweaked specifically for the ESP32 Cheap Yellow Display.     | [Northstrix](https://github.com/Northstrix) | PS/2 Keyboard                                                                     | [SourceForge](https://sourceforge.net/projects/midbar-esp32-cyd/) [Github](https://github.com/Northstrix/Midbar-ESP32-CYD)
 
 (\#) = Project not added by original author
 
