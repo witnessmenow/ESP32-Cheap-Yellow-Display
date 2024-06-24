@@ -23,9 +23,6 @@
     Twitter: https://twitter.com/jonnybergdahl
  *******************************************************************/
 
-// This example only works with ESP32 Board package in version 2.0.17 (not 3.x.x!)
-#if ESP_IDF_VERSION_MAJOR < 5
-
 // Make sure to copy the UserSetup.h file into the library as
 // per the Github Instructions. The pins are defined in there.
 
@@ -34,6 +31,15 @@
 // ----------------------------
 
 #include <Arduino.h>
+
+// This example only works with ESP32 Board package in version 2.0.17 (not 3.x.x!)
+#if ESP_IDF_VERSION_MAJOR == 5
+  #warning This example only works with ESP32 Board package in version 2.0.17 (not 3.x.x!)
+  void setup(){}
+  void loop(){}
+#else
+
+
 #include <WiFi.h>
 
 // ----------------------------
@@ -104,7 +110,7 @@ void setup()
 
 }
 
-void loop() 
+void loop()
 {
   // Prcoess audio
   audio.loop();
