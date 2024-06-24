@@ -31,6 +31,15 @@
 // ----------------------------
 
 #include <Arduino.h>
+
+// This example only works with ESP32 Board package in version 2.0.17 (not 3.x.x!)
+#if ESP_IDF_VERSION_MAJOR == 5
+  #warning This example only works with ESP32 Board package in version 2.0.17 (not 3.x.x!)
+  void setup(){}
+  void loop(){}
+#else
+
+
 #include <WiFi.h>
 
 // ----------------------------
@@ -101,7 +110,7 @@ void setup()
 
 }
 
-void loop() 
+void loop()
 {
   // Prcoess audio
   audio.loop();
@@ -184,4 +193,4 @@ void audio_eof_speech(const char *info)
     Serial.println(info);
 }
 
-
+#endif // ESP_IDF_VERSION_MAJOR
