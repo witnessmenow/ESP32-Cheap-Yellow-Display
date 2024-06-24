@@ -1,0 +1,42 @@
+name: CI
+on:
+  schedule:
+    - cron: '0 0 * * 5'
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+  release:
+    types: [ published, created, edited ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform_version: [ "latest", "2.0.17" ]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v4
+      - uses: arduino/compile-sketches@v1
+        with:
+          fqbn: esp32:esp32:esp32
+          platforms: |
+            - name: "esp32:esp32"
+            - version: ${{ matrix.platform_version }}
+          libraries: |
+            - name: TFT_eSPI
+            - name: XPT2046_Touchscreen
+            - name: XPT2046_Bitbang_Slim
+            - source-url: https://github.com/schreibfaul1/ESP32-audioI2S.git
+          sketch-paths: |
+            - "Examples/Basics"
