@@ -1,4 +1,4 @@
-name: CI
+name: Arduino CLI CI
 on:
   schedule:
     - cron: '0 0 * * 5'
@@ -32,7 +32,7 @@ jobs:
           fqbn: esp32:esp32:esp32
           platforms: |
             - name: "esp32:esp32"
-            - version: ${{ matrix.platform_version }}
+              version: ${{ matrix.platform_version }}
           libraries: |
             - name: TFT_eSPI
             - name: XPT2046_Touchscreen
