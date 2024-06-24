@@ -23,6 +23,9 @@
     Twitter: https://twitter.com/jonnybergdahl
  *******************************************************************/
 
+// This example only works with ESP32 Board package in version 2.0.17 (not 3.x.x!)
+#if ESP_IDF_VERSION_MAJOR < 5
+
 // Make sure to copy the UserSetup.h file into the library as
 // per the Github Instructions. The pins are defined in there.
 
@@ -184,4 +187,4 @@ void audio_eof_speech(const char *info)
     Serial.println(info);
 }
 
-
+#endif // ESP_IDF_VERSION_MAJOR
