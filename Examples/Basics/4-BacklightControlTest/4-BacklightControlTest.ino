@@ -56,8 +56,12 @@ void setup() {
 
   // Setting up the LEDC and configuring the Back light pin
   // NOTE: this needs to be done after tft.init()
+#if ESP_IDF_VERSION_MAJOR == 5
+  ledcAttach(LCD_BACK_LIGHT_PIN, LEDC_BASE_FREQ, LEDC_TIMER_12_BIT);
+#else
   ledcSetup(LEDC_CHANNEL_0, LEDC_BASE_FREQ, LEDC_TIMER_12_BIT);
   ledcAttachPin(LCD_BACK_LIGHT_PIN, LEDC_CHANNEL_0);
+#endif
   
   tft.setRotation(1); //This is the display in landscape
 
