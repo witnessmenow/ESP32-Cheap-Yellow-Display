@@ -1,0 +1,29 @@
+[package]
+name = "touchscreen"
+authors = ["Tommy Gilligan", "Matt Mahin"]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Modified version of: Decorates embedded-graphics to enable touch interactivity"
+homepage = "https://github.com/tommy-gilligan/touchscreen"
+repository = "https://github.com/tommy-gilligan/touchscreen.git"
+documentation = "https://docs.rs/touchscreen/latest/touchscreen/"
+
+[dependencies]
+cfg-if = "1.0.0"
+embedded-graphics-core = "0.4.0"
+embedded-graphics-simulator = { version = "0.6.0", optional = true }
+embedded-graphics-web-simulator = { version = "0.4.0", optional = true }
+embedded-hal = { version = "1.0.0", optional = true }
+log = { version = "0.4.22", optional = true }
+wasm-bindgen = { version = "0.2.88", optional = true }
+web-sys = { version = "^0.3.64", features = [ 'Document', 'Element', 'HtmlElement', 'MouseEvent', 'Window' ], optional = true }
+
+[dev-dependencies]
+embedded-hal-mock = { version = "0.10.0-rc.1", features = ["eh1"] }
+
+[features]
+log = ["dep:log"]
+xpt2046 = ["dep:embedded-hal"]
+web = ["dep:wasm-bindgen", "dep:embedded-graphics-web-simulator", "dep:web-sys"]
+sdl = ["dep:embedded-graphics-simulator"]

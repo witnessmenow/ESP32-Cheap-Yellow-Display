@@ -1,0 +1,75 @@
+[package]
+name = "cyd"
+version = "0.1.0"
+authors = ["Matt Mahin <matt.mahin@qsc.com>"]
+edition = "2021"
+license = "MIT OR Apache-2.0"
+resolver = "2"
+
+[profile.release]
+codegen-units = 1 # LLVM can perform better optimizations using a single thread
+debug = 2
+debug-assertions = false
+incremental = false
+lto = 'fat'
+opt-level = 's'
+overflow-checks = false
+
+[features]
+heap = ["esp-alloc"]
+
+[dependencies]
+cfg-if = "1.0.0"
+critical-section = "1.1.2"
+display-interface = "0.5.0"
+display-interface-spi = "0.5.0"
+embassy-executor = { version = "0.5.0", features = ["task-arena-size-8192"] }
+embassy-sync = "0.6.0"
+embassy-time = { version = "0.3.1", features = ["generic-queue-8"] }
+embedded-graphics = "0.8.1"
+embedded-hal = "1.0.0"
+embedded-hal-bus = { version = "0.2.0" }
+embedded-io = "0.6.1"
+embedded-svc = { version = "0.26.1", default-features = false, features = [] }
+esp-alloc = { version = "0.4.0", optional = true }
+esp-backtrace = { version = "0.13.0", features = [
+  "esp32",
+  "exception-handler",
+  "panic-handler",
+  "println",
+]}
+esp-hal = { version = "0.19.0", features = [
+  "async",
+  "embedded-hal",
+  "embedded-io",
+  "esp32",
+]}
+esp-hal-embassy = { version = "0.2.0", features = ["esp32"] }
+esp-println = { version = "0.10.0", features = [
+  "esp32",
+  "log"
+]}
+esp-wifi = { version = "0.7.1", features = [
+  "async",
+  "esp32",
+  "esp-now",
+  "phy-enable-usb",
+  "utils",
+]}
+fugit = "0.3.7"
+heapless = { version = "0.8.0", default-features = false }
+log = { version = "0.4.21" }
+mipidsi = "0.8.0"
+smoltcp = { version = "0.11.0", default-features = false, features = [
+  "medium-ethernet",
+  "proto-dhcpv4",
+  "proto-igmp",
+  "proto-ipv4",
+  "socket-dhcpv4",
+  "socket-icmp",
+  "socket-raw",
+  "socket-tcp",
+  "socket-udp",
+]}
+static_cell = { version = "2.1.0", features = ["nightly"] }
+touchscreen = { path = "../touchscreen", features = ["xpt2046"] }
