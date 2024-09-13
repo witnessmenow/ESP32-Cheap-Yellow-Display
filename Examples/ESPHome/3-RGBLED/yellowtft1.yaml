@@ -49,6 +49,7 @@ api:
 
 # Set OTA password
 ota:
+  platform: esphome
   password: !secret ota_password
 
 # Setup WiFi credentials
