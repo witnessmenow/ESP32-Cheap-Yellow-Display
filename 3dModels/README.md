@@ -33,3 +33,8 @@ There are a number of designs for cases that can be found across the various 3D 
 (Thangs)](https://thangs.com/designer/dimosram/3d-model/ESP32-2432S028%20enclosure%20for%20Battery%20and%20BMS-788656) - Possibly wrong size? [#44](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/issues/44)
 - CYD - [2.8inch ESP32 2432S028R (Thingiverse)](https://www.thingiverse.com/thing:5990927)
 - CYD - [CYD enclosure with magnetic mount option](https://makerworld.com/en/models/17061#profileId-32030) by Geoff Pedder
+
+## Stylus Management
+
+Help manage the stylus that comes with the CYD
+- CYD - [Stylus holder](https://www.thingiverse.com/thing:6767878) - [afreeland](https://github.com/afreeland)
