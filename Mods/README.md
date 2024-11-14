@@ -22,7 +22,7 @@ As decribed, it involves soldering hand soldering on top of a 0603 component, bu
 
 ## Adding PSRAM
 
-Its possible with some board modification, to use use PSRAM with the CYD
+Its possible with some board modification, to use PSRAM with the CYD
 
 This mod involves removing the RGB LED, cutting some traces and installing the PSRAM IC
 
