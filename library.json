@@ -19,9 +19,9 @@
   "url": "https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display",
   "architectures": ["esp32"],
   "frameworks": "Arduino",
-  "dependencies": {
+  "dependencies": [
     "bodmer/TFT_eSPI@^2.5.31"
-  },
+  ],
   "examples": [
     {
       "name": "1.Hello World",
