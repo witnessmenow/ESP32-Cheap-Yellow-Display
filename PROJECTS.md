@@ -34,7 +34,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | Midbar ESP32 CYD Firebase Edition                                       | A version of Midbar data vault adapted for the ESP32 CYD and WebFlash. It keeps the cryptographic keys in the ESP32 RAM and stores the ciphertexts (encrypted data) in the Google Firebase.  | [Northstrix](https://github.com/Northstrix) | PS2 Keyboard, PS2 Port *optional | [SourceForge](https://sourceforge.net/projects/midbar-esp32-cyd-firebase/)          [Github](https://github.com/Northstrix/Midbar-ESP32-CYD-Firebase-Edition)  | [WebFlash](https://northstrix.github.io/Midbar-ESP32-CYD-Firebase-Edition/flash)
 | cydOS  (WIP) | cydOS is a GUI app that is able to manage various aspects of the CYD, like SD browsing and file mangement, on board flashing of .bin files for rapid firmware switching, on board device settings(WIP)  | [orlandobianco](https://github.com/orlandobianco) | None | [Github]((https://github.com/orlandobianco/cydOS))  | WIP
 | ESP32 MFA Authenticator | Turn the CYD into a MFA Authenticator | [AllanOricil](https://github.com/AllanOricil) | None | [Github](https://github.com/AllanOricil/esp32-mfa-authenticator)  | [Webflash](https://allanoricil.github.io/esp32-mfa-authenticator/)
-
+| cydWeatherStation | cyd Weather station | [gustheseventh](https://github.com/gustheseventh) | None | [Github](https://github.com/gustheseventh/cyd-Weather-Station)  |
 (\#) = Project not added by original author
 
 ## Adding a project
