@@ -40,3 +40,4 @@ jobs:
             - source-url: https://github.com/schreibfaul1/ESP32-audioI2S.git
           sketch-paths: |
             - "Examples/Basics"
+          cli-compile-flags: --build-property "build.extra_flags=-DUSER_SETUP_LOADED -DTFT_MISO=12 -DTFT_MOSI=13 -DTFT_SCLK=14 -DTFT_CS=15 -DUSE_HSPI_PORT -DTFT_DC=2 -DTFT_RST=-1 -DTFT_BL=21 -DILI9341_2_DRIVER"
