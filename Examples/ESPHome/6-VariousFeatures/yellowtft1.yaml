@@ -235,6 +235,7 @@ display:
     dc_pin: GPIO2
     # Remove rotation if your board used the ILI9341 LCD
     rotation: 90
+    invert_colors: false
     pages:
       - id: page1
         lambda: |-
