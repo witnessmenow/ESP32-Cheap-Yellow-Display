@@ -35,6 +35,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | cydOS  (WIP) | cydOS is a GUI app that is able to manage various aspects of the CYD, like SD browsing and file mangement, on board flashing of .bin files for rapid firmware switching, on board device settings(WIP)  | [orlandobianco](https://github.com/orlandobianco) | None | [Github]((https://github.com/orlandobianco/cydOS))  | WIP
 | ESP32 MFA Authenticator | Turn the CYD into a MFA Authenticator | [AllanOricil](https://github.com/AllanOricil) | None | [Github](https://github.com/AllanOricil/esp32-mfa-authenticator)  | [Webflash](https://allanoricil.github.io/esp32-mfa-authenticator/)
 | cydWeatherStation | cyd Weather station | [gustheseventh](https://github.com/gustheseventh) (#) | None | [Github](https://github.com/gustheseventh/cyd-Weather-Station)  |
+| PhilRadio | CYD Wifi Radio project. Re-using an old radio as hardware. Exposing a webserver on local network to configure the radio stations. Persistent storage. | [mogrikid](https://github.com/mogrikid) | Required: A speaker. Recommended:  Speaker, potentiometer, 10kohm resistor, female usb port, switch | [Github](https://github.com/mogrikid/PhilRadio)
 (\#) = Project not added by original author
 
 ## Adding a project
