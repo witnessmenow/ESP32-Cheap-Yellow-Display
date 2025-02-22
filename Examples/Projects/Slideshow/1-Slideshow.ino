@@ -23,7 +23,6 @@
 // https://github.com/TheNitek/XPT2046_Bitbang_Arduino_Library
 
 #include <SPI.h>
-
 #include <SdFat.h>
 // A library for accessing SD cards
 //
@@ -82,7 +81,7 @@ int JPEGDraw(JPEGDRAW *pDraw) {
 
 void * myOpen(const char *filename, int32_t *size) {
   jpgFile = sd.open(filename);
-  *size = jpgFile.size();
+  *size = jpgFile.fileSize();
   return &jpgFile;
 }
 void myClose(void *handle) {
@@ -94,7 +93,7 @@ int32_t myRead(JPEGFILE *handle, uint8_t *buffer, int32_t length) {
 }
 int32_t mySeek(JPEGFILE *handle, int32_t position) {
   if (!jpgFile) return 0;
-  return jpgFile.seek(position);
+  return jpgFile.seekSet(position);
 }
 
 void decodeJpeg(const char *name) {
