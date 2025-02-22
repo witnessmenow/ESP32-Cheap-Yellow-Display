@@ -38,6 +38,7 @@ jobs:
             - name: XPT2046_Touchscreen
             - name: XPT2046_Bitbang_Slim
             - source-url: https://github.com/schreibfaul1/ESP32-audioI2S.git
+              version: 3.0.12
           sketch-paths: |
             - "Examples/Basics"
           cli-compile-flags: |
