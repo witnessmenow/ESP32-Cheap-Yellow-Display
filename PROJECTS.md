@@ -36,6 +36,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | ESP32 MFA Authenticator | Turn the CYD into a MFA Authenticator | [AllanOricil](https://github.com/AllanOricil) | None | [Github](https://github.com/AllanOricil/esp32-mfa-authenticator)  | [Webflash](https://allanoricil.github.io/esp32-mfa-authenticator/)
 | cydWeatherStation | cyd Weather station | [gustheseventh](https://github.com/gustheseventh) (#) | None | [Github](https://github.com/gustheseventh/cyd-Weather-Station)  |
 | PhilRadio | CYD Wifi Radio project. Re-using an old radio as hardware. Exposing a webserver on local network to configure the radio stations. Persistent storage. | [mogrikid](https://github.com/mogrikid) | Required: A speaker. Recommended:  Speaker, potentiometer, 10kohm resistor, female usb port, switch | [Github](https://github.com/mogrikid/PhilRadio)
+| cydWeeWX | Simple CYD Weather Display for the open source WeeWX weather station server. | [hcomet](https://hcomet.github.io/) | None | [Github](https://github.com/hcomet/CheapoDC)| [Webflash](https://hcomet.github.io/cydWeeWX/cydWeeWXFlash.html) |
 (\#) = Project not added by original author
 
 ## Adding a project
