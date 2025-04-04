@@ -1,0 +1,30 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32414.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "Blinky", "Blinky.nfproj", "{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29BACBB9-C5B6-4BEF-AEEF-9AFE39B678D9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{704A1D00-DADA-47DA-A197-00D9B4CA3BE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704A1D00-DADA-47DA-A197-00D9B4CA3BE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704A1D00-DADA-47DA-A197-00D9B4CA3BE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704A1D00-DADA-47DA-A197-00D9B4CA3BE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED0BE4BF-CB02-4B50-95E9-E613CF3D00FB}
+	EndGlobalSection
+EndGlobal
