@@ -123,9 +123,7 @@ Uses the HSPI
 |IO15|TFT_CS||
 |IO21|TFT_BL|Also on P3 connector, for some reason|
 
-// For the 2.4 inch display (I ve found it on Aliexpress), the Backlight (BL) Pin is the IO27 (define it 27 in your code). Chipset is ESP32-D0WD-V3
-//Tested only with micropython.
-
+// For the 2.4 inch display (Chipset is ESP32-D0WD-V3), the Backlight (BL) Pin is the IO27 (define it 27 in your code). 
 
 ## Test points
 |Pad|Use|Note|
