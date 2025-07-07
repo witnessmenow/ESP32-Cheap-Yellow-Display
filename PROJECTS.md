@@ -36,6 +36,9 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | ESP32 MFA Authenticator | Turn the CYD into a MFA Authenticator | [AllanOricil](https://github.com/AllanOricil) | None | [Github](https://github.com/AllanOricil/esp32-mfa-authenticator)  | [Webflash](https://allanoricil.github.io/esp32-mfa-authenticator/)
 | cydWeatherStation | cyd Weather station | [gustheseventh](https://github.com/gustheseventh) (#) | None | [Github](https://github.com/gustheseventh/cyd-Weather-Station)  |
 | PhilRadio | CYD Wifi Radio project. Re-using an old radio as hardware. Exposing a webserver on local network to configure the radio stations. Persistent storage. | [mogrikid](https://github.com/mogrikid) | Required: A speaker. Recommended:  Speaker, potentiometer, 10kohm resistor, female usb port, switch | [Github](https://github.com/mogrikid/PhilRadio)
+| CYD Stream Deck        | A customizable touch-based Bluetooth HID controller using CYD.         | [gahingwoo](https://github.com/gahingwoo)             |     | [GitHub](https://github.com/gahingwoo/cyd-stream-deck)            | [Webflash](https://github.com/gahingwoo/cyd-stream-deck/webflash/index.html)  |
+| CYD DHT22 Weather Clock | A weather and time display using CYD.       | [gahingwoo](https://github.com/gahingwoo)             | DHT22 sensor | [GitHub](https://github.com/gahingwoo/cyd-dht22-weather-clock)     | *Not available* |
+
 (\#) = Project not added by original author
 
 ## Adding a project
