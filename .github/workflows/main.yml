@@ -40,12 +40,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install --upgrade platformio
-        chmod 755 ~/.platformio/packages/tool-esptoolpy/esptool.py
     - name: Build
       run: |
          find . -not -path '*/.*' -type f -name 'platformio.ini' -print0 | xargs -0 grep -L "; nowebflash" | xargs -i bash -c "(echo {}; pio run -e cyd -e cyd2usb -d {})"
     - name: Merge flash files
       run: |
+        chmod 755 ~/.platformio/packages/tool-esptoolpy/esptool.py
         find . -path '*/.pio*' -type f -name 'firmware.bin' -printf '%h\n' | xargs -i bash -c "(echo {}; cd {}; ~/.platformio/packages/tool-esptoolpy/esptool.py --chip esp32 merge_bin -o merged-flash.bin --flash_mode dio --flash_size 4MB 0x1000 bootloader.bin 0x8000 partitions.bin 0x10000 firmware.bin)"
     - name: Create JSON
       run: |
