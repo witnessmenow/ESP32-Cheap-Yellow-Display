@@ -83,7 +83,7 @@ void app_main(void)
 esp_lcd_panel_io_handle_t lcd_io;
 esp_lcd_panel_handle_t lcd_panel;
 esp_lcd_touch_handle_t tp;
-lvgl_port_touch_cfg_t touch_cfg;
+lvgl_port_touch_cfg_t touch_cfg = { 0 };
 lv_display_t *lvgl_display = NULL;
 char buf[16];
 uint16_t n = 0;
