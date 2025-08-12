@@ -20,7 +20,7 @@
   "architectures": ["esp32"],
   "frameworks": "Arduino",
   "dependencies": {
-    "bodmer/TFT_eSPI@^2.5.31"
+    "bodmer/TFT_eSPI": "^2.5.31"
   },
   "examples": [
     {
