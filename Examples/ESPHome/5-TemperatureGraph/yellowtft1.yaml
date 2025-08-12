@@ -153,6 +153,7 @@ display:
     cs_pin: GPIO15
     dc_pin: GPIO2
     rotation: 90
+    invert_colors: false
     lambda: |-
       it.fill(id(Color::BLACK));
       it.print(0, 60, id(arimo14), TextAlign::TOP_LEFT, "35");
