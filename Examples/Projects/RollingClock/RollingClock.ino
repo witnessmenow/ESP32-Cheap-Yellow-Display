@@ -350,6 +350,7 @@ void DrawDate(time_t utc)
     tft.setTextSize(4);
     tft.fillRect(0, 170 - h, 320, h, TFT_BLACK);
     tft.drawString(dayNames[dow], 320 / 2, 170);
+    prevDay = dd;
   }
 }
 
