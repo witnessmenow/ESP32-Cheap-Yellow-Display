@@ -40,6 +40,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | CYD Stream Deck        | A customizable touch-based Bluetooth HID controller using CYD.         | [gahingwoo](https://github.com/gahingwoo)             |     | [GitHub](https://github.com/gahingwoo/cyd-stream-deck)            | [Webflash](https://github.com/gahingwoo/cyd-stream-deck/webflash/index.html)  |
 | CYD DHT22 Weather Clock | A weather and time display using CYD.       | [gahingwoo](https://github.com/gahingwoo)             | DHT22 sensor | [GitHub](https://github.com/gahingwoo/cyd-dht22-weather-clock) | |
 | ESP CYD MCP | Model Context Protocol (MCP) server implementation for the ESP32 CYD | [OfryL](https://github.com/OfryL) | | [Github](https://github.com/OfryL/esp-cyd-mcp) | |
+| SmartEnergyMeter | An ESPHome display for Energy in the house (solar, battery, etc) | [anthony-spruyt](https://github.com/anthony-spruyt) (#) | | [Github](https://github.com/anthony-spruyt/ESPHOME-ESP32_CYD_V2-SmartEnergyMeter) | |
 
 (\#) = Project not added by original author
 
