@@ -40,6 +40,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | CYD Stream Deck        | A customizable touch-based Bluetooth HID controller using CYD.         | [gahingwoo](https://github.com/gahingwoo)             |     | [GitHub](https://github.com/gahingwoo/cyd-stream-deck)            | [Webflash](https://github.com/gahingwoo/cyd-stream-deck/webflash/index.html)  |
 | CYD DHT22 Weather Clock | A weather and time display using CYD.       | [gahingwoo](https://github.com/gahingwoo)             | DHT22 sensor | [GitHub](https://github.com/gahingwoo/cyd-dht22-weather-clock) | |
 | ESP CYD MCP | Model Context Protocol (MCP) server implementation for the ESP32 CYD | [OfryL](https://github.com/OfryL) | | [Github](https://github.com/OfryL/esp-cyd-mcp) | |
+| Aura |  Smart weather forecast device (OpenMeteo) | [Surrey-Homeware](https://github.com/Surrey-Homeware/) (\#) | [3D printed case](https://makerworld.com/en/models/1382304-aura-smart-weather-forecast-display#profileId-1430951) | [Github](https://github.com/Surrey-Homeware/Aura) | [Webflash](https://surrey-homeware.github.io/aura-installer/) |
 
 (\#) = Project not added by original author
 
