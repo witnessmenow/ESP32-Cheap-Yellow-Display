@@ -89,7 +89,7 @@ color:
 image:
   - file: "images/esphome.png"
     id: esphome_image
-    type: RGB24
+    type: RGB
 
 # ============================================================ 
 # Home Assistant related setup
