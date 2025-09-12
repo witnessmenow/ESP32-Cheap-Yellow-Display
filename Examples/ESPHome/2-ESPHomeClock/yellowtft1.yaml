@@ -140,7 +140,8 @@ display:
     cs_pin: GPIO15
     dc_pin: GPIO2
     color_palette: 8BIT # Fix memory issues with ESPHome 25.x
-    rotation: 90
+    transform:
+      swap_xy: true
     invert_colors: false
     lambda: |-
       it.fill(id(ha_blue));
