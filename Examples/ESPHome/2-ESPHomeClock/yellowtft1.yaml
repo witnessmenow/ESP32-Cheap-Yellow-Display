@@ -105,6 +105,7 @@ light:
 time:
   - platform: homeassistant
     id: esptime
+    timezone: Europe/Dublin # See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for list of timezones
 
 # ============================================================ 
 # Hardware related setup
