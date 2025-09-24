@@ -42,6 +42,9 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | ESP CYD MCP | Model Context Protocol (MCP) server implementation for the ESP32 CYD | [OfryL](https://github.com/OfryL) | | [Github](https://github.com/OfryL/esp-cyd-mcp) | |
 | Aura |  Smart weather forecast device (OpenMeteo) | [Surrey-Homeware](https://github.com/Surrey-Homeware/) (\#) | [3D printed case](https://makerworld.com/en/models/1382304-aura-smart-weather-forecast-display#profileId-1430951) | [Github](https://github.com/Surrey-Homeware/Aura) | [Webflash](https://surrey-homeware.github.io/aura-installer/) |
 | SmartEnergyMeter | An ESPHome display for Energy in the house (solar, battery, etc) | [anthony-spruyt](https://github.com/anthony-spruyt) (#) | | [Github](https://github.com/anthony-spruyt/ESPHOME-ESP32_CYD_V2-SmartEnergyMeter) | |
+| Bluetooth Mp3 Music Player  | Bluetooth MP3 Music Player, with FTP server  | [Craig A. Lindley](https://craigandheather.net/) (#) | | [Github](https://craigandheather.net/cydmusicplayer.html) [Hackaday article](https://hackaday.com/2025/01/07/more-things-to-do-with-your-cheap-yellow-display/) | |
+
+
 
 (\#) = Project not added by original author
 
