@@ -4,12 +4,15 @@ This page talks about the pins on the CYD.
 
 ## Connector types
 
-|Connector|Type    |Note                   |
-|---      |---     |----                   |
-|[**P1**](#p1)  |4P 1.25mm JST|Serial     |
-|[**P3**](#p3)  |4P 1.25mm JST|GPIO       |
-|[**P4**](#p4)  |2P 1.25mm JST|Speaker    |
-|[**CN1**](#cn1)|4P 1.25mm JST|GPIO (I2C) |
+The connectors are often called "1.25mm JST" but the correct name is "Molex PicoBlade".
+Chinese clones are sometimes called "mx1.25".
+
+|Connector|Type    |Note                  |
+|---      |---     |----                  |
+|[**P1**](#p1)  |4P 1.25mm Molex PicoBlade|Serial     |
+|[**P3**](#p3)  |4P 1.25mm Molex PicoBlade|GPIO       |
+|[**P4**](#p4)  |2P 1.25mm Molex PicoBlade|Speaker    |
+|[**CN1**](#cn1)|4P 1.25mm Molex PicoBlade|GPIO (I2C) |
 
 ## What pins are available on the CYD?
 
@@ -17,9 +20,9 @@ There are 3 easily accessible GPIO pins
 
 |Pin|Location|Note|
 |---|---|----|
-|IO35|**P3** JST connector|Input only pin, no internal pull-ups available|
-|IO22|**P3** and **CN1** JST connector||
-|IO27|**CN1** JST connector||
+|IO35|**P3** Molex PicoBlade connector|Input only pin, no internal pull-ups available|
+|IO22|**P3** and **CN1** Molex PicoBlade connector||
+|IO27|**CN1** Molex PicoBlade connector||
 
 If you need more than that, you need to start taking them from something else. An SD Card sniffer like mentioned in the [Add-ons](/ADDONS.md) is probably the next easiest.
 
@@ -27,7 +30,7 @@ After that you're probably de-soldering something!
 
 ## Broken Out Pins
 
-There are three 4P 1.25mm JST connectors on the board
+There are three 4P 1.25mm Molex PicoBlade connectors on the board.
 
 ### P3
 |Pin|Use|Note|
@@ -66,7 +69,7 @@ The CYD has two buttons, reset and boot.
 
 ## Speaker
 
-The speaker connector is a 2P 1.25mm JST connector that is connected to the amplifier, so not usable as GPIO at the speaker connector
+The speaker connector is a 2P 1.25mm Molex PicoBlade connector that is connected to the amplifier, so not usable as GPIO at the speaker connector
 
 |Pin|Use|Note|
 |---|---|----|
