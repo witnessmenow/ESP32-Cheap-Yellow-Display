@@ -42,6 +42,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | ESP CYD MCP | Model Context Protocol (MCP) server implementation for the ESP32 CYD | [OfryL](https://github.com/OfryL) | | [Github](https://github.com/OfryL/esp-cyd-mcp) | |
 | Aura |  Smart weather forecast device (OpenMeteo) | [Surrey-Homeware](https://github.com/Surrey-Homeware/) (\#) | [3D printed case](https://makerworld.com/en/models/1382304-aura-smart-weather-forecast-display#profileId-1430951) | [Github](https://github.com/Surrey-Homeware/Aura) | [Webflash](https://surrey-homeware.github.io/aura-installer/) |
 | SmartEnergyMeter | An ESPHome display for Energy in the house (solar, battery, etc) | [anthony-spruyt](https://github.com/anthony-spruyt) (#) | | [Github](https://github.com/anthony-spruyt/ESPHOME-ESP32_CYD_V2-SmartEnergyMeter) | |
+| Navi Phone | Relica of the Mobile Phones used int the anime Serial Experments Lain | [Aquafrostbyte](https://github.com/AquaFrostByte) (#) | A Sd card is required, Speaker and Wifi is optional | [Github](https://github.com/AquaFrostByte/Navi-Phone) | |
 
 (\#) = Project not added by original author
 
