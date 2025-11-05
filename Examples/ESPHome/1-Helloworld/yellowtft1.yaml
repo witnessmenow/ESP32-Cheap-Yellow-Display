@@ -121,6 +121,7 @@ display:
     cs_pin: GPIO15
     dc_pin: GPIO2
     rotation: 90
+    invert_colors: false
     lambda: |-
       it.print(160, 140, id(arimo20), id(ha_blue), TextAlign::BOTTOM_CENTER, "Hello World!");
       it.rectangle(0, 0, 320, 240, id(ha_blue));

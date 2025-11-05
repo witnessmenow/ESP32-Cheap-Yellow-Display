@@ -1,11 +1,20 @@
 #include "Digit.h"
 
+// Constructor
+//
+// The original implementation only initialized the value-related members
+// and left geometry fields like height and position uninitialised. Using
+// those members before explicitly setting them would result in random
+// values being read, leading to unpredictable behaviour when drawing the
+// digits. We now initialise all members to sensible defaults.
 Digit::Digit(int value)
-{
-    m_value = value;
-    m_newValue = value;
-    m_frame = 0;
-}
+    : m_value(value),
+      m_newValue(value),
+      m_frame(0),
+      m_height(0),
+      m_x(0),
+      m_y(0)
+{}
 
 int Digit::Value()
 {

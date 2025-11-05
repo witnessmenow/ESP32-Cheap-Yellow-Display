@@ -89,7 +89,7 @@ color:
 image:
   - file: "images/esphome.png"
     id: esphome_image
-    type: RGB24
+    type: RGB
 
 # ============================================================ 
 # Home Assistant related setup
@@ -105,6 +105,7 @@ light:
 time:
   - platform: homeassistant
     id: esptime
+    timezone: Europe/Dublin # See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for list of timezones
 
 # ============================================================ 
 # Hardware related setup
@@ -139,7 +140,10 @@ display:
     spi_id: tft
     cs_pin: GPIO15
     dc_pin: GPIO2
-    rotation: 90
+    color_palette: 8BIT # Fix memory issues with ESPHome 25.x
+    transform:
+      swap_xy: true
+    invert_colors: false
     lambda: |-
       it.fill(id(ha_blue));
       it.image(120,10, id(esphome_image));
