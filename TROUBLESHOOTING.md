@@ -31,3 +31,15 @@ The ESP32 offers two usable hardware SPI buses, but on the CYD each of display, 
 
 # Cannot upload
 - On Ubuntu and flavors disable or uninstall service `brltty` and make sure user is in group `dialout`
+
+# Automatic flash with esptool failed: Wrong boot mode detected (0x13)
+
+This is the well-known problem of flashing ESP32 through USB-UART converter, when DTR and RTS signals are used to switch the chip to the bootloader mode (with additional 2xNPN transistor digital protection logic). On some PC, OS, driver version it works, on another it doesn't:
+
+```
+A fatal error occurred: Failed to connect to ESP32: Wrong boot mode detected (0x13)! The chip needs to be in download mode. For troubleshooting steps visit: https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html
+```
+
+The solution is to replace a capacitor between EN (RST) and GND from 0.1uF, installed on CYD, to something in range 1uF and 10uF.
+
+**NOTE:** In schematic, this is C4, but at least on Type-C version of CYD it is C5 actually.
