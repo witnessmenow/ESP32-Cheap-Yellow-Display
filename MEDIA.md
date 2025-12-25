@@ -12,3 +12,4 @@ This page can document any times the CYD project was mentioned somewhere!
 
 - [Hackaday.com - “Cheap Yellow Display” Builds Community Through Hardware](https://hackaday.com/2023/10/28/cheap-yellow-display-builds-community-through-hardware/)
 - [Hackster.io - Brian Lough Looks to Build a Community Around the Espressif ESP32-Powered "Cheap Yellow Display"](https://www.hackster.io/news/brian-lough-looks-to-build-a-community-around-the-espressif-esp32-powered-cheap-yellow-display-66d23972910d)
+- [Everything You Should Know About the Cheap Yellow Display (CYD): A Beginner’s Guide to ESP32 & Crypto Mining](https://www.elecrow.com/blog/cheap-yellow-display-cyd-a-beginners-guide-to-esp32-crypto-mining.html)
