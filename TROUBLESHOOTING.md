@@ -31,3 +31,6 @@ The ESP32 offers two usable hardware SPI buses, but on the CYD each of display, 
 
 # Cannot upload
 - On Ubuntu and flavors disable or uninstall service `brltty` and make sure user is in group `dialout`
+
+# Debug Wifi 
+- try this gist with your credentials https://gist.github.com/dx111ge/c6293d13a8c2132e4b1bdd5a69e59df5 , usually it fixes the WiFi issues
