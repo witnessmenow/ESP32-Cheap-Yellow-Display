@@ -99,8 +99,8 @@ esp_err_t app_lcd_init(esp_lcd_panel_io_handle_t *lcd_io, esp_lcd_panel_handle_t
         .mosi_io_num = LCD_SPI_MOSI,
         .miso_io_num = LCD_SPI_MISO,
         .sclk_io_num = LCD_SPI_CLK,
-        .quadhd_io_num = GPIO_NUM_NC,
         .quadwp_io_num = GPIO_NUM_NC,
+        .quadhd_io_num = GPIO_NUM_NC,
         .max_transfer_sz = LCD_DRAWBUF_SIZE * sizeof(uint16_t),
     };
 
