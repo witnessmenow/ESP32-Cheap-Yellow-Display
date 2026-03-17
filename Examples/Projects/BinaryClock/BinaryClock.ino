@@ -13,7 +13,7 @@
 ------------------------------------------------------------------ */
 
 String credentials[][2] = {
-  {"rue","NSA4ever"}
+  {"ssid","password"}
 };
 
 /* NTP server used to get accurate time */
