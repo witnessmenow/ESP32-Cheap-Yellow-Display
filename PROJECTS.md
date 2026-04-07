@@ -47,6 +47,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | Sonos Remote Control | Use your Sonos Speakers as Internet Radio with Station Buttons | Florian Lenz | https://github.com/SpringTideSystems | [GitHub](https://github.com/SpringTideSystems/CYD_Sonos-RemoteControl) | |
 | Binary Clock | Modified RollingClock for binary display | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/BinaryClock)            | |
 | Pi Day | Monte Carlo "darts" approximation of pi | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/PiDay) | |
+| K40 Laser Cooling Monitor | CO2 laser cutter cooling monitor | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/CYD_K40_Cooling_Monitor) | |
 
 (\#) = Project not added by original author
 
