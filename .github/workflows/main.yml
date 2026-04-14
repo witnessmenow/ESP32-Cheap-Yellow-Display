@@ -78,7 +78,7 @@ jobs:
     - name: Setup Github Page
       uses: actions/configure-pages@v6
     - name: Upload webflash files
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-pages-artifact@v5
       with:
         path: ./tmp
 
