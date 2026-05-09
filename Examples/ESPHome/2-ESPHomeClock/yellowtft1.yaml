@@ -141,6 +141,9 @@ display:
     cs_pin: GPIO15
     dc_pin: GPIO2
     color_palette: 8BIT # Fix memory issues with ESPHome 25.x
+    dimensions:
+      height: 240
+      width: 320
     transform:
       swap_xy: true
     invert_colors: false
