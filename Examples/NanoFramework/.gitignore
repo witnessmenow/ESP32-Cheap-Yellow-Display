@@ -1,0 +1,17 @@
+*.dll
+*.suo
+*.cache
+*.user
+*.log
+*.dbmdl
+bin
+obj
+packages
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# DNX
+project.lock.json
+project.fragment.lock.json
+artifacts/
