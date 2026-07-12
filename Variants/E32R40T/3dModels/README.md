@@ -3,8 +3,11 @@
 A protective case for the **LCDWIKI E32R40T** (ESP32-32E + 4.0" ST7796 320x480 resistive touch).
 All dimensions taken from the official LCDWIKI V1.0 mechanical drawing.
 
-![Exploded view](despiece.png)
-![Assembled](montaje.png)
+| Exploded | Assembled |
+|---|---|
+| ![Exploded view](despiece.png) | ![Assembled](montaje.png) |
+| **Back tray** | **Front bezel** |
+| ![Back tray](base.png) | ![Front bezel](bezel_top.png) |
 
 ## Files
 - `e32r40t_case.scad` — **parametric** OpenSCAD source (edit the variables at the top).
