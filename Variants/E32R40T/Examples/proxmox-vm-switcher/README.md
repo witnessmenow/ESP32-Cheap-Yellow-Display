@@ -11,6 +11,14 @@ The panel is a thin HTTP client; all the Proxmox logic lives in a small FastAPI 
 on any always-on box (or on the Proxmox host itself) and talks to the host over SSH using `qm` and
 `pct`.
 
+## Photos
+
+| Panel running | Board (back) |
+|---|---|
+| ![Panel running](docs/panel-running.jpg) | ![Board back](docs/board-back.jpg) |
+
+*(The panel's LAN IP is redacted in the photo.)*
+
 ## Contents
 - `firmware/` — PlatformIO project for the E32R40T (TFT_eSPI). Dynamic list of all VMs/CTs with
   scrolling, tap-to-select + ON/OFF, long-press for the iGPU switch, and OTA updates.
