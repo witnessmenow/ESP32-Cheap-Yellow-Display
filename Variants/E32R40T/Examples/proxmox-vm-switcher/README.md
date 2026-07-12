@@ -5,10 +5,7 @@ container and start/stop them from the touch screen. It also supports a special 
 switch, where only one of several GPU-passthrough VMs may run at a time (tapping one shuts down
 the active one and boots the target).
 
-```
-  ESP32 panel (WiFi)  ──HTTP /machines,/start,/stop,/switch──►  vm-switcher-api  ──SSH──►  Proxmox host
-   touch UI, polls                (X-API-Key auth)               (FastAPI, :8088)          qm / pct
-```
+![Architecture](docs/architecture.png)
 
 The panel is a thin HTTP client; all the Proxmox logic lives in a small FastAPI backend that runs
 on any always-on box (or on the Proxmox host itself) and talks to the host over SSH using `qm` and
