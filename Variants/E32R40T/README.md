@@ -30,3 +30,10 @@ official LCDWIKI mechanical drawing. Files and print/assembly instructions are i
 [3dModels/](3dModels/).
 
 ![Exploded view](3dModels/despiece.png)
+
+## Example project
+
+[**Proxmox VM Switcher**](Examples/proxmox-vm-switcher/) — turn this board into a physical touch
+panel that lists and starts/stops the VMs and containers of a Proxmox VE host (with a special
+"iGPU group" switch). Includes the PlatformIO firmware and a small FastAPI backend. All secrets
+are placeholders.
