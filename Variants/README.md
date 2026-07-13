@@ -69,3 +69,31 @@ build_flags =
 ```
 
 \* = Affiliate Link
+
+### Hosyond-HONGXINBAORUI
+
+[Amazon](https://www.amazon.com/dp/B0D92C9MMH?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1)
+
+Processor is ESP-32D
+Display is 2.8"
+Board size is CYD-compatible.
+Connectors:
+-USB-C
+-Speaker
+-SPI
+--IO23(MOSI)
+--IO19(MISO)
+--IO18(SCLK)
+--IO27(CS)
+-Single bit
+--3.3v
+--IO35
+--NC
+--GND
+-UART
+-BAT
+Buttons:
+-Reset
+-Boot
+RGB LED
+MicroSD
