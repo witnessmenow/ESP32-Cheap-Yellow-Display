@@ -1,0 +1,15 @@
+[Unit]
+Description=VM Switcher API (FastAPI :8088) - backend for the ESP32 Proxmox panel
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/vm-switcher-api
+EnvironmentFile=/opt/vm-switcher-api/.env
+ExecStart=/opt/vm-switcher-api/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8088
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
