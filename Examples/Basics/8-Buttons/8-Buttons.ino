@@ -51,6 +51,10 @@ XPT2046_Bitbang ts(XPT2046_MOSI, XPT2046_MISO, XPT2046_CLK, XPT2046_CS);
 
 TFT_eSPI tft = TFT_eSPI();
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 TFT_eSPI_Button key[6];
 
 void setup() {
@@ -62,7 +66,7 @@ void setup() {
 
   // Start the tft display and set it to black
   tft.init();
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
 
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

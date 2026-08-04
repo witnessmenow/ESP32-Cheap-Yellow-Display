@@ -34,6 +34,10 @@ WiFiCredentials wifiList[] = {
 
 const int wifiCount = sizeof(wifiList) / sizeof(wifiList[0]);
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 // ===== TFT and Data =====
 TFT_eSPI tft = TFT_eSPI();
 String questionTitle = "Fetching...";
@@ -87,7 +91,7 @@ void setup() {
 
   Serial.println("Booting...");
   tft.init();
-  tft.setRotation(0);
+  tft.setRotation(atoi(DISPLAY_ROTATION));
   tft.fillScreen(COLOR_BACKGROUND);
 
   pinMode(buttonUpPin, INPUT_PULLUP);

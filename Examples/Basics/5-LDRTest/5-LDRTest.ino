@@ -41,6 +41,10 @@ int ldrDelay = 1000; // How often to check the LDR reading in miliseconds (1000 
 
 TFT_eSPI tft = TFT_eSPI();
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 void setup() {
 
   Serial.begin(115200);
@@ -52,7 +56,7 @@ void setup() {
 
   // Start the tft display and set it to black
   tft.init();
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
 
   drawValueToScreen(0); // Just start with a 0 value on screen
 

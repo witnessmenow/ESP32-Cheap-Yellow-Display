@@ -21,6 +21,10 @@
     Twitter: https://twitter.com/witnessmenow
  *******************************************************************/
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 #include "genericBaseProject.h"
 #include "RollingClockLogic.h"
 

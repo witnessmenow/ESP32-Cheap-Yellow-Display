@@ -25,6 +25,11 @@ XPT2046_Touchscreen ts(XPT2046_CS, XPT2046_IRQ);
 const uint16_t touchScreenMinimumX = 200, touchScreenMaximumX = 3800, touchScreenMinimumY = 250,touchScreenMaximumY = 3850;
 
 TFT_eSPI tft = TFT_eSPI();
+
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 TFT_eSprite s1 = TFT_eSprite(&tft);
 TFT_eSprite s2 = TFT_eSprite(&tft);
 TFT_eSprite s3 = TFT_eSprite(&tft);
@@ -77,7 +82,7 @@ void setup()
   // tft.writedata(1);
 
   //tft.invertDisplay(1); //If you have a CYD2USB - https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/cyd.md#my-cyd-has-two-usb-ports
-  tft.setRotation(0); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);
 

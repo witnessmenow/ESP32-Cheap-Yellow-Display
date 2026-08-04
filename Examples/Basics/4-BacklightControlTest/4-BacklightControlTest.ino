@@ -26,6 +26,10 @@
 
 TFT_eSPI tft = TFT_eSPI();
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 #define LCD_BACK_LIGHT_PIN 21
 
 // use first channel of 16 channels (started from zero)
@@ -63,7 +67,7 @@ void setup() {
   ledcAttachPin(LCD_BACK_LIGHT_PIN, LEDC_CHANNEL_0);
 #endif
   
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
 
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

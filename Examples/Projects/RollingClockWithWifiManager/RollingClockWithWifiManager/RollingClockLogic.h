@@ -23,14 +23,14 @@ void SetupCYD()
     tft.fillScreen(clockBackgroundColor);
     tft.setTextColor(clockFontColor, clockBackgroundColor);
 
-    tft.setRotation(1);
+    tft.setRotation(atoi(DISPLAY_ROTATION));
     tft.setTextFont(clockFont);
     tft.setTextSize(clockSize);
     tft.setTextDatum(clockDatum);
 
     sprite.createSprite(tft.textWidth("8"), tft.fontHeight());
     sprite.setTextColor(clockFontColor, clockBackgroundColor);
-    sprite.setRotation(1);
+    sprite.setRotation(atoi(DISPLAY_ROTATION));
     sprite.setTextFont(clockFont);
     sprite.setTextSize(clockSize);
     sprite.setTextDatum(clockDatum);

@@ -66,6 +66,10 @@ const char WIFI_SSID[100] = "|*SSID*|";
 const char WIFI_PASS[100] = "|*PASS*|";
 const char RADIO_URL[100] = "https://media-ssl.musicradio.com/Heart90sMP3";
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 TFT_eSPI tft = TFT_eSPI();
 Audio audio(true, I2S_DAC_CHANNEL_LEFT_EN);
 
@@ -76,7 +80,7 @@ void setup()
   
   // Start the TFT display and set it to black
   tft.init();
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
   tft.setTextWrap(true, true);
 
   // Clear the screen before writing to it and set default text colors

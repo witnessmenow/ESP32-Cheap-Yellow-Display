@@ -58,6 +58,10 @@ static const int ntpSyncIntervalInSeconds = 300; // How often to sync with time 
 TFT_eSPI tft = TFT_eSPI();              // Invoke custom library
 TFT_eSprite sprite = TFT_eSprite(&tft); // Sprite class
 
+// Change this to set a fixed display rotation (0-3), or flash this example with the web
+// wizard and pick a rotation there - it will patch this buffer for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+
 int clockFont = 1;
 int clockSize = 6;
 int clockDatum = TL_DATUM;
@@ -71,14 +75,14 @@ void SetupCYD()
   tft.fillScreen(clockBackgroundColor);
   tft.setTextColor(clockFontColor, clockBackgroundColor);
 
-  tft.setRotation(1);
+  tft.setRotation(atoi(DISPLAY_ROTATION));
   tft.setTextFont(clockFont);
   tft.setTextSize(clockSize);
   tft.setTextDatum(clockDatum);
 
   sprite.createSprite(tft.textWidth("8"), tft.fontHeight());
   sprite.setTextColor(clockFontColor, clockBackgroundColor);
-  sprite.setRotation(1);
+  sprite.setRotation(atoi(DISPLAY_ROTATION));
   sprite.setTextFont(clockFont);
   sprite.setTextSize(clockSize);
   sprite.setTextDatum(clockDatum);
