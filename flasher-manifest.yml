@@ -1,0 +1,234 @@
+# Metadata for the ESP32-S3-Flasher wizard (https://github.com/lemio/ESP32-S3-Flasher).
+# Built from platformio.ini by the `lemio/ESP32-S3-Flasher/action` GitHub Action - keys
+# here are matched to environment names in platformio.ini.
+
+site:
+  title: "Cheap Yellow Display - Example Flasher"
+  subtitle: "Flash any CYD example straight from your browser"
+
+examples:
+  basics-1-helloworld-cyd:
+    name: "1. Hello World (CYD)"
+    description: "Basic TFT_eSPI hello-world test."
+    recommended: true
+  basics-1-helloworld-cyd2usb:
+    name: "1. Hello World (CYD2USB)"
+    description: "Basic TFT_eSPI hello-world test."
+
+  basics-2-touchtest-cyd:
+    name: "2. Touch Test (CYD)"
+    description: "Tests the resistive touch screen."
+  basics-2-touchtest-cyd2usb:
+    name: "2. Touch Test (CYD2USB)"
+    description: "Tests the resistive touch screen."
+
+  basics-3-sdcardtest-cyd:
+    name: "3. SD Card Test (CYD)"
+    description: "Reads and writes files on the SD card slot."
+  basics-3-sdcardtest-cyd2usb:
+    name: "3. SD Card Test (CYD2USB)"
+    description: "Reads and writes files on the SD card slot."
+
+  basics-4-backlightcontroltest-cyd:
+    name: "4. Backlight Control Test (CYD)"
+    description: "Controls the display backlight brightness."
+  basics-4-backlightcontroltest-cyd2usb:
+    name: "4. Backlight Control Test (CYD2USB)"
+    description: "Controls the display backlight brightness."
+
+  basics-5-ldrtest-cyd:
+    name: "5. LDR Test (CYD)"
+    description: "Reads the on-board light dependent resistor."
+  basics-5-ldrtest-cyd2usb:
+    name: "5. LDR Test (CYD2USB)"
+    description: "Reads the on-board light dependent resistor."
+
+  basics-6-ledtest-cyd:
+    name: "6. LED Test (CYD)"
+    description: "Cycles the on-board RGB LED."
+  basics-6-ledtest-cyd2usb:
+    name: "6. LED Test (CYD2USB)"
+    description: "Cycles the on-board RGB LED."
+
+  basics-7-helloradio-cyd:
+    name: "7. Hello Radio (CYD)"
+    description: "Internet radio streamer with on-screen controls."
+    variables:
+      - firmware_name: "|*SSID*|"
+        readable_name: "WiFi Network Name"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS*|"
+        readable_name: "WiFi Password"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "https://media-ssl.musicradio.com/Heart90sMP3"
+        readable_name: "Radio Stream URL"
+        default_value: "https://media-ssl.musicradio.com/Heart90sMP3"
+        max_length: 100
+  basics-7-helloradio-cyd2usb:
+    name: "7. Hello Radio (CYD2USB)"
+    description: "Internet radio streamer with on-screen controls."
+    variables:
+      - firmware_name: "|*SSID*|"
+        readable_name: "WiFi Network Name"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS*|"
+        readable_name: "WiFi Password"
+        default_value: ""
+        max_length: 100
+
+  basics-8-buttons-cyd:
+    name: "8. Buttons (CYD)"
+    description: "On-screen touch buttons using XPT2046_Bitbang_Slim."
+  basics-8-buttons-cyd2usb:
+    name: "8. Buttons (CYD2USB)"
+    description: "On-screen touch buttons using XPT2046_Bitbang_Slim."
+
+  lvgl8-cyd:
+    name: "LVGL 8 Demo (CYD)"
+    description: "LVGL v8 widgets demo with XPT2046 touch support."
+  lvgl8-cyd2usb:
+    name: "LVGL 8 Demo (CYD2USB)"
+    description: "LVGL v8 widgets demo with XPT2046 touch support."
+
+  lvgl9-cyd:
+    name: "LVGL 9 Demo (CYD)"
+    description: "LVGL v9 widgets demo with XPT2046 touch support."
+    recommended: true
+  lvgl9-cyd2usb:
+    name: "LVGL 9 Demo (CYD2USB)"
+    description: "LVGL v9 widgets demo with XPT2046 touch support."
+
+  lvgl9-plus-led-cyd:
+    name: "LVGL 9 + LED Demo (CYD)"
+    description: "LVGL v9 demo that also drives the on-board RGB LED."
+  lvgl9-plus-led-cyd2usb:
+    name: "LVGL 9 + LED Demo (CYD2USB)"
+    description: "LVGL v9 demo that also drives the on-board RGB LED."
+
+  squareline-cyd:
+    name: "SquareLine Studio UI (CYD)"
+    description: "A UI exported from SquareLine Studio."
+  squareline-cyd2usb:
+    name: "SquareLine Studio UI (CYD2USB)"
+    description: "A UI exported from SquareLine Studio."
+
+  rollingclock-cyd:
+    name: "Rolling Clock (CYD)"
+    description: "A mechanical split-flap style rolling clock display."
+  rollingclock-cyd2usb:
+    name: "Rolling Clock (CYD2USB)"
+    description: "A mechanical split-flap style rolling clock display."
+
+  rollingclock-wifimanager-cyd:
+    name: "Rolling Clock with WiFiManager (CYD)"
+    description: "Rolling Clock with a captive-portal WiFi setup flow, no code changes needed for WiFi."
+  rollingclock-wifimanager-cyd2usb:
+    name: "Rolling Clock with WiFiManager (CYD2USB)"
+    description: "Rolling Clock with a captive-portal WiFi setup flow, no code changes needed for WiFi."
+
+  slideshow-cyd:
+    name: "Slideshow (CYD)"
+    description: "Displays JPEG images from the SD card as a slideshow."
+  slideshow-cyd2usb:
+    name: "Slideshow (CYD2USB)"
+    description: "Displays JPEG images from the SD card as a slideshow."
+
+  leetcode-daily-question-cyd:
+    name: "LeetCode Daily Question (CYD)"
+    description: "Fetches and displays today's LeetCode daily question."
+    variables:
+      - firmware_name: "|*SSID1*|"
+        readable_name: "WiFi Network 1 Name"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS1*|"
+        readable_name: "WiFi Network 1 Password"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*SSID2*|"
+        readable_name: "WiFi Network 2 Name (optional fallback)"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS2*|"
+        readable_name: "WiFi Network 2 Password (optional fallback)"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*SSID3*|"
+        readable_name: "WiFi Network 3 Name (optional fallback)"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS3*|"
+        readable_name: "WiFi Network 3 Password (optional fallback)"
+        default_value: ""
+        max_length: 100
+  leetcode-daily-question-cyd2usb:
+    name: "LeetCode Daily Question (CYD2USB)"
+    description: "Fetches and displays today's LeetCode daily question."
+    variables:
+      - firmware_name: "|*SSID1*|"
+        readable_name: "WiFi Network 1 Name"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS1*|"
+        readable_name: "WiFi Network 1 Password"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*SSID2*|"
+        readable_name: "WiFi Network 2 Name (optional fallback)"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS2*|"
+        readable_name: "WiFi Network 2 Password (optional fallback)"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*SSID3*|"
+        readable_name: "WiFi Network 3 Name (optional fallback)"
+        default_value: ""
+        max_length: 100
+      - firmware_name: "|*PASS3*|"
+        readable_name: "WiFi Network 3 Password (optional fallback)"
+        default_value: ""
+        max_length: 100
+
+  tetris-nunchuck-cyd:
+    name: "Tetris with Nunchuck (CYD)"
+    description: "Tetris played using a Nintendo Wii Nunchuck."
+  tetris-nunchuck-cyd2usb:
+    name: "Tetris with Nunchuck (CYD2USB)"
+    description: "Tetris played using a Nintendo Wii Nunchuck."
+
+  volos-sliders-rgb-cyd:
+    name: "Volos Sliders RGB (CYD)"
+    description: "Touch sliders for controlling an RGB value."
+  volos-sliders-rgb-cyd2usb:
+    name: "Volos Sliders RGB (CYD2USB)"
+    description: "Touch sliders for controlling an RGB value."
+
+  adafruit-ili9341-cyd:
+    name: "Adafruit_ILI9341 Test (CYD)"
+    description: "Display test using the Adafruit_ILI9341 library instead of TFT_eSPI."
+
+  bb-spi-lcd-cyd:
+    name: "bb_spi_lcd Test (CYD)"
+    description: "Display test using the bb_spi_lcd library instead of TFT_eSPI."
+
+  external-button-test-cyd:
+    name: "External Button Test (CYD)"
+    description: "Reads an externally wired push button."
+  external-button-test-cyd2usb:
+    name: "External Button Test (CYD2USB)"
+    description: "Reads an externally wired push button."
+
+  nunchuck-test-cyd:
+    name: "Nunchuck Test (CYD)"
+    description: "Reads input from a Nintendo Wii Nunchuck."
+  nunchuck-test-cyd2usb:
+    name: "Nunchuck Test (CYD2USB)"
+    description: "Reads input from a Nintendo Wii Nunchuck."
+
+  nfc-via-sd-sniffer-cyd:
+    name: "NFC via SD Sniffer"
+    description: "Reads NFC tags using a PN532 module wired via the SD card SPI bus."

@@ -17,10 +17,19 @@ struct WiFiCredentials {
   const char* password;
 };
 
+// Change these for your local WiFi, or flash this example with the web wizard and enter
+// your WiFi details there - it will patch these buffers for you.
+const char WIFI_SSID_1[100] = "|*SSID1*|";
+const char WIFI_PASS_1[100] = "|*PASS1*|";
+const char WIFI_SSID_2[100] = "|*SSID2*|";
+const char WIFI_PASS_2[100] = "|*PASS2*|";
+const char WIFI_SSID_3[100] = "|*SSID3*|";
+const char WIFI_PASS_3[100] = "|*PASS3*|";
+
 WiFiCredentials wifiList[] = {
-    {"HomeSSID", "password123"},
-    {"MobileHotspot", "hotspotpw"},
-    {"OfficeNet", "securepass"}
+    {WIFI_SSID_1, WIFI_PASS_1},
+    {WIFI_SSID_2, WIFI_PASS_2},
+    {WIFI_SSID_3, WIFI_PASS_3}
 };
 
 const int wifiCount = sizeof(wifiList) / sizeof(wifiList[0]);

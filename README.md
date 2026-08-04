@@ -48,7 +48,23 @@ Buy from wherever works out cheapest for you:
 
 For details on how to get started with your CYD, please check out the [Setup and Configuration](/SETUP.md) page
 
+## Flash an Example Instantly
+
+Don't want to set up a toolchain? Every Arduino/PlatformIO example in this repo can be
+flashed straight from your browser (Chrome/Edge, over USB) using our flashing wizard,
+powered by [ESP32-S3-Flasher](https://github.com/lemio/ESP32-S3-Flasher):
+
+**[🧙 Open the Flashing Wizard](https://lemio.github.io/ESP32-Cheap-Yellow-Display/wizard.html)**
+
 ## Code Examples
+
+All of the Arduino/PlatformIO examples below live in a single PlatformIO project rooted
+at this repo's [platformio.ini](/platformio.ini) - each example is one or two
+environments (`<example>-cyd` / `<example>-cyd2usb`) of that same project, rather than
+its own separate project. Open the repo root in the PlatformIO IDE and pick an
+environment to build, or run e.g. `pio run -e basics-1-helloworld-cyd` from the command
+line. If you're adding a new example, add its environment(s) to the root
+`platformio.ini` instead of creating a new `platformio.ini` in the example's folder.
 
 ### The Basics
 
