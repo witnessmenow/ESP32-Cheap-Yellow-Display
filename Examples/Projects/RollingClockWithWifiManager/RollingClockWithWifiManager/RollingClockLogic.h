@@ -24,6 +24,7 @@ void SetupCYD()
     tft.setTextColor(clockFontColor, clockBackgroundColor);
 
     tft.setRotation(atoi(DISPLAY_ROTATION));
+    tft.invertDisplay(atoi(DISPLAY_INVERT));
     tft.setTextFont(clockFont);
     tft.setTextSize(clockSize);
     tft.setTextDatum(clockDatum);

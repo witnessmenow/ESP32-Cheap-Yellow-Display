@@ -48,9 +48,11 @@
 
 TFT_eSPI tft = TFT_eSPI();
 
-// Change this to set a fixed display rotation (0-3), or flash this example with the web
-// wizard and pick a rotation there - it will patch this buffer for you.
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
 const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 int buttonArray[] = {35,22,27};
 int arraySize = 3;
@@ -68,6 +70,7 @@ void setup() {
   // Start the tft display and set it to black
   tft.init();
   tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
   
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

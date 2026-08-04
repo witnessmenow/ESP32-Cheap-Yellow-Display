@@ -17,9 +17,11 @@ static lv_disp_draw_buf_t draw_buf;
 static lv_color_t buf[ screenWidth * screenHeight / 10 ];
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
-// Change this to set a fixed display rotation (0-3), or flash this example with the web
-// wizard and pick a rotation there - it will patch this buffer for you.
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
 const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 // set up touch
 #define TIRQ_PIN  2
@@ -82,6 +84,7 @@ void setup() {
 
   tft.init();          /* TFT init */
   tft.setRotation( atoi(DISPLAY_ROTATION) ); /* Landscape orientation, flipped */
+  tft.invertDisplay( atoi(DISPLAY_INVERT) );
   mySpi.begin(XPT2046_CLK, XPT2046_MISO, XPT2046_MOSI, XPT2046_CS); /* Start second SPI bus for touchscreen */
   ts.begin(mySpi); /* Touchscreen init */
   ts.setRotation( 1 ); /* Landscape orientation, flipped */

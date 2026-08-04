@@ -34,8 +34,11 @@ unsigned int localPort = 8888; // local port to listen for UDP packets
 TimeChangeRule *tcr;           // pointer to the time change rule, use to get TZ abbrev
 
 /*-------- PREFERENCES ----------*/
+
+const char WIFI_SSID[100] = "|*SSID*|";
+const char WIFI_PASS[100] = "|*PASS*|";
 String credentials[][2] = {
-    {"SSID", "password"},
+    {WIFI_SSID, WIFI_PASS},
     {"OptionalOtherSSID", "OptionalOtherSSDPassword"},
 };
 const bool SHOW_24HOUR = false;
@@ -58,9 +61,11 @@ static const int ntpSyncIntervalInSeconds = 300; // How often to sync with time 
 TFT_eSPI tft = TFT_eSPI();              // Invoke custom library
 TFT_eSprite sprite = TFT_eSprite(&tft); // Sprite class
 
-// Change this to set a fixed display rotation (0-3), or flash this example with the web
-// wizard and pick a rotation there - it will patch this buffer for you.
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
 const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 int clockFont = 1;
 int clockSize = 6;
@@ -76,6 +81,7 @@ void SetupCYD()
   tft.setTextColor(clockFontColor, clockBackgroundColor);
 
   tft.setRotation(atoi(DISPLAY_ROTATION));
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
   tft.setTextFont(clockFont);
   tft.setTextSize(clockSize);
   tft.setTextDatum(clockDatum);

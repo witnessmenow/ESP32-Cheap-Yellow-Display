@@ -26,9 +26,11 @@ const uint16_t touchScreenMinimumX = 200, touchScreenMaximumX = 3800, touchScree
 
 TFT_eSPI tft = TFT_eSPI();
 
-// Change this to set a fixed display rotation (0-3), or flash this example with the web
-// wizard and pick a rotation there - it will patch this buffer for you.
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
 const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 TFT_eSprite s1 = TFT_eSprite(&tft);
 TFT_eSprite s2 = TFT_eSprite(&tft);
@@ -81,8 +83,8 @@ void setup()
   // tft.writecommand(ILI9341_GAMMASET); //Gamma curve selected
   // tft.writedata(1);
 
-  //tft.invertDisplay(1); //If you have a CYD2USB - https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/blob/main/cyd.md#my-cyd-has-two-usb-ports
   tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);
 
