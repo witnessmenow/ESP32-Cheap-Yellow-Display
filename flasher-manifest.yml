@@ -11,6 +11,7 @@
 site:
   title: Cheap Yellow Display - Example Flasher
   subtitle: Flash any CYD example straight from your browser
+  bootModeVideo: https://github.com/user-attachments/assets/e06bbd1f-ccc4-47cd-be45-65cba46ab892
 examples:
   basics-1-helloworld:
     name: 1. Hello World
