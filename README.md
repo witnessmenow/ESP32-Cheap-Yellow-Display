@@ -56,6 +56,14 @@ powered by [ESP32-S3-Flasher](https://github.com/lemio/ESP32-S3-Flasher):
 
 **[🧙 Open the Flashing Wizard](https://lemio.github.io/ESP32-Cheap-Yellow-Display/wizard.html)**
 
+## Get into boot mode (if stuck).
+
+
+
+https://github.com/user-attachments/assets/e06bbd1f-ccc4-47cd-be45-65cba46ab892
+
+
+
 ## Code Examples
 
 All of the Arduino/PlatformIO examples below live in a single PlatformIO project rooted
