@@ -304,6 +304,10 @@ examples:
         label: Inverted (CYD2USB)
       default_value: '0'
       max_length: 16
+    - firmware_name: '|*TZ*|'
+      readable_name: Timezone
+      type: timezone
+      max_length: 64
   rollingclock-wifimanager:
     name: Rolling Clock with WiFiManager
     description: Rolling Clock with a captive-portal WiFi setup flow, no code changes needed for WiFi.
@@ -332,6 +336,10 @@ examples:
         label: Inverted (CYD2USB)
       default_value: '0'
       max_length: 16
+    - firmware_name: '|*TZ*|'
+      readable_name: Timezone
+      type: timezone
+      max_length: 64
   slideshow:
     name: Slideshow
     description: Displays JPEG images from the SD card as a slideshow.

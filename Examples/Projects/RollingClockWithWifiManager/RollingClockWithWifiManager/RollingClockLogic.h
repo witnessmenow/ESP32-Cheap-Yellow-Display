@@ -191,23 +191,32 @@ void DrawDigitsOneByOne()
 
 void ParseDigits()
 {
-    time_t local = myTZ.now();
-    digs[0]->NewValue((SHOW_24HOUR ? hour(local) : hourFormat12(local)) / 10);
-    digs[1]->NewValue((SHOW_24HOUR ? hour(local) : hourFormat12(local)) % 10);
-    digs[2]->NewValue(minute(local) / 10);
-    digs[3]->NewValue(minute(local) % 10);
-    digs[4]->NewValue(second(local) / 10);
-    digs[5]->NewValue(second(local) % 10);
-    ispm = isPM(local);
+    time_t utc;
+    time(&utc);
+    struct tm local;
+    localtime_r(&utc, &local);
+    int hour12 = local.tm_hour % 12;
+    if (hour12 == 0)
+        hour12 = 12;
+    int displayHour = SHOW_24HOUR ? local.tm_hour : hour12;
+    digs[0]->NewValue(displayHour / 10);
+    digs[1]->NewValue(displayHour % 10);
+    digs[2]->NewValue(local.tm_min / 10);
+    digs[3]->NewValue(local.tm_min % 10);
+    digs[4]->NewValue(local.tm_sec / 10);
+    digs[5]->NewValue(local.tm_sec % 10);
+    ispm = local.tm_hour >= 12;
 }
 
 void DrawDate()
 {
-    // time_t local = myTZ.toLocal(utc, &tcr);
-    time_t local = myTZ.now();
-    int dd = day(local);
-    int mth = month(local);
-    int yr = year(local);
+    time_t utc;
+    time(&utc);
+    struct tm local;
+    localtime_r(&utc, &local);
+    int dd = local.tm_mday;
+    int mth = local.tm_mon + 1;
+    int yr = local.tm_year + 1900;
 
     if (dd != prevDay)
     {
@@ -230,11 +239,11 @@ void DrawDate()
 
         tft.drawString(buffer, 320 / 2, 210);
 
-        int dow = weekday(local);
-        String dayNames[] = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        // struct tm's tm_wday is 0=Sunday..6=Saturday
+        String dayNames[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
         tft.setTextSize(4);
         tft.fillRect(0, 170 - h, 320, h, TFT_BLACK);
-        tft.drawString(dayNames[dow], 320 / 2, 170);
+        tft.drawString(dayNames[local.tm_wday], 320 / 2, 170);
     }
 }
 
