@@ -37,9 +37,9 @@ I'm no longer creating hardware products, but I think it would be interesting if
 
 Buy from wherever works out cheapest for you:
 
-- [Aliexpress\*](https://s.click.aliexpress.com/e/_DkSpIjB)
-- [Aliexpress\*](https://s.click.aliexpress.com/e/_DkcmuCh)
-- [Aliexpress](https://www.aliexpress.com/item/1005004502250619.html)
+- [Aliexpress\*](https://s.click.aliexpress.com/e/_c4qCIGnp)
+- [Aliexpress (make sure to get 2.8 version) \*](https://s.click.aliexpress.com/e/_c36bmiWr)
+- [Aliexpress](https://www.aliexpress.com/item/1005009795213070.html)
 - [Makerfabs](https://www.makerfabs.com/sunton-esp32-2-8-inch-tft-with-touch.html) - Seems to come with a 16GB SD card. Makerfabs also stock my [ESP32 Trinity](https://github.com/witnessmenow/ESP32-Trinity) (NOTE there will be import due in the EU from makerfabs)
 
 \* = Affiliate Link
