@@ -72,7 +72,7 @@ build_flags =
 
 ### Hosyond-HONGXINBAORUI
 
-[Amazon](https://www.amazon.com/dp/B0D92C9MMH?ref=ppx_yo2ov_dt_b_fed_asin_title&th=1)
+[Amazon](https://www.amazon.com/dp/B0D92C9MMH)
 
 Processor is ESP-32D
 Display is 2.8"
