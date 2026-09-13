@@ -26,7 +26,7 @@ I think it's useful for the following types of people:
 
 So this is pretty nice hardware and a cheap price, but the software instructions/support around it is pretty poor. Just a single link to a zip file on a random website.
 
-A couple of years ago I released the [ESP32 Trinity](https://github.com/witnessmenow/ESP32-Trinity), which is an open source ESP32 board for controlling Matrix panels. I think the main benefit people get out of the work I did on the Trinty is not the hardware, but the documentation, example code and ready to go projects.
+A couple of years ago I released the [ESP32 Trinity](https://github.com/witnessmenow/ESP32-Trinity), which is an open source ESP32 board for controlling Matrix panels. I think the main benefit people get out of the work I did on the Trinity is not the hardware, but the documentation, example code and ready to go projects.
 
 I'm no longer creating hardware products, but I think it would be interesting if we could create the same kind of community around this display, where people can share examples and projects made for this display.
 
@@ -37,9 +37,9 @@ I'm no longer creating hardware products, but I think it would be interesting if
 
 Buy from wherever works out cheapest for you:
 
-- [Aliexpress\*](https://s.click.aliexpress.com/e/_DkSpIjB)
-- [Aliexpress\*](https://s.click.aliexpress.com/e/_DkcmuCh)
-- [Aliexpress](https://www.aliexpress.com/item/1005004502250619.html)
+- [Aliexpress\*](https://s.click.aliexpress.com/e/_c4qCIGnp)
+- [Aliexpress (make sure to get 2.8 version) \*](https://s.click.aliexpress.com/e/_c36bmiWr)
+- [Aliexpress](https://www.aliexpress.com/item/1005009795213070.html)
 - [Makerfabs](https://www.makerfabs.com/sunton-esp32-2-8-inch-tft-with-touch.html) - Seems to come with a 16GB SD card. Makerfabs also stock my [ESP32 Trinity](https://github.com/witnessmenow/ESP32-Trinity) (NOTE there will be import due in the EU from makerfabs)
 
 \* = Affiliate Link
@@ -107,6 +107,8 @@ Please note: I can't gaurantee the accuracy of the translation, how up to date t
 - [French / Française](https://github.com/usini/ESP32-Cheap-Yellow-Display-Documentation-FR)
 - [German / Deutsch](https://github.com/paelzer/ESP32-Cheap-Yellow-Display-Documentation-DE)
 - [Russian / Русский](https://github.com/GreyLabsDev/ESP32-Cheap-Yellow-Display-Documentation-RU)
+- [Portuguese / Português](https://github.com/bruno-cozendey/ESP32-Cheap-Yellow-Display-Documentation-Pt-BR)
+- [Spanish / Español](https://github.com/chemazener/ESP32-Cheap-Yellow-Display-Documentation-ES)
 
 If you would like to contribure a translation, please name the repo with the language name or code in the repo name and you can link it here.
 
