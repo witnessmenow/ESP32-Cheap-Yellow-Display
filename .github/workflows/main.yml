@@ -19,21 +19,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - name: Cache pip
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
     - name: Cache PlatformIO
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: ~/.platformio
         key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
     - name: Set up Python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: '3.12'
     - name: Install PlatformIO
@@ -76,9 +76,9 @@ jobs:
 
         echo ']}' >> tmp/examples.json
     - name: Setup Github Page
-      uses: actions/configure-pages@v5
+      uses: actions/configure-pages@v6
     - name: Upload webflash files
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-pages-artifact@v5
       with:
         path: ./tmp
 
@@ -95,4 +95,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
