@@ -6,10 +6,8 @@ You will have to modify the PREFERENCES section in RollingClock.ino to your WiFi
 */
 
 #include <Arduino.h>
-#include <TimeLib.h> // Time Library provides Time and Date conversions
-#include <WiFi.h>    // To connect to WiFi
-#include <WiFiUdp.h> // To communicate with NTP server
-#include <Timezone.h>
+#include <WiFi.h> // To connect to WiFi
+#include <time.h> // Time and Date conversions, NTP sync via configTzTime()
 
 #define TOUCH_CS // This sketch does not use touch, but this is defined to quiet the warning about not defining touch_cs.
 
@@ -21,21 +19,12 @@ void Debug(String label, int val)
   Serial.println(val);
 }
 
-/*-------- TIME SERVER ----------*/
-// NTP Servers:
-static const char ntpServerName[] = "us.pool.ntp.org";
-// static const char ntpServerName[] = "time.nist.gov";
-// static const char ntpServerName[] = "time-a.timefreq.bldrdoc.gov";
-// static const char ntpServerName[] = "time-b.timefreq.bldrdoc.gov";
-// static const char ntpServerName[] = "time-c.timefreq.bldrdoc.gov";
-
-WiFiUDP Udp;
-unsigned int localPort = 8888; // local port to listen for UDP packets
-TimeChangeRule *tcr;           // pointer to the time change rule, use to get TZ abbrev
-
 /*-------- PREFERENCES ----------*/
+
+const char WIFI_SSID[100] = "|*SSID*|";
+const char WIFI_PASS[100] = "|*PASS*|";
 String credentials[][2] = {
-    {"SSID", "password"},
+    {WIFI_SSID, WIFI_PASS},
     {"OptionalOtherSSID", "OptionalOtherSSDPassword"},
 };
 const bool SHOW_24HOUR = false;
@@ -43,20 +32,24 @@ const bool SHOW_AMPM = true;
 
 const bool NOT_US_DATE = true;
 
-// Info about these settings at https://github.com/JChristensen/Timezone#coding-timechangerules
-TimeChangeRule myStandardTime = {"CST", First, Sun, Nov, 2, -6 * 60};
-TimeChangeRule myDaylightSavingsTime = {"CDT", Second, Sun, Mar, 2, -5 * 60};
-
-// TimeChangeRule myStandardTime = {"GMT", First, Sun, Nov, 2, 0};
-// TimeChangeRule myDaylightSavingsTime = {"IST", Second, Sun, Mar, 2, 1 * 60};
-Timezone myTZ(myStandardTime, myDaylightSavingsTime);
-static const int ntpSyncIntervalInSeconds = 300; // How often to sync with time server (300 = every five minutes)
+// Your timezone as a POSIX TZ string, e.g. "CST6CDT,M3.2.0,M11.1.0" for US Central, or
+// "GMT0BST,M3.5.0/1,M10.5.0" for UK time - see https://github.com/nayarsystems/posix_tz_db
+// for a lookup table covering every IANA timezone. Or flash this example with the web
+// wizard and pick your timezone there - it auto-detects it from your browser and
+// patches this buffer for you.
+const char POSIX_TZ[64] = "|*TZ*|";
 
 /*-------- CYD (Cheap Yellow Display) ----------*/
 #include <TFT_eSPI.h> // Hardware-specific library
 #include <SPI.h>
 TFT_eSPI tft = TFT_eSPI();              // Invoke custom library
 TFT_eSprite sprite = TFT_eSprite(&tft); // Sprite class
+
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 int clockFont = 1;
 int clockSize = 6;
@@ -71,14 +64,15 @@ void SetupCYD()
   tft.fillScreen(clockBackgroundColor);
   tft.setTextColor(clockFontColor, clockBackgroundColor);
 
-  tft.setRotation(1);
+  tft.setRotation(atoi(DISPLAY_ROTATION));
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
   tft.setTextFont(clockFont);
   tft.setTextSize(clockSize);
   tft.setTextDatum(clockDatum);
 
   sprite.createSprite(tft.textWidth("8"), tft.fontHeight());
   sprite.setTextColor(clockFontColor, clockBackgroundColor);
-  sprite.setRotation(1);
+  sprite.setRotation(atoi(DISPLAY_ROTATION));
   sprite.setTextFont(clockFont);
   sprite.setTextSize(clockSize);
   sprite.setTextDatum(clockDatum);
@@ -238,92 +232,28 @@ void DrawDigitsOneByOne()
 
 void ParseDigits(time_t utc)
 {
-  time_t local = myTZ.toLocal(utc, &tcr);
-  digs[0]->NewValue((SHOW_24HOUR ? hour(local) : hourFormat12(local)) / 10);
-  digs[1]->NewValue((SHOW_24HOUR ? hour(local) : hourFormat12(local)) % 10);
-  digs[2]->NewValue(minute(local) / 10);
-  digs[3]->NewValue(minute(local) % 10);
-  digs[4]->NewValue(second(local) / 10);
-  digs[5]->NewValue(second(local) % 10);
-  ispm = isPM(local);
-}
-
-/*-------- NTP code ----------*/
-const int NTP_PACKET_SIZE = 48;     // NTP time is in the first 48 bytes of message
-byte packetBuffer[NTP_PACKET_SIZE]; // buffer to hold incoming & outgoing packets
-
-// send an NTP request to the time server at the given address
-void sendNTPpacket(IPAddress &address)
-{
-  memset(packetBuffer, 0, NTP_PACKET_SIZE); // set all bytes in the buffer to 0
-
-  // Initialize values needed to form NTP request
-  // (see URL above for details on the packets)
-  packetBuffer[0] = 0b11100011; // LI, Version, Mode
-  packetBuffer[1] = 0;          // Stratum, or type of clock
-  packetBuffer[2] = 6;          // Polling Interval
-  packetBuffer[3] = 0xEC;       // Peer Clock Precision
-
-  // 8 bytes of zero for Root Delay & Root Dispersion
-  packetBuffer[12] = 49;
-  packetBuffer[13] = 0x4E;
-  packetBuffer[14] = 49;
-  packetBuffer[15] = 52;
-
-  // all NTP fields have been given values, now
-  // you can send a packet requesting a timestamp:
-  Udp.beginPacket(address, 123); // NTP requests are to port 123
-  Udp.write(packetBuffer, NTP_PACKET_SIZE);
-  Udp.endPacket();
-}
-
-time_t getNtpTime()
-{
-  IPAddress ntpServerIP; // NTP server's ip address
-
-  while (Udp.parsePacket() > 0)
-    ; // discard any previously received packets
-
-  Serial.println("Transmit NTP Request");
-  WiFi.hostByName(ntpServerName, ntpServerIP);
-  Serial.print(ntpServerName);
-  Serial.print(": ");
-  Serial.println(ntpServerIP);
-
-  sendNTPpacket(ntpServerIP);
-  uint32_t beginWait = millis();
-  while (millis() - beginWait < 1500)
-  {
-    int size = Udp.parsePacket();
-    if (size >= NTP_PACKET_SIZE)
-    {
-      // Serial.println("Receive NTP Response");
-      Udp.read(packetBuffer, NTP_PACKET_SIZE); // read packet into the buffer
-      unsigned long secsSince1900;
-      // convert four bytes starting at location 40 to a long integer
-      secsSince1900 = (unsigned long)packetBuffer[40] << 24;
-      secsSince1900 |= (unsigned long)packetBuffer[41] << 16;
-      secsSince1900 |= (unsigned long)packetBuffer[42] << 8;
-      secsSince1900 |= (unsigned long)packetBuffer[43];
-
-      // NTP server responds within 50ms, so it does not account for the one second lag.
-      // unsigned long secsSinceNTPRequest = (millis() - beginWait);
-      // Debug("secsSinceNTPRequest=",secsSinceNTPRequest);
-      unsigned long hackFactor = 1; // Without this the clock is 1 second behind (even when drawing without animation)
-
-      return secsSince1900 - 2208988800UL + hackFactor;
-    }
-  }
-  Serial.println("No NTP Response :-(");
-  return timeNotSet; // return 0 if unable to get the time
+  struct tm local;
+  localtime_r(&utc, &local);
+  int hour12 = local.tm_hour % 12;
+  if (hour12 == 0)
+    hour12 = 12;
+  int displayHour = SHOW_24HOUR ? local.tm_hour : hour12;
+  digs[0]->NewValue(displayHour / 10);
+  digs[1]->NewValue(displayHour % 10);
+  digs[2]->NewValue(local.tm_min / 10);
+  digs[3]->NewValue(local.tm_min % 10);
+  digs[4]->NewValue(local.tm_sec / 10);
+  digs[5]->NewValue(local.tm_sec % 10);
+  ispm = local.tm_hour >= 12;
 }
 
 void DrawDate(time_t utc)
 {
-  time_t local = myTZ.toLocal(utc, &tcr);
-  int dd = day(local);
-  int mth = month(local);
-  int yr = year(local);
+  struct tm local;
+  localtime_r(&utc, &local);
+  int dd = local.tm_mday;
+  int mth = local.tm_mon + 1;
+  int yr = local.tm_year + 1900;
 
   if (dd != prevDay)
   {
@@ -345,11 +275,11 @@ void DrawDate(time_t utc)
 
     tft.drawString(buffer, 320 / 2, 210);
 
-    int dow = weekday(local);
-    String dayNames[] = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    // struct tm's tm_wday is 0=Sunday..6=Saturday
+    String dayNames[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     tft.setTextSize(4);
     tft.fillRect(0, 170 - h, 320, h, TFT_BLACK);
-    tft.drawString(dayNames[dow], 320 / 2, 170);
+    tft.drawString(dayNames[local.tm_wday], 320 / 2, 170);
     prevDay = dd;
   }
 }
@@ -398,15 +328,12 @@ void SetupNTP()
 {
   Serial.print("IP number assigned by DHCP is ");
   Serial.println(WiFi.localIP());
-  Serial.println("Starting UDP");
-  Udp.begin(localPort);
-  Serial.println("waiting for sync");
-  setSyncProvider(getNtpTime);
-  setSyncInterval(ntpSyncIntervalInSeconds);
-  while (timeStatus() == timeNotSet)
+  Serial.println("waiting for NTP sync");
+  configTzTime(POSIX_TZ, "pool.ntp.org", "time.nist.gov");
+  struct tm timeinfo;
+  while (!getLocalTime(&timeinfo, 1000))
   {
     Serial.print(".");
-    delay(100);
   }
 }
 
@@ -424,7 +351,8 @@ time_t prevDisplay = 0; // when the Digital clock was displayed
 
 void loop()
 {
-  time_t current = now();
+  time_t current;
+  time(&current);
   if (current != prevDisplay)
   {
     prevDisplay = current;

@@ -1,2 +1,6 @@
 .pio
 .vscode
+
+# PlatformIO's default src_dir. tools/select_example_src.py stages the current
+# environment's example sketch here at build time - nothing here should be committed.
+/src/

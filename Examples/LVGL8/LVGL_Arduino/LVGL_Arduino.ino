@@ -46,6 +46,12 @@ static lv_color_t buf[ screenWidth * screenHeight / 10 ];
 
 TFT_eSPI tft = TFT_eSPI(screenWidth, screenHeight); /* TFT instance */
 
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
+
 #if LV_USE_LOG != 0
 /* Serial debugging */
 void my_print(const char * buf)
@@ -116,7 +122,8 @@ void setup()
     ts.setRotation(1); /* Landscape orientation */
 
     tft.begin();          /* TFT init */
-    tft.setRotation( 1 ); /* Landscape orientation */
+    tft.setRotation( atoi(DISPLAY_ROTATION) ); /* Landscape orientation */
+    tft.invertDisplay( atoi(DISPLAY_INVERT) );
 
     lv_disp_draw_buf_init( &draw_buf, buf, NULL, screenWidth * screenHeight / 10 );
 

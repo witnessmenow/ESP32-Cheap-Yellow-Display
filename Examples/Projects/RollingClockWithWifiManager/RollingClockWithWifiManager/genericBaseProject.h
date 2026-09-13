@@ -28,13 +28,6 @@
 // Can be installed from the library manager (Search for "ESP_DoubleResetDetector")
 // https://github.com/khoih-prog/ESP_DoubleResetDetector
 
-#include <ezTime.h>
-// Library used for getting the time and converting session time
-// to users timezone
-
-// Search for "ezTime" in the Arduino Library manager
-// https://github.com/ropg/ezTime
-
 #include <ArduinoJson.h>
 // Library used for parsing Json from the API responses
 
@@ -64,8 +57,6 @@ ProjectConfig projectConfig;
 
 CheapYellowDisplay cyd;
 ProjectDisplay *projectDisplay = &cyd;
-
-Timezone myTZ;
 
 void baseProjectSetup()
 {
@@ -119,17 +110,14 @@ void baseProjectSetup()
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
 
-    Serial.println("Waiting for time sync");
-
-    waitForSync();
-
+    Serial.println("Waiting for NTP time sync");
+    configTzTime(POSIX_TZ, "pool.ntp.org", "time.nist.gov");
+    struct tm timeinfo;
+    while (!getLocalTime(&timeinfo, 1000))
+    {
+        Serial.print(".");
+    }
     Serial.println();
-    Serial.println("UTC:             " + UTC.dateTime());
-
-    myTZ.setLocation(projectConfig.timeZone);
-    Serial.print(projectConfig.timeZone);
-    Serial.print(F(":     "));
-    Serial.println(myTZ.dateTime());
     Serial.println("-------------------------");
 }
 

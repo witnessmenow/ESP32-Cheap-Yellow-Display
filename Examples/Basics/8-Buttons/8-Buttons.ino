@@ -51,6 +51,12 @@ XPT2046_Bitbang ts(XPT2046_MOSI, XPT2046_MISO, XPT2046_CLK, XPT2046_CS);
 
 TFT_eSPI tft = TFT_eSPI();
 
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
+
 TFT_eSPI_Button key[6];
 
 void setup() {
@@ -62,7 +68,8 @@ void setup() {
 
   // Start the tft display and set it to black
   tft.init();
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
 
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

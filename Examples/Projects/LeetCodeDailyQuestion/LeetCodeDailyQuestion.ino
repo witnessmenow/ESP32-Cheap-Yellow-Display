@@ -17,13 +17,28 @@ struct WiFiCredentials {
   const char* password;
 };
 
+// Change these for your local WiFi, or flash this example with the web wizard and enter
+// your WiFi details there - it will patch these buffers for you.
+const char WIFI_SSID_1[100] = "|*SSID1*|";
+const char WIFI_PASS_1[100] = "|*PASS1*|";
+const char WIFI_SSID_2[100] = "|*SSID2*|";
+const char WIFI_PASS_2[100] = "|*PASS2*|";
+const char WIFI_SSID_3[100] = "|*SSID3*|";
+const char WIFI_PASS_3[100] = "|*PASS3*|";
+
 WiFiCredentials wifiList[] = {
-    {"HomeSSID", "password123"},
-    {"MobileHotspot", "hotspotpw"},
-    {"OfficeNet", "securepass"}
+    {WIFI_SSID_1, WIFI_PASS_1},
+    {WIFI_SSID_2, WIFI_PASS_2},
+    {WIFI_SSID_3, WIFI_PASS_3}
 };
 
 const int wifiCount = sizeof(wifiList) / sizeof(wifiList[0]);
+
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 // ===== TFT and Data =====
 TFT_eSPI tft = TFT_eSPI();
@@ -78,7 +93,8 @@ void setup() {
 
   Serial.println("Booting...");
   tft.init();
-  tft.setRotation(0);
+  tft.setRotation(atoi(DISPLAY_ROTATION));
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
   tft.fillScreen(COLOR_BACKGROUND);
 
   pinMode(buttonUpPin, INPUT_PULLUP);
