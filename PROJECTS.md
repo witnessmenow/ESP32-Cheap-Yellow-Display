@@ -60,6 +60,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | Pi Day | Monte Carlo "darts" approximation of pi | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/PiDay) | |
 | K40 Laser Cooling Monitor | CO2 laser cutter cooling monitor | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/CYD_K40_Cooling_Monitor) | |
 | CYD ZX Spectrum | Turns a CYD into a 48K ZX Spectrum with an on-screen touch keyboard | [Keir Finlow-Bates](https://www.linkedin.com/in/keirf/) | | [Github](https://github.com/kf106/cyd-zxspectrum) | [Webflash](https://kf106.github.io/cyd-zxspectrum/) |
+| ESP Screens | A Home Assistant app that turns the CYD (ILI9341 variant) into a room control screen: pick tiles for lights, climate, covers, media, weather and sensor graphs in Home Assistant and send them to the screen without reflashing. ESPHome + LVGL, installed over USB from Home Assistant. | [Max Gramser](https://github.com/MaxGramser) | A Home Assistant server | [GitHub](https://github.com/MaxGramser/homeassistant_espscreen) | |
 
 (\#) = Project not added by original author
 
