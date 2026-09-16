@@ -60,6 +60,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | Pi Day | Monte Carlo "darts" approximation of pi | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/PiDay) | |
 | K40 Laser Cooling Monitor | CO2 laser cutter cooling monitor | [Randy Rue](https://github.com/randyrue) |  | [GitHub](https://github.com/randyrue/CYD_K40_Cooling_Monitor) | |
 | CYD ZX Spectrum | Turns a CYD into a 48K ZX Spectrum with an on-screen touch keyboard | [Keir Finlow-Bates](https://www.linkedin.com/in/keirf/) | | [Github](https://github.com/kf106/cyd-zxspectrum) | [Webflash](https://kf106.github.io/cyd-zxspectrum/) |
+| Flow Ctrl | Push-to-talk / hands-free button for Wispr Flow dictation — the CYD pairs as a Bluetooth keyboard; includes a printed case | [WOODWERD LLC](https://github.com/WOODWERD) | | [Github](https://github.com/WOODWERD/cyd-flow-ctrl) | [Webflash](https://woodwerd.github.io/cyd-flow-ctrl/flash/) |
 
 (\#) = Project not added by original author
 
