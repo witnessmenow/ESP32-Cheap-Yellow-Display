@@ -26,6 +26,12 @@
 
 TFT_eSPI tft = TFT_eSPI();
 
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
+
 #define LCD_BACK_LIGHT_PIN 21
 
 // use first channel of 16 channels (started from zero)
@@ -63,7 +69,8 @@ void setup() {
   ledcAttachPin(LCD_BACK_LIGHT_PIN, LEDC_CHANNEL_0);
 #endif
   
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
 
   // Clear the screen before writing to it
   tft.fillScreen(TFT_BLACK);

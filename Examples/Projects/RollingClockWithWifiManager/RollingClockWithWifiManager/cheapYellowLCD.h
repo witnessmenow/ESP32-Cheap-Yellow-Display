@@ -20,7 +20,8 @@ public:
 
     // Start the tft display and set it to black
     tft.init();
-    tft.setRotation(1);
+    tft.setRotation(atoi(DISPLAY_ROTATION));
+    tft.invertDisplay(atoi(DISPLAY_INVERT));
     tft.fillScreen(TFT_BLACK);
   }
 

@@ -1,15 +1,11 @@
 #define PROJECT_CONFIG_JSON "/project_config.json"
 
-#define PROJECT_TIME_ZONE_LABEL "timeZone"
 #define PROJECT_TIME_TWENTY_FOUR_HOUR "twentyFourHour"
 #define PROJECT_TIME_US_DATE "usDate"
 
 class ProjectConfig
 {
 public:
-  // https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-  String timeZone = "Europe/London"; // seems to be something wrong with Europe/Dublin
-
   bool twentyFourHour = false;
 
   bool usDateFormat = false;
@@ -30,11 +26,6 @@ public:
         if (!error)
         {
           Serial.println("\nparsed json");
-
-          if (json.containsKey(PROJECT_TIME_ZONE_LABEL))
-          {
-            timeZone = String(json[PROJECT_TIME_ZONE_LABEL].as<String>());
-          }
 
           if (json.containsKey(PROJECT_TIME_TWENTY_FOUR_HOUR))
           {
@@ -64,7 +55,6 @@ public:
   {
     Serial.println(F("Saving config"));
     StaticJsonDocument<1024> json;
-    json[PROJECT_TIME_ZONE_LABEL] = timeZone;
     json[PROJECT_TIME_TWENTY_FOUR_HOUR] = twentyFourHour;
     json[PROJECT_TIME_US_DATE] = usDateFormat;
 

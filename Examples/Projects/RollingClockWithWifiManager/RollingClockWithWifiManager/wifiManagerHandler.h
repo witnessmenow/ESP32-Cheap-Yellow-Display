@@ -26,8 +26,6 @@ void setupWiFiManager(bool forceConfig, ProjectConfig config, ProjectDisplay *th
   // set callback that gets called when connecting to previous WiFi fails, and enters Access Point mode
   wm.setAPCallback(configModeCallback);
 
-  WiFiManagerParameter timeZoneParam(PROJECT_TIME_ZONE_LABEL, "Time Zone", config.timeZone.c_str(), 60);
-
   char checkBox[] = "type=\"checkbox\"";
   char checkBoxChecked[] = "type=\"checkbox\" checked";
   char *customHtml;
@@ -53,7 +51,6 @@ void setupWiFiManager(bool forceConfig, ProjectConfig config, ProjectDisplay *th
   }
   WiFiManagerParameter isUsDateFormat(PROJECT_TIME_US_DATE, "US Date Format", "T", 2, customHtmlTwo);
 
-  wm.addParameter(&timeZoneParam);
   wm.addParameter(&isTwentyFourHour);
   wm.addParameter(&isUsDateFormat);
 
@@ -86,7 +83,6 @@ void setupWiFiManager(bool forceConfig, ProjectConfig config, ProjectDisplay *th
   if (shouldSaveConfig)
   {
 
-    config.timeZone = String(timeZoneParam.getValue());
     config.twentyFourHour = (strncmp(isTwentyFourHour.getValue(), "T", 1) == 0);
     config.usDateFormat = (strncmp(isUsDateFormat.getValue(), "T", 1) == 0);
 

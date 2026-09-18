@@ -60,9 +60,17 @@
 
 // ----------------------------
 
-// Change ssid and password for your local WiFi.
-const char* ssid     = "YOUR-SSID"; // Change this to your WiFi SSID
-const char* password = "YOUR-PASSWORD"; // Change this to your WiFi password
+// Change ssid and password for your local WiFi, or flash this example with the web
+// wizard and enter your WiFi details there - it will patch these buffers for you.
+const char WIFI_SSID[100] = "|*SSID*|";
+const char WIFI_PASS[100] = "|*PASS*|";
+const char RADIO_URL[100] = "https://media-ssl.musicradio.com/Heart90sMP3";
+
+// Change these to set a fixed display rotation (0-3) and/or color inversion (0 or 1 -
+// CYD2USB units usually need 1, see cyd.md), or flash this example with the web wizard
+// and pick them there - it will patch these buffers for you.
+const char DISPLAY_ROTATION[16] = "|*ROTATION*|";
+const char DISPLAY_INVERT[16] = "|*INVERT*|";
 
 TFT_eSPI tft = TFT_eSPI();
 Audio audio(true, I2S_DAC_CHANNEL_LEFT_EN);
@@ -74,7 +82,8 @@ void setup()
   
   // Start the TFT display and set it to black
   tft.init();
-  tft.setRotation(1); //This is the display in landscape
+  tft.setRotation(atoi(DISPLAY_ROTATION)); //This is the display in landscape
+  tft.invertDisplay(atoi(DISPLAY_INVERT));
   tft.setTextWrap(true, true);
 
   // Clear the screen before writing to it and set default text colors
@@ -83,9 +92,9 @@ void setup()
   tft.drawString("Title", 0, 10, 1);
 
   // Connect to WiFi
-  WiFi.begin(ssid, password);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
   Serial.print("Connecting to ");
-  Serial.println(ssid);
+  Serial.println(WIFI_SSID);
   while (WiFi.status() != WL_CONNECTED) 
   {
     delay(500);
@@ -103,7 +112,7 @@ void setup()
   do
   {
     // Connect to 'FM - Disco Ball 70's-80's Los Angeles'
-    succeeded = audio.connecttohost("http://sc8.1.fm:8100/;");     
+    succeeded = audio.connecttohost(RADIO_URL);
     delay(500);
     Serial.println("Retrying");
   } while (!succeeded);
