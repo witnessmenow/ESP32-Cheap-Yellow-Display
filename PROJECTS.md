@@ -63,7 +63,7 @@ Projects appearing on here is not necessarily a seal of approval from me, I will
 | AI Monitor | Desk display for Claude, ChatGPT, Gemini, Copilot, Cursor and Antigravity usage limits (rings or bars, reset countdowns), fed over USB serial by a macOS or Windows companion app. Usage data never leaves USB, no AI credentials on the device | [tobymarks](https://github.com/tobymarks) | USB data cable to a Mac or Windows PC | [GitHub](https://github.com/tobymarks/esp32-ai-monitor) | |
 | Flow Ctrl | Push-to-talk / hands-free button for Wispr Flow dictation — the CYD pairs as a Bluetooth keyboard; includes a printed case | [WOODWERD LLC](https://github.com/WOODWERD) | | [Github](https://github.com/WOODWERD/cyd-flow-ctrl) | [Webflash](https://woodwerd.github.io/cyd-flow-ctrl/flash/) |
 | ESP Screens | A Home Assistant app that turns the CYD (ILI9341 variant) into a room control screen: pick tiles for lights, climate, covers, media, weather and sensor graphs in Home Assistant and send them to the screen without reflashing. ESPHome + LVGL, installed over USB from Home Assistant. | [Max Gramser](https://github.com/MaxGramser) | A Home Assistant server | [GitHub](https://github.com/MaxGramser/homeassistant_espscreen) | |
-
+| OmniMon-CYD | A Klipper and Marlin 3D printer monitor for the CYD | [heidepiek](https://github.com/heidepiek) | None | [Github](https://github.com/heidepiek/OmniMon-CYD) | |
 (\#) = Project not added by original author
 
 ## Adding a project
