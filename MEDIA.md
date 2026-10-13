@@ -7,9 +7,11 @@ This page can document any times the CYD project was mentioned somewhere!
 - [Brian Lough (hey, thats me!) - Cheap and Easy to Use ESP32 Screen!](https://www.youtube.com/watch?v=0AVyvwv0agk)
 - [Talking Sasquach - Don't be Fooled!! This Cheap Yellow Display Can Do a LOT!!](https://youtu.be/PsqMCoCTgTg?feature=shared)
 - [Teaching Tech - Cheap and easy Klipper touch interface with CYD Klipper](https://youtu.be/R3o0MGYW1ZU?feature=shared)
+- [Hacktuber - With This $9 CYD ESP32 Module You Can Do Anything...](https://www.youtube.com/watch?v=xvjQwQaIYu8)
 
 ## Articles
 
 - [Hackaday.com - “Cheap Yellow Display” Builds Community Through Hardware](https://hackaday.com/2023/10/28/cheap-yellow-display-builds-community-through-hardware/)
 - [Hackster.io - Brian Lough Looks to Build a Community Around the Espressif ESP32-Powered "Cheap Yellow Display"](https://www.hackster.io/news/brian-lough-looks-to-build-a-community-around-the-espressif-esp32-powered-cheap-yellow-display-66d23972910d)
 - [Everything You Should Know About the Cheap Yellow Display (CYD): A Beginner’s Guide to ESP32 & Crypto Mining](https://www.elecrow.com/blog/cheap-yellow-display-cyd-a-beginners-guide-to-esp32-crypto-mining.html)
+- [Geeky Gadgets - $9 CYD ESP32 Module Includes a 2.88-Inch LCD Screen](https://www.geeky-gadgets.com/cyd-esp32-module-features/)
