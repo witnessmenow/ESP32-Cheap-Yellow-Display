@@ -33,6 +33,9 @@ There are a number of designs for cases that can be found across the various 3D 
 (Thangs)](https://thangs.com/designer/dimosram/3d-model/ESP32-2432S028%20enclosure%20for%20Battery%20and%20BMS-788656) - Possibly wrong size? [#44](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display/issues/44)
 - CYD - [2.8inch ESP32 2432S028R (Thingiverse)](https://www.thingiverse.com/thing:5990927)
 - CYD - [CYD enclosure with magnetic mount option](https://makerworld.com/en/models/17061#profileId-32030) by Geoff Pedder
+- CYD - [Braino! case for the 2.8" boards](https://github.com/iamankushpandit/Gume/tree/main/cases/E32R28T-1) by Ankush Pandit. No screws, four printed clips hold it shut, and there is room inside for a LiPo and a speaker.
+- CYD 3.2" - [Braino! case for the E32R32P](https://github.com/iamankushpandit/Gume/tree/main/cases/E32R32P) by Ankush Pandit. Front shell with printed fasteners, back plate with an 8 Ohm speaker grille.
+- CYD 4" - [Braino! case for the E32R40T](https://github.com/iamankushpandit/Gume/tree/main/cases/E32R40T) by Ankush Pandit. Front shell, back plate and four printed fasteners, all on one plate.
 
 ## Stylus Management
 
