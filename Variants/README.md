@@ -8,6 +8,10 @@ These displays will also need a custom user_setup.h, if one doesn't exist you ma
 
 [AliExpress\*](https://s.click.aliexpress.com/e/_Ddcpl1j)
 
+This board is sold in two versions: **1732S019N** (no touch) and **1732S019C** (capacitive touch). Per [rzeldent/platformio-espressif32-sunton](https://github.com/rzeldent/platformio-espressif32-sunton/blob/main/esp32-1732S019C.json), the C version has a GT911 touch controller at I2C address 0x5D on SDA 9 / SCL 46, with reset on GPIO 3 and interrupt on GPIO 8.
+
+The same board definition sets a 35 px column offset (`DISPLAY_GAP_X=35`): the 170 px wide panel does not start at column 0 of the ST7789's memory. If the image is shifted or there is a noisy strip at one edge, apply that offset.
+
 #### PlatformIO Config
 
 ```
